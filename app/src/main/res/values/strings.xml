@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Agência de Turismo</string>
+    <string-array name="tipo_transporte">
+        <item>Todos os Tipos</item>
+        <item>Ônibus</item>
+        <item>Avião</item>
+    </string-array>
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="15sp">
+
+    <RelativeLayout
+        android:id="@+id/layout_relativo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bord_top">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginLeft="16dp"
+            android:text="Voo de Ida e Volta + Hospedagem" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/img_compra"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_below="@+id/layout_relativo"
+        android:scaleType="centerCrop"
+        android:src="@drawable/imagem" />
+
+    <TextView
+        android:id="@+id/txt_nomeCompra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/img_compra"
+        android:layout_margin="16dp"
+        android:singleLine="true"
+        android:text="Nome do Pacote"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txt_valorCompra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/img_compra"
+        android:layout_alignBottom="@id/img_compra"
+        android:layout_margin="16dp"
+        android:text="R$Valor"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txt_destinoCompra"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/img_compra"
+        android:layout_marginStart="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toStartOf="@id/txt_valorCompra"
+        android:singleLine="true"
+        android:text="Origem e Destino"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_compra"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/txt_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Data de Ida e Volta"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
