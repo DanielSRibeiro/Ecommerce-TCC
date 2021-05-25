@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo;
+package com.example.agnciadeturismo.ui.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,8 +6,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModel;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.agnciadeturismo.R;
 
 public class RecentementeAdapter extends RecyclerView.Adapter<RecentementeAdapter.viewHolder> {
 

@@ -4,7 +4,7 @@
     android:layout_width="320dp"
     android:layout_height="wrap_content"
     android:elevation="15sp"
-    app:cardCornerRadius="25dp"
+    app:cardCornerRadius="15dp"
     android:layout_marginRight="8dp">
 
     <RelativeLayout

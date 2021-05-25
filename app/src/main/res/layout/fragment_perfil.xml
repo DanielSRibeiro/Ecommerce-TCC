@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.fragment.PerfilFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/ic_aviao_de_papel" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/imageView"
+        android:layout_alignBottom="@id/imageView"
+        android:layout_toEndOf="@id/imageView"
+        android:gravity="center_vertical"
+        android:text="HorizonFly"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:typeface="sans" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/imageView"
+        android:layout_marginHorizontal="16dp"
+        android:backgroundTint="#C6C6C6"
+        app:cardCornerRadius="50dp">
+
+        <ImageView
+            android:id="@+id/img_usuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_baseline_person_24"
+            android:backgroundTint="@color/white" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txt_nomeUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/cardView"
+        android:layout_alignBottom="@id/cardView"
+        android:layout_toEndOf="@id/cardView"
+        android:gravity="center_vertical"
+        android:text="Nome do Usuario"
+        android:textAllCaps="true"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/cardView"
+        android:layout_marginVertical="16dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/layoutCompras"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/img_compraPerfil"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_outline_shopping_bag_24"
+            android:backgroundTint="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_comprasPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/img_compraPerfil"
+            android:layout_toEndOf="@id/img_compraPerfil"
+            android:text="Compras"
+            android:textColor="@color/primaryColor"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_comprasPerfil"
+            android:layout_toEndOf="@id/img_compraPerfil"
+            android:text="Pacotes comprados do cliente" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutCartoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutCompras"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/img_cartoesPerfil"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_baseline_credit_card_24"
+            android:backgroundTint="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_cartoesPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/img_cartoesPerfil"
+            android:layout_toEndOf="@id/img_cartoesPerfil"
+            android:text="Cartões"
+            android:textColor="@color/primaryColor"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_cartoesPerfil"
+            android:layout_toEndOf="@id/img_cartoesPerfil"
+            android:text="Configurações do cartão" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutSair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutCartoes"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/img_sairPerfil"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_baseline_person_24"
+            android:backgroundTint="@color/black" />
+
+        <TextView
+            android:id="@+id/txt_sairPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/img_sairPerfil"
+            android:layout_toEndOf="@id/img_sairPerfil"
+            android:text="Logout"
+            android:textColor="@color/primaryColor"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_sairPerfil"
+            android:layout_toEndOf="@id/img_sairPerfil"
+            android:text="Sair da conta" />
+
+    </RelativeLayout>
+</RelativeLayout>

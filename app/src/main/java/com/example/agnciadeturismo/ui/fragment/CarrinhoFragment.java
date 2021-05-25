@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo;
+package com.example.agnciadeturismo.ui.fragment;
 
 import android.os.Bundle;
 
@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LoginFragment extends Fragment {
+import com.example.agnciadeturismo.R;
+
+public class CarrinhoFragment extends Fragment {
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_carrinho, container, false);
+
+
 
         return view;
     }

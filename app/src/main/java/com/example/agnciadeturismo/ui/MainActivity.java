@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo;
+package com.example.agnciadeturismo.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.ui.fragment.HomeFragment;
+import com.example.agnciadeturismo.ui.fragment.CarrinhoFragment;
+import com.example.agnciadeturismo.ui.fragment.LoginFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, new BuscarFragment())
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, new HomeFragment())
                 .commit();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -29,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getItemId()){
                     case R.id.nav_buscar:
-                        fragment = new BuscarFragment();
+                        fragment = new HomeFragment();
                         break;
                     case R.id.nav_carrinho:
                         fragment = new CarrinhoFragment();
