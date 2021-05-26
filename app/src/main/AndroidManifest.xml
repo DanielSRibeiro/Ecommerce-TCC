@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo">
-        <activity android:name=".ui.DashboardActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ui.DetalhesActivity"></activity>
+        <activity
+            android:name=".ui.DashboardActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.BuscarActivity"
             android:screenOrientation="portrait" />

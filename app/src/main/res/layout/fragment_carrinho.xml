@@ -30,6 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/imageView"
-        tools:listitem="@layout/adapter_carrinho"/>
+        tools:listitem="@layout/adapter_carrinho" />
 
 </RelativeLayout>

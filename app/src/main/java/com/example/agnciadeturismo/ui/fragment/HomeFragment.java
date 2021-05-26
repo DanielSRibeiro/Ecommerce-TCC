@@ -13,12 +13,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.ui.BuscarActivity;
+import com.example.agnciadeturismo.ui.DetalhesActivity;
+import com.example.agnciadeturismo.ui.adapter.OnClickItemPacote;
 import com.example.agnciadeturismo.ui.adapter.RecentementeAdapter;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnClickItemPacote {
 
     AutoCompleteTextView autoCompleteTextViewTransporte;
     RecyclerView recyclerViewRecentemente;
@@ -27,6 +30,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
         atualizaAdapter();
@@ -43,7 +47,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void atualizaAdapter() {
-        RecentementeAdapter adapter = new RecentementeAdapter();
+        RecentementeAdapter adapter = new RecentementeAdapter(this);
         recyclerViewRecentemente.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewRecentemente.setAdapter(adapter);
     }
@@ -60,5 +64,11 @@ public class HomeFragment extends Fragment {
         String[] tipo_transporte = getResources().getStringArray(R.array.tipo_transporte);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, tipo_transporte);
         autoCompleteTextViewTransporte.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(int posicao) {
+        Intent intent = new Intent(getActivity(), DetalhesActivity.class);
+        startActivity(intent);
     }
 }

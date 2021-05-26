@@ -24,9 +24,14 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        buttonLogin = view.findViewById(R.id.btn_login);
-        textViewCadastrar = view.findViewById(R.id.txt_cadastrarUsuario);
 
+        initView(view);
+        onClick();
+
+        return view;
+    }
+
+    private void onClick() {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,6 +50,10 @@ public class LoginFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        return view;
+    }
+
+    private void initView(View view) {
+        buttonLogin = view.findViewById(R.id.btn_login);
+        textViewCadastrar = view.findViewById(R.id.txt_cadastrarUsuario);
     }
 }

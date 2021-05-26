@@ -16,6 +16,10 @@ public class BuscarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar);
 
+        initView();
+    }
+
+    private void initView() {
         toolbar = findViewById(R.id.toolbar_buscar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

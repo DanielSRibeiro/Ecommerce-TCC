@@ -11,31 +11,31 @@ import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 
-
-public class CadastrarUsuarioActivity extends AppCompatActivity {
+public class DetalhesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    Button buttonCadastrar;
+    Button buttonComprar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_usuario);
+        setContentView(R.layout.activity_detalhes);
 
         initView();
-        buttonCadastrar.setOnClickListener(new View.OnClickListener() {
+        buttonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CadastrarUsuarioActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
+
     }
 
     private void initView() {
-        toolbar = findViewById(R.id.toolbar_cadastrar);
-        buttonCadastrar = findViewById(R.id.btn_cadastrarUsuario);
-
+        toolbar = findViewById(R.id.toolbar_detalhes);
+        buttonComprar = findViewById(R.id.btn_comprarPacote);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

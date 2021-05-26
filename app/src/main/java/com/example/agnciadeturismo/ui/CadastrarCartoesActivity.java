@@ -21,7 +21,6 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_cartoes);
 
         initView();
-
         buttonCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

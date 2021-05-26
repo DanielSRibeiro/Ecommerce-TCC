@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".ui.DetalhesActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_detalhes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        app:title="Pacote" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_detalhes">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_detalhes"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/imagem" />
+
+            <TextView
+                android:id="@+id/txt_nomeDetalhes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img_detalhes"
+                android:layout_margin="16dp"
+                android:text="Nome do Pacote"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txt_descricaoDetalhes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_nomeDetalhes"
+                android:layout_marginHorizontal="16dp"
+                android:text="Descrição"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_inclui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_descricaoDetalhes"
+                android:layout_margin="16dp"
+                android:text="Esse pacote inclui"
+                android:textSize="18sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_inclui"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/white"
+                android:elevation="4dp"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp">
+
+                    <ImageView
+                        android:id="@+id/img_voo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/ic_baseline_flight_24"
+                        android:backgroundTint="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/img_voo"
+                        android:layout_alignBottom="@id/img_voo"
+                        android:layout_toEndOf="@id/img_voo"
+                        android:gravity="center_vertical"
+                        android:text="Voo de Ida e Volta" />
+
+                    <TextView
+                        android:id="@+id/txt_origemDetalhes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img_voo"
+                        android:layout_marginTop="16dp"
+                        android:text="Origem: " />
+
+                    <TextView
+                        android:id="@+id/txt_destinoDetalhes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_origemDetalhes"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Destino: " />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/cardView"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="129dp"
+                android:background="@color/white"
+                android:elevation="4dp"
+                app:cardCornerRadius="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="16dp">
+
+                    <ImageView
+                        android:id="@+id/img_hotel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/ic_outline_hotel_24"
+                        android:backgroundTint="@color/black" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/img_hotel"
+                        android:layout_alignBottom="@id/img_hotel"
+                        android:layout_toEndOf="@id/img_hotel"
+                        android:gravity="center_vertical"
+                        android:text="Hospedagem" />
+
+                    <TextView
+                        android:id="@+id/txt_diariasDetalhes"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/img_hotel"
+                        android:layout_marginTop="16dp"
+                        android:text="3 diárias: " />
+
+                    <TextView
+                        android:id="@+id/txt_dataChegada"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_diariasDetalhes"
+                        android:layout_marginTop="8dp"
+                        android:text="Data de chegada: " />
+
+                    <TextView
+                        android:id="@+id/txt_dataSaida"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txt_dataChegada"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Data de saída: " />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewFixo"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_alignParentBottom="true">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="24dp">
+
+
+            <TextView
+                android:id="@+id/txt_partirDe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/txt_valorPacote"
+                android:layout_alignBottom="@+id/txt_valorDetalhes"
+                android:layout_marginTop="8dp"
+                android:text="A partir de " />
+
+            <TextView
+                android:id="@+id/txt_valorDetalhes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_diaria"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@+id/txt_partirDe"
+                android:text="R$799,00"
+                android:textColor="@color/corPreco"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_partirDe"
+                android:text="por Pessoa" />
+
+            <Button
+                android:id="@+id/btn_comprarPacote"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/layout_bord"
+                android:text="Comprar"
+                android:textAllCaps="false" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
