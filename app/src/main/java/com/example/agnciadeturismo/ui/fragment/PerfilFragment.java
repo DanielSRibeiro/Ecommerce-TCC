@@ -10,11 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.CadastrarUsuarioActivity;
-import com.example.agnciadeturismo.ui.DashboardActivity;
+import com.example.agnciadeturismo.ui.activities.CadastrarUsuarioActivity;
+import com.example.agnciadeturismo.ui.activities.DashboardActivity;
 
 public class PerfilFragment extends Fragment {
 

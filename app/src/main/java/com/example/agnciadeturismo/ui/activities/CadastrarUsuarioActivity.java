@@ -1,9 +1,8 @@
-package com.example.agnciadeturismo.ui;
+package com.example.agnciadeturismo.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;

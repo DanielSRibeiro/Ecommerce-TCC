@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui;
+package com.example.agnciadeturismo.ui.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
+    Fragment fragment = new HomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, new HomeFragment())
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            fragment = new CarrinhoFragment();
+        }
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, fragment)
                 .commit();
     }
 }

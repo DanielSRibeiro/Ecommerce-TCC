@@ -7,7 +7,7 @@
     tools:context=".ui.fragment.CompraFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_cartao"
+        android:id="@+id/recycler_compra"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/adapter_compra" />

@@ -13,18 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.BuscarActivity;
-import com.example.agnciadeturismo.ui.DetalhesActivity;
+import com.example.agnciadeturismo.ui.activities.BuscarActivity;
+import com.example.agnciadeturismo.ui.activities.DetalhesActivity;
 import com.example.agnciadeturismo.ui.adapter.OnClickItemPacote;
-import com.example.agnciadeturismo.ui.adapter.RecentementeAdapter;
+import com.example.agnciadeturismo.ui.adapter.OfertaAdapter;
 
 public class HomeFragment extends Fragment implements OnClickItemPacote {
 
     AutoCompleteTextView autoCompleteTextViewTransporte;
-    RecyclerView recyclerViewRecentemente;
+    RecyclerView recyclerViewOferta;
     Button buttonPesquisar;
 
     @Override
@@ -47,14 +46,14 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     }
 
     private void atualizaAdapter() {
-        RecentementeAdapter adapter = new RecentementeAdapter(this);
-        recyclerViewRecentemente.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewRecentemente.setAdapter(adapter);
+        OfertaAdapter adapter = new OfertaAdapter(this);
+        recyclerViewOferta.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewOferta.setAdapter(adapter);
     }
 
     private void initView(View view) {
         autoCompleteTextViewTransporte = view.findViewById(R.id.autoCompleteTextView_transporte);
-        recyclerViewRecentemente = view.findViewById(R.id.recycler_recentemente);
+        recyclerViewOferta = view.findViewById(R.id.recycler_oferta);
         buttonPesquisar = view.findViewById(R.id.btn_pesquisarPacote);
     }
 

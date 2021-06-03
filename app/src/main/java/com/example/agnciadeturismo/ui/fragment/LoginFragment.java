@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.agnciadeturismo.ui.CadastrarUsuarioActivity;
+import com.example.agnciadeturismo.ui.activities.CadastrarUsuarioActivity;
 import com.example.agnciadeturismo.R;
 
 public class LoginFragment extends Fragment {

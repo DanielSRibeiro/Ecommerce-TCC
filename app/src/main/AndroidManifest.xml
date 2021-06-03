@@ -9,21 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo">
-        <activity android:name=".ui.DetalhesActivity"></activity>
+        <activity android:name=".ui.activities.DetalhesActivity"></activity>
         <activity
-            android:name=".ui.DashboardActivity"
+            android:name=".ui.activities.DashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.BuscarActivity"
+            android:name=".ui.activities.BuscarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.CadastrarCartoesActivity"
+            android:name=".ui.activities.CadastrarCartoesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.CadastrarUsuarioActivity"
+            android:name=".ui.activities.CadastrarUsuarioActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

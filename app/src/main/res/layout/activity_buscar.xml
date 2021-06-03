@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.BuscarActivity"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".ui.activities.BuscarActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_buscar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:background="@color/white"
         android:elevation="4dp"
         android:orientation="vertical"
-        android:layout_alignParentTop="true"
-        app:title="Pacotes para o ...."/>
+        app:title="Pacotes para o ...." />
 
     <RelativeLayout
         android:id="@+id/latout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primaryColor"
-        android:layout_below="@id/toolbar_buscar">
+        android:layout_below="@id/toolbar_buscar"
+        android:background="@color/primaryColor">
 
         <ImageView
             android:id="@+id/img_informacao"
@@ -37,9 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/img_informacao"
-            android:layout_toEndOf="@id/img_informacao"
             android:layout_marginHorizontal="16dp"
             android:layout_marginVertical="8dp"
+            android:layout_toEndOf="@id/img_informacao"
             android:text="Não se esqueça de sempre usar mascara ao sair de casa!!"
             android:textColor="@color/white"
             android:textSize="18dp" />
@@ -47,10 +47,10 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="16dp"
+        android:id="@+id/recycler_pacote"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/latout"
-        tools:listitem="@layout/adapter_pacote"
-        android:id="@+id/recycler_pacote"/>
+        android:layout_margin="16dp"
+        tools:listitem="@layout/adapter_pacote" />
 </RelativeLayout>

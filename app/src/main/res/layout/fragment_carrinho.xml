@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/ic_aviao_de_papel" />
-
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/imageView"
-        android:layout_alignBottom="@id/imageView"
-        android:layout_toEndOf="@id/imageView"
-        android:gravity="center_vertical"
-        android:text="HorizonFly"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:typeface="sans" />
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_carrinho"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/imageView"
-        tools:listitem="@layout/adapter_carrinho" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/ic_aviao_de_papel" />
 
-</RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/imageView"
+            android:layout_alignBottom="@id/imageView"
+            android:layout_toEndOf="@id/imageView"
+            android:gravity="center_vertical"
+            android:text="HorizonFly"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:typeface="sans" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_carrinho"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/imageView"
+            tools:listitem="@layout/adapter_carrinho" />
+    </RelativeLayout>
+
+</ScrollView>

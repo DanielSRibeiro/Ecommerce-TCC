@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CadastrarCartoesActivity"
+    tools:context=".ui.activities.CadastrarCartoesActivity"
     android:background="@color/background">
 
     <androidx.appcompat.widget.Toolbar

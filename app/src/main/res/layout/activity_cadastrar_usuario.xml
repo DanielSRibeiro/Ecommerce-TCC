@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.CadastrarUsuarioActivity">
+    tools:context=".ui.activities.CadastrarUsuarioActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_cadastrar"

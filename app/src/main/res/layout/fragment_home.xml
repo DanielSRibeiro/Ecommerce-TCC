@@ -110,22 +110,22 @@
         android:textAllCaps="false" />
 
     <TextView
-        android:id="@+id/txt_recentemente"
+        android:id="@+id/txt_oferta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_pesquisarPacote"
         android:layout_margin="16dp"
-        android:text="Recentemente você buscou"
+        android:text="Pacotes em ofertas"
         android:textSize="18sp"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_recentemente"
+        android:id="@+id/recycler_oferta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/txt_recentemente"
+        android:layout_below="@+id/txt_oferta"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/adapter_recentemente" />
+        tools:listitem="@layout/adapter_oferta" />
 </RelativeLayout>

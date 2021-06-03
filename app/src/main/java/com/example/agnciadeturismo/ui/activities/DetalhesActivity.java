@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui;
+package com.example.agnciadeturismo.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -25,8 +25,9 @@ public class DetalhesActivity extends AppCompatActivity {
         buttonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
+                Toast.makeText(DetalhesActivity.this, "Selecionar Cartão para realizar a compra", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetalhesActivity.this, DashboardActivity.class);
+                intent.putExtra("nome", "Cartão");
                 startActivity(intent);
             }
         });
