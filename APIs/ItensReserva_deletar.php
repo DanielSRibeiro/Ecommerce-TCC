@@ -5,10 +5,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     ("Problema com a conexão");
     
     $CPF = $_POST["cpf"];
-    $cd = $_POST["cdCartao"];
+    $cd = $_POST["cdItemReserva"];
 
-    $sqlComando =  "DELETE FROM Cartao 
-                    WHERE cd_cartao = $cd and CPF = '$CPF'";
+    $sqlComando =  "DELETE FROM ItensReserva 
+                    WHERE CPF = '$CPF' and cd_itensreserva = $cd";
 
     if(mysqli_query($con, $sqlComando)){
         echo("true");

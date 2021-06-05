@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $sqlComando = "SELECT * FROM Pacote WHERE cd_cidOrigem = '$origem' and cd_cidDestino = '$destino'";
     $sql = $con->prepare("$sqlComando");
     $sql->execute();
-    $sql->bind_result($cd_pacote, $cd_viagem, $cd_hotel, $cd_categoria, $cd_tipotransporte, $cd_cidOrigem, $cd_transporte, $cd_cidDestino, 
+    $sql->bind_result($cd_pacote, $cd_viagem, $cd_hotel, $cd_categoria, $cd_tipotransporte, $cd_cidOrigem, $cd_cidDestino, 
     $nome_pacote, $descricao_pacote, $dtChekin_hotel, $dtChekout_hotel, $img_pacote, $vl_pacote);
 
     while($sql->fetch()){
@@ -21,10 +21,9 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             "cd_categoria" => $cd_categoria,
             "cd_tipoTransporte" => $cd_tipotransporte,
             "cd_origem" => $cd_cidOrigem,
-            "cd_transporte" => $cd_transporte,
             "cd_destino" => $cd_cidDestino,
             "nome_pacote" => $nome_pacote,
-            "descrecao" => $descricao_pacote,
+            "descricao" => $descricao_pacote,
             "chekin" => $dtChekin_hotel,
             "chekout" => $dtChekout_hotel,
             "img" => $img_pacote,

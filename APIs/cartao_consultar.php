@@ -3,7 +3,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $con = mysqli_connect("localhost", "root", "123456", "db_horizon") or die
     ("Problema com a conexão");
 
-    $CPFUsuario = $_GET["CPF"];
+    $CPFUsuario = $_GET["cpf"];
 
     $array = array();
     $sqlComando = "SELECT * FROM Cartao WHERE CPF = '$CPFUsuario'";

@@ -6,12 +6,11 @@ if($_SERVER["REQUEST_METHOD"] == 'POST'){
 
    $nome = $_POST["nome"];
    $email = $_POST["email"];
-   $CPF = $_POST["CPF"];
+   $CPF = $_POST["cpf"];
    $rg = $_POST["rg"];
    $telefone = $_POST["telefone"];
    $senha = $_POST["senha"];
    $img = $_POST["img"];
-
 
    $sqlComando = "  UPDATE Cliente SET 
                         nome = '$nome',

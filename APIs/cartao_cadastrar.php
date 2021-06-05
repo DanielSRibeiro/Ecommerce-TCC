@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $con = mysqli_connect("localhost", "root", "123456", "db_horizon") or die
     ("Problema com a conexão");
     
-    $CPF = $_POST["CPF"];
+    $CPF = $_POST["cpf"];
     $nomeCartao = $_POST["nomeCartao"];
     $nomeImpresso = $_POST["nomeImpresso"];
     $numero = $_POST["numeroCartao"];
