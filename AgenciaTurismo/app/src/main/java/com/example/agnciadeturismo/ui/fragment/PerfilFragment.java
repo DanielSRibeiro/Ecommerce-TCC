@@ -65,6 +65,7 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CadastrarUsuarioActivity.class);
+                intent.putExtra("bundle", "qualquer texto");
                 startActivity(intent);
             }
         });

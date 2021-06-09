@@ -36,6 +36,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="14"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +48,7 @@
             android:layout_height="wrap_content"
             android:hint="CPF"
             android:inputType="textEmailAddress"
-            android:maxLength="20" />
+            android:maxLength="14" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

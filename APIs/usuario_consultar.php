@@ -25,10 +25,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             'tipo' => $tipo
         ];
 
-        array_push($array, $temp);
     }
 
-    echo json_encode($array);
-
+    echo json_encode($temp);
 }
 ?>

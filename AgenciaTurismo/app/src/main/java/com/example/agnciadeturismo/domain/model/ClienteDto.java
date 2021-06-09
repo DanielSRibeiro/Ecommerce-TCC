@@ -1,9 +1,9 @@
-package com.example.agnciadeturismo.model;
+package com.example.agnciadeturismo.domain.model;
 
-public class FuncionarioDto {
-    private String cpf, nome, telefone, email, rg, senha, tipo, img, cargo;
+public class ClienteDto {
+    private String cpf, nome, telefone, email, rg, senha, tipo, img;
 
-    public FuncionarioDto(String cpf, String nome, String telefone, String email, String rg, String senha, String tipo, String img, String cargo) {
+    public ClienteDto(String cpf, String nome, String telefone, String email, String rg, String senha, String tipo, String img) {
         this.cpf = cpf;
         this.nome = nome;
         this.telefone = telefone;
@@ -12,10 +12,8 @@ public class FuncionarioDto {
         this.senha = senha;
         this.tipo = tipo;
         this.img = img;
-        this.cargo = cargo;
     }
-
-    public FuncionarioDto() {}
+    public ClienteDto(){}
 
     public String getCpf() {
         return cpf;
@@ -79,13 +77,5 @@ public class FuncionarioDto {
 
     public void setImg(String img) {
         this.img = img;
-    }
-
-    public String getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
     }
 }
