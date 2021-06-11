@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.fragment;
+package com.example.agnciadeturismo.presenter.ui;
 
 import android.os.Bundle;
 
@@ -11,9 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.activities.DashboardActivity;
-import com.example.agnciadeturismo.ui.adapter.CartaoAdapter;
-import com.example.agnciadeturismo.ui.adapter.CompraAdapter;
+import com.example.agnciadeturismo.presenter.ui.DashboardActivity;
+import com.example.agnciadeturismo.presenter.adapter.CompraAdapter;
 
 public class CompraFragment extends Fragment {
 

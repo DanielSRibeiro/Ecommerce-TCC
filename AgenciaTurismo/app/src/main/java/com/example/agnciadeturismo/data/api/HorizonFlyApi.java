@@ -1,6 +1,8 @@
 package com.example.agnciadeturismo.data.api;
 
-import com.example.agnciadeturismo.domain.model.ClienteDto;
+import com.example.agnciadeturismo.model.ClienteDto;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -11,9 +13,9 @@ import retrofit2.http.Query;
 
 public interface HorizonFlyApi {
 
-    @FormUrlEncoded
+
     @GET("usuario_consultar.php")
-    Call<ClienteDto> consultarCliente(
+    Call<ArrayList<ClienteDto>> consultarCliente(
             @Query("cpf") String cpf,
             @Query("senha") String senha
     );

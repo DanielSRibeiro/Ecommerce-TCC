@@ -18,15 +18,16 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             'nome' => $nome,
             'telefone' => $telefone,
             'email' => $email,
-            'CPF' => $CPF,
+            'cpf' => $CPF,
             'rg' => $rg,
             'senha' => $senha,
             'img' => $img,
             'tipo' => $tipo
         ];
 
+        array_push($array, $temp);
     }
 
-    echo json_encode($temp);
+    echo json_encode($array);
 }
 ?>

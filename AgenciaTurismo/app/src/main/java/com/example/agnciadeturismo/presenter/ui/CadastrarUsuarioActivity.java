@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.activities;
+package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,7 +22,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
     Button buttonCadastrar;
     ViewModelCliente viewModelCliente;
     EditText editTextNome, editTextSenha, editTextTelefone, editTextCPF, editTextRG, editTextEmail;
-    String nome, email, cpf, rg, telefone, senha;
+    String nome, email, cpf, rg, telefone, senha, img;
     boolean alterar = false;
 
     @Override
@@ -41,7 +41,8 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
                 telefone = editTextTelefone.getText().toString();
                 senha = editTextSenha.getText().toString();
 
-                viewModelCliente.postCliente(alterar, nome, email, cpf, rg, telefone, senha);
+                viewModelCliente.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+
             }
         });
     }
@@ -65,6 +66,15 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
             alterar = true;
             buttonCadastrar.setText("Alterar conta");
             getSupportActionBar().setTitle("Alterar sua conta");
+
+            editTextCPF.setEnabled(false);
+            editTextNome.setText(bundle.getString("nome"));
+            editTextCPF.setText(bundle.getString("cpf"));
+            editTextEmail.setText(bundle.getString("email"));
+            editTextRG.setText(bundle.getString("rg"));
+            editTextTelefone.setText(bundle.getString("tel"));
+            editTextSenha.setText(bundle.getString("senha"));
+            img = bundle.getString("img");
         }
     }
 

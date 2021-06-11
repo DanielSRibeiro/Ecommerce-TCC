@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.activities;
+package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.fragment.CartaoFragment;
-import com.example.agnciadeturismo.ui.fragment.CompraFragment;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -35,7 +33,7 @@ public class DashboardActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             Fragment fragment = null;
-            switch (bundle.getString("nome")){
+            switch (bundle.getString("activity")){
                 case "Cartão":
                     fragment = new CartaoFragment();
                     break;

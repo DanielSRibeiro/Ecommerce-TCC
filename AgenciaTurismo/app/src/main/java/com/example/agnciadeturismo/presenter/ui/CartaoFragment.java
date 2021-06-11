@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.fragment;
+package com.example.agnciadeturismo.presenter.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,15 +13,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.activities.CadastrarCartoesActivity;
-import com.example.agnciadeturismo.ui.activities.DashboardActivity;
-import com.example.agnciadeturismo.ui.activities.MainActivity;
-import com.example.agnciadeturismo.ui.adapter.CartaoAdapter;
-import com.example.agnciadeturismo.ui.adapter.OfertaAdapter;
-import com.example.agnciadeturismo.ui.adapter.OnClickItemCartao;
+import com.example.agnciadeturismo.presenter.ui.CadastrarCartoesActivity;
+import com.example.agnciadeturismo.presenter.ui.DashboardActivity;
+import com.example.agnciadeturismo.presenter.adapter.CartaoAdapter;
+import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class CartaoFragment extends Fragment implements OnClickItemCartao {
+public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
 
     FloatingActionButton fabCadastrar;
     RecyclerView recyclerViewCartao;
@@ -37,7 +35,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CadastrarCartoesActivity.class);
-                intentCadastrar(intent);
+                startActivity(intent);
             }
         });
 
@@ -56,15 +54,16 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
         recyclerViewCartao.setAdapter(adapter);
     }
 
-    private void intentCadastrar(Intent intent) {
+    @Override
+    public void onClickComprar(int posicao) {
+        Toast.makeText(getActivity(), "Compra realizada com sucesso!!!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), DashboardActivity.class);
+        intent.putExtra("activity", "Compras");
         startActivity(intent);
     }
 
     @Override
-    public void onClick(int posicao) {
-        Toast.makeText(getActivity(), "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity(), MainActivity.class);
-        intent.putExtra("carrinho", "carrinho");
-        intentCadastrar(intent);
+    public void onClickRemover(int posicao) {
+        Toast.makeText(getActivity(), "Remover", Toast.LENGTH_SHORT).show();
     }
 }

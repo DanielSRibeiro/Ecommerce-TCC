@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.adapter;
+package com.example.agnciadeturismo.presenter.adapter;
 
 public interface OnClickItemPacote {
     void onClick(int posicao);

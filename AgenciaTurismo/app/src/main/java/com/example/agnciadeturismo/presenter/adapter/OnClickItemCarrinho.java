@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.adapter;
+package com.example.agnciadeturismo.presenter.adapter;
 
 public interface OnClickItemCarrinho {
     void onClickComprar(int posicao);

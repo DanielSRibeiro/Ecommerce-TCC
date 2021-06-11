@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.activities;
+package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,15 +8,14 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.fragment.HomeFragment;
-import com.example.agnciadeturismo.ui.fragment.CarrinhoFragment;
-import com.example.agnciadeturismo.ui.fragment.LoginFragment;
+import com.example.agnciadeturismo.model.ClienteDto;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Fragment fragment = new HomeFragment();
+    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,4 +55,13 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, fragment)
                 .commit();
     }
+
+    public ClienteDto setUsuario(ClienteDto novoCliente){
+        return this.cliente = novoCliente;
+    }
+
+    public ClienteDto getUsuario(){
+        return cliente;
+    }
+
 }

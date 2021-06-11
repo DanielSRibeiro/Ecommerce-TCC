@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".ui.activities.CadastrarUsuarioActivity">
+    tools:context=".presenter.ui.CadastrarUsuarioActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_cadastrar"
@@ -76,7 +76,6 @@
             android:hint="CPF"
             app:counterEnabled="true"
             app:counterMaxLength="14"
-            app:endIconMode="clear_text"
             app:helperTextEnabled="true"
             app:helperTextTextColor="@android:color/holo_red_light">
 

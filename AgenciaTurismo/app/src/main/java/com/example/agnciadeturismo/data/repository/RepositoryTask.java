@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.repository;
+package com.example.agnciadeturismo.data.repository;
 
 import android.util.Log;
 
@@ -37,9 +37,9 @@ public class RepositoryTask {
         return resultado;
     }
 
-    public boolean alterarCliente(String nome, String email, String cpf, String rg, String telefone, String senha){
+    public boolean alterarCliente(String nome, String email, String cpf, String rg, String telefone, String senha, String img){
         Call<Boolean> api = RetrofitTask.instanceRetrofit()
-                .create(HorizonFlyApi.class).updateCliente(nome, email, cpf, rg, telefone, senha, "");
+                .create(HorizonFlyApi.class).updateCliente(nome, email, cpf, rg, telefone, senha, img);
 
         try {
             Response<Boolean> response = api.execute();

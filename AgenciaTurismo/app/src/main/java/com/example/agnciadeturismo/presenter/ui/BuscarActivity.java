@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.activities;
+package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,9 +10,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.adapter.BuscarAdapter;
-import com.example.agnciadeturismo.ui.adapter.CartaoAdapter;
-import com.example.agnciadeturismo.ui.adapter.OnClickItemPacote;
+import com.example.agnciadeturismo.presenter.adapter.BuscarAdapter;
+import com.example.agnciadeturismo.presenter.adapter.OnClickItemPacote;
 
 public class BuscarActivity extends AppCompatActivity implements OnClickItemPacote {
 

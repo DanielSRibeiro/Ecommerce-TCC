@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.fragment;
+package com.example.agnciadeturismo.presenter.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,10 +15,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.activities.BuscarActivity;
-import com.example.agnciadeturismo.ui.activities.DetalhesActivity;
-import com.example.agnciadeturismo.ui.adapter.OnClickItemPacote;
-import com.example.agnciadeturismo.ui.adapter.OfertaAdapter;
+import com.example.agnciadeturismo.presenter.ui.BuscarActivity;
+import com.example.agnciadeturismo.presenter.ui.DetalhesActivity;
+import com.example.agnciadeturismo.presenter.adapter.OnClickItemPacote;
+import com.example.agnciadeturismo.presenter.adapter.OfertaAdapter;
 
 public class HomeFragment extends Fragment implements OnClickItemPacote {
 

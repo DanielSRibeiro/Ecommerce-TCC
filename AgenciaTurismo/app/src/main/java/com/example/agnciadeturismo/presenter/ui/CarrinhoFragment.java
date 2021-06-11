@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.fragment;
+package com.example.agnciadeturismo.presenter.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.ui.activities.DashboardActivity;
-import com.example.agnciadeturismo.ui.adapter.CarrinhoAdapter;
-import com.example.agnciadeturismo.ui.adapter.OnClickItemCarrinho;
+import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.presenter.adapter.CarrinhoAdapter;
+import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
 
 public class CarrinhoFragment extends Fragment implements OnClickItemCarrinho {
 
@@ -41,17 +41,26 @@ public class CarrinhoFragment extends Fragment implements OnClickItemCarrinho {
         recyclerViewCarrinho.setAdapter(adapter);
     }
 
+    private void toast(String s) {
+        Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onClickComprar(int posicao) {
-        Toast.makeText(getActivity(), "Compra realizada com sucesso!!!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-        intent.putExtra("nome", "Compras");
-        startActivity(intent);
-
+        ClienteDto cliente  = ((MainActivity) getActivity()).getUsuario();
+        if(cliente.getCpf() != null){
+            toast("Selecionar Cartão para realizar a compra");
+            Intent intent = new Intent(getActivity(), DashboardActivity.class);
+            intent.putExtra("activity", "Cartão");
+            startActivity(intent);
+        }else{
+            toast("É necessário realizar o login para poder comprar");
+        }
     }
 
     @Override
     public void onClickRemover(int posicao) {
-        Toast.makeText(getActivity(), "Remover", Toast.LENGTH_SHORT).show();
+        toast("Remover");
+        atualizaAdapter();
     }
 }

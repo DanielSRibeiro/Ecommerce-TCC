@@ -1,8 +1,9 @@
-package com.example.agnciadeturismo.ui.activities;
+package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,29 +11,32 @@ import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 
-public class CadastrarCartoesActivity extends AppCompatActivity {
+public class DetalhesActivity extends AppCompatActivity {
 
-    Button buttonCadastrar;
     Toolbar toolbar;
+    Button buttonComprar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastrar_cartoes);
+        setContentView(R.layout.activity_detalhes);
 
         initView();
-        buttonCadastrar.setOnClickListener(new View.OnClickListener() {
+        buttonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CadastrarCartoesActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
-                finish();
+                Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
+                intent.putExtra("carrinho", "carrinho");
+                startActivity(intent);
             }
         });
+
     }
 
     private void initView() {
-        buttonCadastrar = findViewById(R.id.btn_cadastrarCartoes);
-        toolbar = findViewById(R.id.toolbar_cadastrar_cartoes);
+        toolbar = findViewById(R.id.toolbar_detalhes);
+        buttonComprar = findViewById(R.id.btn_comprarPacote);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

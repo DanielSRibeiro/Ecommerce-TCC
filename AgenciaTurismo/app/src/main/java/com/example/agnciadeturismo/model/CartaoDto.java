@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.domain.model;
+package com.example.agnciadeturismo.model;
 
 public class CartaoDto {
 

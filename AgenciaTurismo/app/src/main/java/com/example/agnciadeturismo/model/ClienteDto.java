@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.domain.model;
+package com.example.agnciadeturismo.model;
 
 public class ClienteDto {
     private String cpf, nome, telefone, email, rg, senha, tipo, img;

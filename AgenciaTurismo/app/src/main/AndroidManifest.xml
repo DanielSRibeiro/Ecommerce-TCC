@@ -12,21 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activities.DetalhesActivity"></activity>
+        <activity android:name=".presenter.ui.DetalhesActivity"></activity>
         <activity
-            android:name=".ui.activities.DashboardActivity"
+            android:name=".presenter.ui.DashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.BuscarActivity"
+            android:name=".presenter.ui.BuscarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.CadastrarCartoesActivity"
+            android:name=".presenter.ui.CadastrarCartoesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.CadastrarUsuarioActivity"
+            android:name=".presenter.ui.CadastrarUsuarioActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activities.MainActivity"
+            android:name=".presenter.ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

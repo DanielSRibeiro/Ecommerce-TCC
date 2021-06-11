@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo.ui.adapter;
+package com.example.agnciadeturismo.presenter.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +12,9 @@ import com.example.agnciadeturismo.R;
 
 public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder> {
 
-    OnClickItemCartao listener;
+    OnClickItemCarrinho listener;
 
-    public CartaoAdapter(OnClickItemCartao listener) {
+    public CartaoAdapter(OnClickItemCarrinho listener) {
         this.listener = listener;
     }
 
@@ -40,7 +40,7 @@ public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder
 
         TextView textViewNome, textViewNumero;
 
-        public viewHolder(@NonNull View itemView, OnClickItemCartao listener) {
+        public viewHolder(@NonNull View itemView, OnClickItemCarrinho listener) {
             super(itemView);
 
             textViewNome = itemView.findViewById(R.id.txt_nomeCartao);
@@ -49,7 +49,15 @@ public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onClick(getAdapterPosition());
+                    listener.onClickComprar(getAdapterPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    listener.onClickRemover(getAdapterPosition());
+                    return true;
                 }
             });
         }
