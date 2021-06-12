@@ -17,4 +17,8 @@ public class RetrofitTask {
 
         return retrofit;
     }
+
+    public static HorizonFlyApi getRetrofit(){
+        return instanceRetrofit().create(HorizonFlyApi.class);
+    }
 }

@@ -2,18 +2,33 @@ package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.data.api.RetrofitTask;
+import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.viewmodel.ViewModelCartao;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CadastrarCartoesActivity extends AppCompatActivity {
 
     Button buttonCadastrar;
+    EditText editTextNomeCartao, editTextNumero, editTextNomeImpresso, editTextData, editTextCVV;
     Toolbar toolbar;
+    ViewModelCartao viewModelCartao;
+    private static final String TAG = "CadastrarCartoesActivit";
+    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,20 +36,56 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_cartoes);
 
         initView();
+        initObserve();
         buttonCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CadastrarCartoesActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
-                finish();
+                String nomeCartao = editTextNomeCartao.getText().toString();
+                String numero = editTextNumero.getText().toString();
+                String nomeImpresso = editTextNomeImpresso.getText().toString();
+                String data = editTextData.getText().toString();
+                String cvv = editTextCVV.getText().toString();
+
+//                cliente = MainActivity.getUsuario();
+//                if(cliente.getCpf() != null){
+                    Log.d("TAG", "entrou");
+                    viewModelCartao.cadastrarCartao("00000000000000", nomeCartao, nomeImpresso, numero, cvv, data);
+//                }else{
+//                    Log.d(TAG, "CPF inválido");
+//                }
             }
         });
     }
 
     private void initView() {
+        viewModelCartao = new ViewModelProvider(this).get(ViewModelCartao.class);
         buttonCadastrar = findViewById(R.id.btn_cadastrarCartoes);
+        editTextNomeCartao = findViewById(R.id.edt_nomeCartao);
+        editTextNumero = findViewById(R.id.edt_numeroCartao);
+        editTextNomeImpresso = findViewById(R.id.edt_nomeImpresso);
+        editTextData = findViewById(R.id.edt_dataValidade);
+        editTextCVV = findViewById(R.id.edt_cvv);
         toolbar = findViewById(R.id.toolbar_cadastrar_cartoes);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void initObserve() {
+        viewModelCartao.cadastrar.observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean resultado) {
+
+                if(resultado){
+                    Log.d(TAG, "Sucesso");
+                    Toast.makeText(CadastrarCartoesActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else{
+                    Log.d(TAG, "Falha");
+                    Toast.makeText(CadastrarCartoesActivity.this, "O formato da data esta errado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.agnciadeturismo.data.api;
 
+import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 
 import java.util.ArrayList;
@@ -43,4 +44,26 @@ public interface HorizonFlyApi {
             @Field("img") String img
     );
 
+    @FormUrlEncoded
+    @POST("cartao_cadastrar.php")
+    Call<Boolean> cadastrarCartao(
+            @Field("cpf") String cpf,
+            @Field("nomeCartao") String nomeCartao,
+            @Field("nomeImpresso") String nomeImpresso,
+            @Field("numeroCartao") String numeroCartao,
+            @Field("cvv") String cvv,
+            @Field("validadeCartao") String validadeCartao
+    );
+
+    @GET("cartao_consultar.php")
+    Call<ArrayList<CartaoDto>> consultarCartao(
+            @Query("cpf") String cpf
+    );
+
+    @FormUrlEncoded
+    @POST("cartao_deletar.php")
+    Call<Boolean> deletarCartao(
+            @Field("cpf") String cpf,
+            @Field("cdCartao") int codigo
+    );
 }

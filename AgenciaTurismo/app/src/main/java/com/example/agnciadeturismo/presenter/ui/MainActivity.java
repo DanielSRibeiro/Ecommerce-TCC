@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Fragment fragment = new HomeFragment();
-    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    static ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public ClienteDto setUsuario(ClienteDto novoCliente){
-        return this.cliente = novoCliente;
+    public static ClienteDto setUsuario(ClienteDto novoCliente){
+        return cliente = novoCliente;
     }
 
-    public ClienteDto getUsuario(){
+    public static ClienteDto getUsuario(){
         return cliente;
     }
 

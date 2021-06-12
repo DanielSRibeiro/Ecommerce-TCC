@@ -1,11 +1,28 @@
 package com.example.agnciadeturismo.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class CartaoDto {
 
+    @SerializedName("cd")
     private int cd;
-    
-    private String CPF, nomeCartao, nomeImpresso,
-            numeroCartao, cvv, validadeCartao;
+
+    @SerializedName("cpf")
+    private String CPF;
+
+    @SerializedName("nome")
+    private String nomeCartao;
+
+    @SerializedName("nomeImpresso")
+    private String nomeImpresso;
+
+    @SerializedName("numero")
+    private String numeroCartao;
+
+    private String cvv;
+
+    @SerializedName("validade")
+    private String validadeCartao;
 
     public CartaoDto(String CPF, String nomeCartao, String nomeImpresso, String numeroCartao, String cvv, String validadeCartao) {
         this.CPF = CPF;
@@ -64,5 +81,13 @@ public class CartaoDto {
 
     public void setValidadeCartao(String validadeCartao) {
         this.validadeCartao = validadeCartao;
+    }
+
+    public int getCd() {
+        return cd;
+    }
+
+    public void setCd(int cd) {
+        this.cd = cd;
     }
 }

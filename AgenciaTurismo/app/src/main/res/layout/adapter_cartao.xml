@@ -39,7 +39,8 @@
             android:layout_margin="16dp"
             android:text="Nº 0000 0000 0000 0000"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textSize="16dp"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

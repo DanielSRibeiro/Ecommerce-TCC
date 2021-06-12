@@ -10,7 +10,7 @@ import java.io.IOException;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class RepositoryTask {
+public class ClienteRepositoryTask {
 
     private static final String TAG = "RepositoryTask";
     public boolean resultado;
