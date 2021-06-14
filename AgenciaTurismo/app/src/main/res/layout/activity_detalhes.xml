@@ -85,6 +85,7 @@
                         android:backgroundTint="@color/black" />
 
                     <TextView
+                        android:id="@+id/txt_idaVolta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/img_voo"

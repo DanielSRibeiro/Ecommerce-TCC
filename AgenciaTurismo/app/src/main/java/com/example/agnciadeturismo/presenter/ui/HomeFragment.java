@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,9 +90,10 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     @Override
     public void onClick(int posicao) {
         PacoteDto pacote = listPacote.get(posicao);
+
         Intent intent = new Intent(getActivity(), DetalhesActivity.class);
         intent.putExtra("codigo", pacote.getCd());
-        intent.putExtra("vaigem", pacote.getCdViagem());
+        intent.putExtra("viagem", pacote.getCdViagem());
         intent.putExtra("hotel", pacote.getCdHotel());
         intent.putExtra("categoria", pacote.getCdCategoria());
         intent.putExtra("tipoTransporte", pacote.getCdTipoTranporte());
