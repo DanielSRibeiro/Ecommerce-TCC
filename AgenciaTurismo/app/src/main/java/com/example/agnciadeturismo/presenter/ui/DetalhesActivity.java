@@ -27,7 +27,7 @@ public class DetalhesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
-                intent.putExtra("carrinho", "carrinho");
+                intent.putExtra("activity", "carrinho");
                 startActivity(intent);
             }
         });

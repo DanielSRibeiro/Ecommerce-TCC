@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agnciadeturismo.R;
 
-public class BuscarAdapter extends RecyclerView.Adapter<BuscarAdapter.viewHolder> {
+public class PacoteAdapter extends RecyclerView.Adapter<PacoteAdapter.viewHolder> {
 
     OnClickItemPacote listener;
 
-    public BuscarAdapter(OnClickItemPacote listener) {
+    public PacoteAdapter(OnClickItemPacote listener) {
         this.listener = listener;
     }
 

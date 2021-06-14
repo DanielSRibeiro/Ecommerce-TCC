@@ -3,14 +3,14 @@ package com.example.agnciadeturismo.viewmodel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.agnciadeturismo.data.repository.CartaoRepositoryTask;
 import com.example.agnciadeturismo.model.CartaoDto;
 
 import java.util.ArrayList;
 
-public class ViewModelCartao extends ViewModel {
-
+public class CartaoViewModel extends ViewModel {
 
     CartaoRepositoryTask repositoryTask = new CartaoRepositoryTask();
     private MutableLiveData<Boolean> mCadastrar = new MutableLiveData<>();
@@ -51,4 +51,5 @@ public class ViewModelCartao extends ViewModel {
     private void getAllCartoes(String cpf){
         mCartao.postValue(repositoryTask.getAllCartoes(cpf));
     }
+
 }

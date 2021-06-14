@@ -17,12 +17,14 @@
         app:title="Crie sua conta" />
 
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
         app:endIconMode="clear_text"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_cadastrar"
         app:startIconDrawable="@drawable/ic_baseline_person_24"
@@ -41,7 +43,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
+        android:layout_marginTop="8dp"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout"
@@ -62,7 +64,7 @@
         android:id="@+id/linear"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="16dp"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
@@ -162,10 +164,10 @@
         android:id="@+id/btn_cadastrarUsuario"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Criar conta"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
         app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-        android:textAllCaps="false"/>
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 </androidx.constraintlayout.widget.ConstraintLayout>

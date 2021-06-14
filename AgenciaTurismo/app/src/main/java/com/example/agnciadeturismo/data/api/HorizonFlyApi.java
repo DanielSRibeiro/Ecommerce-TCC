@@ -2,6 +2,7 @@ package com.example.agnciadeturismo.data.api;
 
 import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.model.PacoteDto;
 
 import java.util.ArrayList;
 
@@ -66,4 +67,7 @@ public interface HorizonFlyApi {
             @Field("cpf") String cpf,
             @Field("cdCartao") int codigo
     );
+
+    @GET("pacote_oferta.php")
+    Call<ArrayList<PacoteDto>> consultarOferta();
 }

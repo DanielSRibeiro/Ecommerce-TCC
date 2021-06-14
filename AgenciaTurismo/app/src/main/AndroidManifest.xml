@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ui.DetalhesActivity"></activity>
+        <activity android:name=".presenter.ui.DetalhesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presenter.ui.DashboardActivity"
             android:screenOrientation="portrait" />

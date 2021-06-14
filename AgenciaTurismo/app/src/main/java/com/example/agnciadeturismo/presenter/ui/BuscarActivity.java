@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.presenter.adapter.BuscarAdapter;
+import com.example.agnciadeturismo.presenter.adapter.PacoteAdapter;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemPacote;
 
 public class BuscarActivity extends AppCompatActivity implements OnClickItemPacote {
@@ -36,7 +36,7 @@ public class BuscarActivity extends AppCompatActivity implements OnClickItemPaco
     }
 
     private void atualizaAdapter() {
-        BuscarAdapter adapter = new BuscarAdapter(this);
+        PacoteAdapter adapter = new PacoteAdapter(this);
         recyclerViewPacote.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewPacote.setAdapter(adapter);
     }

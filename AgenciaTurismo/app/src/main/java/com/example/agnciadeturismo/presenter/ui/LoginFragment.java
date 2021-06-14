@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -23,7 +22,7 @@ import com.example.agnciadeturismo.data.api.HorizonFlyApi;
 import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.viewmodel.ViewModelCliente;
+import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class LoginFragment extends Fragment {
     Button buttonLogin;
     TextView textViewCadastrar;
     EditText editTextCPF, editTextSenha;
-    ViewModelCliente viewModelCliente;
+    ClienteViewModel clienteViewModel;
     private static final String TAG = "LoginFragment";
     ClienteDto cliente;
 
@@ -68,7 +67,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void initView(View view) {
-        viewModelCliente = new ViewModelProvider(getActivity()).get(ViewModelCliente.class);
+        clienteViewModel = new ViewModelProvider(getActivity()).get(ClienteViewModel.class);
         buttonLogin = view.findViewById(R.id.btn_login);
         textViewCadastrar = view.findViewById(R.id.txt_cadastrarUsuario);
         editTextCPF = view.findViewById(R.id.edt_cpfLogin);

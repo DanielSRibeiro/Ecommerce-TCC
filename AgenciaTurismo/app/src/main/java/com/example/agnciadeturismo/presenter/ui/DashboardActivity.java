@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -54,7 +55,9 @@ public class DashboardActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+        Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+        intent.putExtra("activity", "perfil");
+        startActivity(intent);
         return super.onSupportNavigateUp();
     }
 }

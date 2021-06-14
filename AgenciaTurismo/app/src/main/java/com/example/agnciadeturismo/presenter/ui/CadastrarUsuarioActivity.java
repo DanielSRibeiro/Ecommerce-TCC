@@ -5,16 +5,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.viewmodel.ViewModelCliente;
+import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
 
 
 public class CadastrarUsuarioActivity extends AppCompatActivity {
@@ -22,10 +21,11 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
     private static final String TAG = "CadastrarUsuarioActivit";
     Toolbar toolbar;
     Button buttonCadastrar;
-    ViewModelCliente viewModelCliente;
+    ClienteViewModel clienteViewModel;
     EditText editTextNome, editTextSenha, editTextTelefone, editTextCPF, editTextRG, editTextEmail;
     String nome, email, cpf, rg, telefone, senha, img;
     boolean alterar = false;
+    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +43,13 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
                 telefone = editTextTelefone.getText().toString();
                 senha = editTextSenha.getText().toString();
 
-                viewModelCliente.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+                clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
             }
         });
     }
 
     private void initView() {
-        viewModelCliente = new ViewModelProvider(this).get(ViewModelCliente.class);
+        clienteViewModel = new ViewModelProvider(this).get(ClienteViewModel.class);
         toolbar = findViewById(R.id.toolbar_cadastrar);
         buttonCadastrar = findViewById(R.id.btn_cadastrarUsuario);
         editTextNome = findViewById(R.id.edt_nome);
@@ -62,31 +62,32 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
+        cliente = MainActivity.getUsuario();
+        if(cliente.getCpf() != null){
             alterar = true;
             buttonCadastrar.setText("Alterar conta");
             getSupportActionBar().setTitle("Alterar sua conta");
 
             editTextCPF.setEnabled(false);
-            editTextNome.setText(bundle.getString("nome"));
-            editTextCPF.setText(bundle.getString("cpf"));
-            editTextEmail.setText(bundle.getString("email"));
-            editTextRG.setText(bundle.getString("rg"));
-            editTextTelefone.setText(bundle.getString("tel"));
-            editTextSenha.setText(bundle.getString("senha"));
-            img = bundle.getString("img");
+            editTextNome.setText(cliente.getNome());
+            editTextCPF.setText(cliente.getCpf());
+            editTextEmail.setText(cliente.getEmail());
+            editTextRG.setText(cliente.getRg());
+            editTextTelefone.setText(cliente.getTelefone());
+            editTextSenha.setText(cliente.getSenha());
+            img = cliente.getImg();
         }
     }
 
     private void initObeserve() {
-        viewModelCliente.clienteCadastrado.observe(CadastrarUsuarioActivity.this, new Observer<String>() {
+        clienteViewModel.cadastrado.observe(this, new Observer<Boolean>() {
             @Override
-            public void onChanged(String toast) {
-                Toast.makeText(CadastrarUsuarioActivity.this, toast, Toast.LENGTH_SHORT).show();
-                Log.d("TAG", toast);
-                if(toast == ViewModelCliente.cadastradoSucesso){
+            public void onChanged(Boolean cadastrado) {
+                if(cadastrado == true){
+                    Toast.makeText(CadastrarUsuarioActivity.this, ClienteViewModel.cadastradoSucesso, Toast.LENGTH_SHORT).show();
                     finish();
+                }else{
+                    Toast.makeText(CadastrarUsuarioActivity.this, "Esse CPF já foi cadastrado!!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

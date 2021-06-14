@@ -50,7 +50,12 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
-            fragment = new CarrinhoFragment();
+            String activity = bundle.getString("activity");
+            if(activity.equals("carrinho")){
+                fragment = new CarrinhoFragment();
+            }else if(activity.equals("perfil")){
+                fragment = new PerfilFragment();
+            }
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, fragment)
                 .commit();

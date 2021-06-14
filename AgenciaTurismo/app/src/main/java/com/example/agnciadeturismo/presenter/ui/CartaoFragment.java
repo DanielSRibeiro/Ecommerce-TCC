@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,22 +20,22 @@ import android.widget.Toast;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
-import com.example.agnciadeturismo.presenter.ui.CadastrarCartoesActivity;
-import com.example.agnciadeturismo.presenter.ui.DashboardActivity;
 import com.example.agnciadeturismo.presenter.adapter.CartaoAdapter;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
-import com.example.agnciadeturismo.viewmodel.ViewModelCartao;
+import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
 
+    private static final String TAG = "CartaoFragment";
     FloatingActionButton fabCadastrar;
     RecyclerView recyclerViewCartao;
     String cpf = "";
-    ViewModelCartao viewModelCartao;
+    CartaoViewModel cartaoViewModel;
     ArrayList<CartaoDto> listCartao = new ArrayList<>();
+    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +43,6 @@ public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
         View view = inflater.inflate(R.layout.fragment_cartao, container, false);
         initView(view);
         initObserver();
-
         fabCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,8 +54,21 @@ public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
         return view;
     }
 
+    private void initView(View view) {
+        cartaoViewModel = new ViewModelProvider(getActivity()).get(CartaoViewModel.class);
+        fabCadastrar = view.findViewById(R.id.fab_cadastrar);
+        recyclerViewCartao = view.findViewById(R.id.recycler_cartao);
+        ((DashboardActivity) getActivity()).setTitulo("Cartão", "Selecionar o Cartão para efetuar a compra");
+
+        cliente = MainActivity.getUsuario();
+        if(cliente.getCpf() != null){
+            cpf = cliente.getCpf();
+            cartaoViewModel.init(cpf);
+        }
+    }
+
     private void initObserver() {
-        viewModelCartao.cartao.observe(getActivity(), new Observer<ArrayList<CartaoDto>>() {
+        cartaoViewModel.cartao.observe(getActivity(), new Observer<ArrayList<CartaoDto>>() {
             @Override
             public void onChanged(ArrayList<CartaoDto> list) {
                 listCartao = list;
@@ -63,28 +76,16 @@ public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
             }
         });
 
-        viewModelCartao.excluir.observe(getActivity(), new Observer<Boolean>() {
+        cartaoViewModel.excluir.observe(getActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean resultado) {
                 if(resultado == true){
                     Toast.makeText(getActivity(), "Excluido com Sucesso!!", Toast.LENGTH_SHORT).show();
-                    viewModelCartao.init(cpf);
+                    Log.d(TAG, "CPF: "+cpf);
+                    cartaoViewModel.init(cpf);
                 }
             }
         });
-    }
-
-    private void initView(View view) {
-        viewModelCartao = new ViewModelProvider(getActivity()).get(ViewModelCartao.class);
-        fabCadastrar = view.findViewById(R.id.fab_cadastrar);
-        recyclerViewCartao = view.findViewById(R.id.recycler_cartao);
-        ((DashboardActivity) getActivity()).setTitulo("Cartão", "Selecionar o Cartão para efetuar a compra");
-
-        Bundle bundle =  getActivity().getIntent().getExtras();
-        if(bundle != null){
-           cpf = bundle.getString("cpf");
-           viewModelCartao.init(cpf);
-        }
     }
 
     private void atualizaAdapter(ArrayList<CartaoDto> listCartao) {
@@ -110,7 +111,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
         msg.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                viewModelCartao.deletarCartao(cpf, codigo);
+                cartaoViewModel.deletarCartao(cpf, codigo);
             }
         });
         msg.show();

@@ -6,14 +6,13 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.agnciadeturismo.data.repository.ClienteRepositoryTask;
 
-public class ViewModelCliente extends ViewModel {
+public class ClienteViewModel extends ViewModel {
 
-    private MutableLiveData<String> _clienteCadastrado = new MutableLiveData<>();
-    public LiveData clienteCadastrado = _clienteCadastrado;
+    private MutableLiveData<Boolean> mCadastrado = new MutableLiveData<>();
+    public LiveData cadastrado = mCadastrado;
 
     ClienteRepositoryTask clienteRepositoryTask = new ClienteRepositoryTask();
     public static String cadastradoSucesso;
-    public static String cadastradoFalha = "Esse CPF já foi cadastrado!!";
     boolean postCliente;
 
     public void modificarCliente(boolean alterar, String nome, String email, String cpf, String rg, String telefone, String senha, String img){
@@ -32,20 +31,12 @@ public class ViewModelCliente extends ViewModel {
     private void inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha) {
         postCliente = clienteRepositoryTask.inserirCliente(nome, email, cpf, rg, telefone, senha);
         cadastradoSucesso = "Cadastrado com Sucesso!!";
-        setClienteCadastrado(cadastradoSucesso, postCliente);
+        mCadastrado.postValue(postCliente);
     }
 
     private void updateCliente(String nome, String email, String cpf, String rg, String telefone, String senha, String img) {
         postCliente = clienteRepositoryTask.alterarCliente(nome, email, cpf, rg, telefone, senha, img);
         cadastradoSucesso = "Alterado com Sucesso!!";
-        setClienteCadastrado(cadastradoSucesso, postCliente);
-    }
-
-    private void setClienteCadastrado(String cadastradoSucesso, boolean postCliente) {
-        if(postCliente == true){
-            _clienteCadastrado.postValue(cadastradoSucesso);
-        } else{
-            _clienteCadastrado.postValue(cadastradoFalha);
-        }
+        mCadastrado.postValue(postCliente);
     }
 }

@@ -15,14 +15,14 @@ import android.widget.TextView;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
-import com.example.agnciadeturismo.viewmodel.ViewModelCliente;
+import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
 
 public class PerfilFragment extends Fragment {
 
     RelativeLayout layoutCompras, layoutCartoes, layoutSair;
     TextView textViewNome;
     ClienteDto cliente;
-    ViewModelCliente viewModelCliente;
+    ClienteViewModel clienteViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,7 +35,7 @@ public class PerfilFragment extends Fragment {
     }
 
     private void initView(View view) {
-        viewModelCliente = new ViewModelProvider(getActivity()).get(ViewModelCliente.class);
+        clienteViewModel = new ViewModelProvider(getActivity()).get(ClienteViewModel.class);
         layoutCompras = view.findViewById(R.id.layoutCompras);
         layoutCartoes = view.findViewById(R.id.layoutCartoes);
         layoutSair = view.findViewById(R.id.layoutSair);
@@ -85,13 +85,6 @@ public class PerfilFragment extends Fragment {
 
     private void mudarTela(String activity, Intent intent){
         intent.putExtra("activity", activity);
-        intent.putExtra("nome", cliente.getNome());
-        intent.putExtra("cpf", cliente.getCpf());
-        intent.putExtra("email", cliente.getEmail());
-        intent.putExtra("rg", cliente.getRg());
-        intent.putExtra("tel", cliente.getTelefone());
-        intent.putExtra("senha", cliente.getSenha());
-        intent.putExtra("img", cliente.getImg());
         startActivity(intent);
     }
 }

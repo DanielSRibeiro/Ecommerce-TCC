@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,20 +14,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.ClienteDto;
-import com.example.agnciadeturismo.viewmodel.ViewModelCartao;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 
 public class CadastrarCartoesActivity extends AppCompatActivity {
 
     Button buttonCadastrar;
     EditText editTextNomeCartao, editTextNumero, editTextNomeImpresso, editTextData, editTextCVV;
     Toolbar toolbar;
-    ViewModelCartao viewModelCartao;
+    CartaoViewModel cartaoViewModel;
     private static final String TAG = "CadastrarCartoesActivit";
     ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
@@ -46,19 +42,18 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 String data = editTextData.getText().toString();
                 String cvv = editTextCVV.getText().toString();
 
-//                cliente = MainActivity.getUsuario();
-//                if(cliente.getCpf() != null){
-                    Log.d("TAG", "entrou");
-                    viewModelCartao.cadastrarCartao("00000000000000", nomeCartao, nomeImpresso, numero, cvv, data);
-//                }else{
-//                    Log.d(TAG, "CPF inválido");
-//                }
+                cliente = MainActivity.getUsuario();
+                if(cliente.getCpf() != null){
+                    cartaoViewModel.cadastrarCartao(cliente.getCpf(), nomeCartao, nomeImpresso, numero, cvv, data);
+                }else{
+                    Log.d(TAG, "CPF inválido");
+                }
             }
         });
     }
 
     private void initView() {
-        viewModelCartao = new ViewModelProvider(this).get(ViewModelCartao.class);
+        cartaoViewModel = new ViewModelProvider(this).get(CartaoViewModel.class);
         buttonCadastrar = findViewById(R.id.btn_cadastrarCartoes);
         editTextNomeCartao = findViewById(R.id.edt_nomeCartao);
         editTextNumero = findViewById(R.id.edt_numeroCartao);
@@ -72,25 +67,28 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     }
 
     private void initObserve() {
-        viewModelCartao.cadastrar.observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
+        cartaoViewModel.cadastrar.observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean resultado) {
-
                 if(resultado){
-                    Log.d(TAG, "Sucesso");
                     Toast.makeText(CadastrarCartoesActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    mudarTela();
                 }else{
-                    Log.d(TAG, "Falha");
                     Toast.makeText(CadastrarCartoesActivity.this, "O formato da data esta errado", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
+    private void mudarTela() {
+        Intent intent = new Intent(CadastrarCartoesActivity.this, DashboardActivity.class);
+        intent.putExtra("activity", "Cartão");
+        startActivity(intent);
+    }
+
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+        mudarTela();
         return super.onSupportNavigateUp();
     }
 }
