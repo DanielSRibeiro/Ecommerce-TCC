@@ -1,6 +1,7 @@
 package com.example.agnciadeturismo.data.api;
 
 import com.example.agnciadeturismo.model.CartaoDto;
+import com.example.agnciadeturismo.model.CidadeDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.model.PacoteDto;
 
@@ -70,4 +71,13 @@ public interface HorizonFlyApi {
 
     @GET("pacote_oferta.php")
     Call<ArrayList<PacoteDto>> consultarOferta();
+
+    @GET("cidade_consultarTudo.php")
+    Call<ArrayList<CidadeDto>> getAllCidades();
+
+    @GET("cidade_consultarNome.php")
+    Call<ArrayList<CidadeDto>> getNomeCidade(
+            @Query("cidade") String nome
+    );
+
 }

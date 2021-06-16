@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 import com.example.agnciadeturismo.R;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DetalhesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -23,6 +27,7 @@ public class DetalhesActivity extends AppCompatActivity {
     TextView textViewIdaVolta, textViewDataChegada, textViewDataSaida, textViewValor;
     ImageView ImageViewPacote;
     int codigo, tipoTransporte, categoria;
+    private static final String TAG = "DetalhesActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +74,16 @@ public class DetalhesActivity extends AppCompatActivity {
             textViewDestino.setText("Destino: "+bundle.getString("destino"));
             textViewNomePacote.setText(bundle.getString("nomePacote"));
             textViewDescricao.setText(bundle.getString("descricao"));
-            textViewDataChegada.setText("Data de chegada: "+bundle.getString("checkin"));
+
+            SimpleDateFormat in = new SimpleDateFormat("dd-MM-yyyy HH:MM:SS");
+            String data = bundle.getString("checkin");
+//            String dataChegada = in.format(new Date(data));
+            Log.d(TAG, data);
+//            Log.d(TAG, dataChegada);
+
+            textViewDataChegada.setText("Data de chegada: ");
             textViewDataSaida.setText("Data de saída: "+bundle.getString("checkout"));
-//            Picasso.get().load(bundle.getString("img")).into(ImageViewPacote);
+            Picasso.get().load("http://192.168.0.106/"+bundle.getString("img")).into(ImageViewPacote);
             textViewValor.setText("R$"+bundle.getDouble("valor"));
         }
     }

@@ -17,6 +17,10 @@ import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CadastrarCartoesActivity extends AppCompatActivity {
 
     Button buttonCadastrar;
@@ -39,8 +43,10 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 String nomeCartao = editTextNomeCartao.getText().toString();
                 String numero = editTextNumero.getText().toString();
                 String nomeImpresso = editTextNomeImpresso.getText().toString();
-                String data = editTextData.getText().toString();
                 String cvv = editTextCVV.getText().toString();
+
+                SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+                String data = in.format(new Date(editTextData.getText().toString()));
 
                 cliente = MainActivity.getUsuario();
                 if(cliente.getCpf() != null){

@@ -33,6 +33,11 @@ public class BuscarActivity extends AppCompatActivity implements OnClickItemPaco
         recyclerViewPacote = findViewById(R.id.recycler_pacote);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null){
+            getSupportActionBar().setTitle("Pacotes para "+bundle.getString("destino"));
+        }
     }
 
     private void atualizaAdapter() {
@@ -43,13 +48,13 @@ public class BuscarActivity extends AppCompatActivity implements OnClickItemPaco
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
+        Intent intent = new Intent(BuscarActivity.this, MainActivity.class);
+        startActivity(intent);
         return super.onSupportNavigateUp();
     }
 
     @Override
     public void onClick(int posicao) {
-        Toast.makeText(this, "Detalhes", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(BuscarActivity.this, DetalhesActivity.class);
         startActivity(intent);
     }

@@ -16,8 +16,8 @@ public class ClienteRepositoryTask {
     public boolean resultado;
 
     public boolean inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha){
-        Call<Boolean> api = RetrofitTask.instanceRetrofit()
-                .create(HorizonFlyApi.class).cadastrarCliente(nome, email, cpf, rg, telefone, senha);
+        Call<Boolean> api = RetrofitTask.getRetrofit()
+                .cadastrarCliente(nome, email, cpf, rg, telefone, senha);
 
         try {
             Response<Boolean> response = api.execute();
@@ -38,8 +38,7 @@ public class ClienteRepositoryTask {
     }
 
     public boolean alterarCliente(String nome, String email, String cpf, String rg, String telefone, String senha, String img){
-        Call<Boolean> api = RetrofitTask.instanceRetrofit()
-                .create(HorizonFlyApi.class).updateCliente(nome, email, cpf, rg, telefone, senha, img);
+        Call<Boolean> api = RetrofitTask.getRetrofit().updateCliente(nome, email, cpf, rg, telefone, senha, img);
 
         try {
             Response<Boolean> response = api.execute();

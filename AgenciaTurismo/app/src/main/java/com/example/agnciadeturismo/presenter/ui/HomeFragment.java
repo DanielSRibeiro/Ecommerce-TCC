@@ -19,21 +19,23 @@ import android.widget.Button;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.PacoteDto;
-import com.example.agnciadeturismo.presenter.ui.BuscarActivity;
-import com.example.agnciadeturismo.presenter.ui.DetalhesActivity;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemPacote;
 import com.example.agnciadeturismo.presenter.adapter.OfertaAdapter;
+import com.example.agnciadeturismo.viewmodel.CidadeViewModel;
 import com.example.agnciadeturismo.viewmodel.PacoteViewModel;
 
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements OnClickItemPacote {
 
-    AutoCompleteTextView autoCompleteTextViewTransporte;
+    private static final String TAG = "HomeFragment";
+    AutoCompleteTextView autoCompleteTextViewTransporte, autoCompleteTextViewOrigem, autoCompleteTextViewDestino;
     RecyclerView recyclerViewOferta;
     Button buttonPesquisar;
     ArrayList<PacoteDto> listPacote = new ArrayList<>();
-    PacoteViewModel viewModel;
+    PacoteViewModel pacoteViewModel;
+    CidadeViewModel cidadeViewModel;
+    int cdOrigem = -1, cdDestino = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,8 +48,7 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
         buttonPesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), BuscarActivity.class);
-                startActivity(intent);
+                cidadeViewModel.getCodigoCidade(autoCompleteTextViewOrigem.getText().toString(), autoCompleteTextViewDestino.getText().toString());
             }
         });
 
@@ -55,13 +56,68 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     }
 
     private void initObserver() {
-        viewModel.oferta.observe(getActivity(), new Observer<ArrayList<PacoteDto>>() {
+        pacoteViewModel.oferta.observe(getActivity(), new Observer<ArrayList<PacoteDto>>() {
             @Override
             public void onChanged(ArrayList<PacoteDto> response) {
                 listPacote = response;
                 atualizaAdapter(listPacote);
             }
         });
+
+        cidadeViewModel.todasCidades.observe(getActivity(), new Observer<String[]>() {
+            @Override
+            public void onChanged(String[] listCidades) {
+                ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, listCidades);
+                autoCompleteTextViewOrigem.setAdapter(adapter);
+                autoCompleteTextViewDestino.setAdapter(adapter);
+                Log.d(TAG, "Sucesso");
+            }
+        });
+
+        cidadeViewModel.codigoOrigem.observe(getActivity(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer codigoOrigem) {
+                if(codigoOrigem != null){
+                    cdOrigem = codigoOrigem;
+                    buscarPacote();
+                }else{
+                    cdOrigem = -1;
+                }
+            }
+        });
+
+        cidadeViewModel.codigoDestino.observe(getActivity(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer codigoDestino) {
+                if(codigoDestino != null){
+                    cdDestino = codigoDestino;
+                    buscarPacote();
+                }else{
+                    cdDestino = -1;
+                }
+            }
+        });
+    }
+
+    private void buscarPacote() {
+        if (cdOrigem != -1 && cdDestino != -1) {
+            int transporte = -1;
+            if(autoCompleteTextViewTransporte.equals("Ônibus")){
+                transporte = 1;
+            }else if(autoCompleteTextViewTransporte.equals("Avião")){
+                transporte = 2;
+            }else if(autoCompleteTextViewTransporte.equals("Cruzeiro")){
+                transporte = 3;
+            }
+            Intent intent = new Intent(getActivity(), BuscarActivity.class);
+            intent.putExtra("tipo", transporte);
+            intent.putExtra("cdOrigem", cdOrigem);
+            intent.putExtra("cdDestino", cdDestino);
+            intent.putExtra("destino", autoCompleteTextViewDestino.getText().toString());
+            cdOrigem = -1;
+            cdDestino = -1;
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -70,15 +126,20 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
         String[] tipo_transporte = getResources().getStringArray(R.array.tipo_transporte);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, tipo_transporte);
         autoCompleteTextViewTransporte.setAdapter(adapter);
+
     }
 
     private void initView(View view) {
-        viewModel = new ViewModelProvider(this).get(PacoteViewModel.class);
+        pacoteViewModel = new ViewModelProvider(this).get(PacoteViewModel.class);
+        cidadeViewModel = new ViewModelProvider(this).get(CidadeViewModel.class);
         autoCompleteTextViewTransporte = view.findViewById(R.id.autoCompleteTextView_transporte);
+        autoCompleteTextViewOrigem = view.findViewById(R.id.autoCompleteTextView_origem);
+        autoCompleteTextViewDestino = view.findViewById(R.id.autoCompleteTextView_destino);
         recyclerViewOferta = view.findViewById(R.id.recycler_oferta);
         buttonPesquisar = view.findViewById(R.id.btn_pesquisarPacote);
 
-        viewModel.getAllPacotesOferta();
+        pacoteViewModel.getAllPacotesOferta();
+        cidadeViewModel.getAllCidades();
     }
 
     private void atualizaAdapter(ArrayList<PacoteDto> listPacote) {

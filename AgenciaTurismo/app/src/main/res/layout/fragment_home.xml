@@ -46,15 +46,15 @@
         android:paddingTop="8dp">
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_weight="1"
             android:hint="Origem"
             app:endIconMode="clear_text">
 
-            <EditText
-                android:id="@+id/edt_origemPacote"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView_origem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLength="20" />
@@ -62,7 +62,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -70,8 +70,8 @@
             android:hint="Destino"
             app:endIconMode="clear_text">
 
-            <EditText
-                android:id="@+id/edt_destinoPacote"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView_destino"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:maxLength="20" />
@@ -88,7 +88,7 @@
         android:layout_below="@+id/linear"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        android:hint="Tipo de Transporte">
+        app:endIconMode="dropdown_menu">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView_transporte"
@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textinput_transporte"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="Pesquisar"
         android:textAllCaps="false" />
 

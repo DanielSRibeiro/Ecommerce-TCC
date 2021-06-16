@@ -95,8 +95,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void initRetrofit(String cpf, String senha) {
-        RetrofitTask.instanceRetrofit().create(HorizonFlyApi.class)
-                .consultarCliente(cpf, senha).enqueue(new Callback<ArrayList<ClienteDto>>() {
+        RetrofitTask.getRetrofit().consultarCliente(cpf, senha).enqueue(new Callback<ArrayList<ClienteDto>>() {
             @Override
             public void onResponse(Call<ArrayList<ClienteDto>> call, Response<ArrayList<ClienteDto>> response) {
                 if(response.isSuccessful()){

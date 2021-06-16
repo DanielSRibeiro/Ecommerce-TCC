@@ -14,8 +14,7 @@
         android:layout_alignParentTop="true"
         android:background="@color/white"
         android:elevation="4dp"
-        android:orientation="vertical"
-        app:title="Pacotes para o ...." />
+        android:orientation="vertical" />
 
     <RelativeLayout
         android:id="@+id/latout"

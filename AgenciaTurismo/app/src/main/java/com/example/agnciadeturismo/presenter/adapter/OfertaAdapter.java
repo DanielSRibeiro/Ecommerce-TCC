@@ -42,7 +42,7 @@ public class OfertaAdapter extends RecyclerView.Adapter<OfertaAdapter.viewHolder
         PacoteDto pacote = listPacote.get(position);
         holder.textViewNome.setText(pacote.getNomePacote());
         holder.textViewValor.setText("R$"+pacote.getVlPacote());
-//        Picasso.get().load(new File("file://img/img.jpg")).into(holder.img);
+        Picasso.get().load("http://192.168.0.106/"+pacote.getImg()).into(holder.img);
     }
 
     @Override
