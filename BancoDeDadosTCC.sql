@@ -50,6 +50,7 @@ CREATE TABLE Cidade (
     FOREIGN KEY (cd_estado) REFERENCES Estado (cd_estado) /*Referencia */
 );
 
+
 CREATE TABLE TipoTransporte (
 cd_tipotransporte INTEGER primary key auto_increment,
 tipo_transporte VARCHAR(60) -- Ônibus / Avião / Cruzeiro
@@ -74,7 +75,7 @@ CREATE TABLE Hotel (
     descricao_hotel VARCHAR(400) not null,
     telefone_hotel VARCHAR(17) not null,
     endereco_hotel VARCHAR(100) not null,
-    diaria_hotel  Decimal(14,0) not null,
+    diaria_hotel VARCHAR(50) not null,
     img_hotel VARCHAR(500) not null,
     FOREIGN KEY (cd_cidade) REFERENCES Cidade (cd_cidade) /*Referencia */
 );
@@ -89,7 +90,7 @@ CREATE TABLE Viagem (
     dt_ida DATETIME not null,
     dt_chegada DATETIME not null,
     descricao VARCHAR(400) not null,
-    vl_total Decimal(14,0) not null,
+    vl_total VARCHAR(50) not null,
     img_viagem VARCHAR(1000) not null,
     FOREIGN KEY (origem) REFERENCES Transporte(cd_transporte) /*Referencia */,
     FOREIGN KEY (destino) REFERENCES Transporte(cd_transporte) /*Referencia */,
@@ -117,7 +118,7 @@ CREATE TABLE Pacote (
     dtChekin_hotel DATETIME not null,
     dtChekout_hotel DATETIME not null,
     img_pacote VARCHAR(1000) not null,
-    vl_pacote  Decimal(14,0) not null,
+    vl_pacote   VARCHAR(50)   null,
     FOREIGN KEY (cd_hotel) REFERENCES Hotel (cd_hotel) /*Referencia */,
 	FOREIGN KEY (cd_viagem) REFERENCES Viagem(cd_viagem) /*Referencia */,
 	FOREIGN KEY (cd_cidOrigem) REFERENCES Cidade(cd_cidade) /*Referencia */,
@@ -183,12 +184,13 @@ SELECT * FROM Transporte;
 SELECT * FROM tipotransporte;
 SELECT * FROM Cartao;
 SELECT * FROM Pacote;
+SELECT * FROM Hotel;
 SELECT * FROM Reserva;
 SELECT * FROM Cidade;
 SELECT * FROM Estado;
 SELECT * FROM Categoria;
 SELECT * FROM Itens_escolhidos;
-
+delete from Cidade where cd_cidade = 1;
 Select * from Funcionario where rg = '241574230';
 -- Select nome e telefone de clientes e funcionários
 SELECT nome,telefone from Cliente;
@@ -200,29 +202,6 @@ SELECT nome,telefone from Funcionário;
 
 -- Views logo Abaixo;
     
-/* VIEW MOSTRAR PACOTES ORIGEM */
-drop view vw_MostraPacotesOrigem;
-create view vw_MostraPacotesOrigem
-as select
-Cidade.cidade,
-Pacote.vl_pacote,
-Pacote.img_pacote,
-Pacote.nome_pacote,
-Pacote.cd_cidOrigem
-from Pacote inner join Cidade 
-on Cidade.cd_cidade  = Pacote.cd_cidOrigem ;
-
-
-/*  VIEW MOSTRAR PACOTES DESTINO */
-drop view vw_MostraPacotesDestino; -- Dropar a view
-create view
--- Nome da view
- vw_MostraPacotesDestino
-as select -- seleciona
-Cidade.cidade,
-Pacote.cd_cidDestino
-from Pacote inner join Cidade 
-on Cidade.cd_cidade  = Pacote.cd_cidDestino ;
 
 
 /* VIEW DE DETALHES DE Pacote */
@@ -254,12 +233,13 @@ Viagem.dt_chegada,
 Viagem.vl_total,
 Viagem.img_viagem,
 Viagem.descricao,
-Cidade.cidade
+Cidade.cidade as CidadeDestino,
+Cidade.cidade as CidadeOrigem
 from Pacote inner join Hotel on Hotel.cd_hotel = Pacote.cd_hotel
 inner join Viagem on  Viagem.cd_viagem = Pacote.cd_viagem 
 INNER JOIN TipoTransporte  on TipoTransporte.cd_tipotransporte =  Pacote.cd_tipotransporte
-inner join Cidade on Cidade.cd_cidade = Viagem.destino;
-
+inner join Cidade 
+where Cidade.cidade = Viagem.destino and CidadeOrigem = Viagem.origem ;
 select * from DetalhesPacote;
 /* VIEW DE TRANSPORTES */
 CREATE VIEW
@@ -298,7 +278,6 @@ select * from Transportes;
 
 
 /*VIEW DE VIAGENS */
-/*VIEW DE VIAGENS */
 CREATE VIEW
  vw_MostraViagem
  as select 
@@ -320,7 +299,7 @@ from Viagem
 INNER JOIN TipoTransporte on TipoTransporte.cd_tipotransporte =  Viagem.cd_tipotransporte inner join Cidade 
 where Cidade.cd_cidade = Viagem.destino and Cidade.cd_cidade  = Viagem.origem ;
  
- 
+ select * from vw_mostraviagem;
 delimiter //
     drop procedure if exists buscarViagem;
     create procedure buscarViagem()
