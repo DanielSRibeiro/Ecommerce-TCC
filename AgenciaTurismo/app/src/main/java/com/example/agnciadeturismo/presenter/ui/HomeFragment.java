@@ -102,11 +102,11 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     private void buscarPacote() {
         if (cdOrigem != -1 && cdDestino != -1) {
             int transporte = -1;
-            if(autoCompleteTextViewTransporte.equals("Ônibus")){
+            if(autoCompleteTextViewTransporte.equals("Avião")){
                 transporte = 1;
-            }else if(autoCompleteTextViewTransporte.equals("Avião")){
-                transporte = 2;
             }else if(autoCompleteTextViewTransporte.equals("Cruzeiro")){
+                transporte = 2;
+            }else if(autoCompleteTextViewTransporte.equals("Ônibus")){
                 transporte = 3;
             }
             Intent intent = new Intent(getActivity(), BuscarActivity.class);
