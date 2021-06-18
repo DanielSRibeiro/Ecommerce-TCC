@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.data.api.HorizonFlyApi;
+import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.PacoteDto;
 import com.squareup.picasso.Picasso;
 
@@ -42,7 +44,7 @@ public class OfertaAdapter extends RecyclerView.Adapter<OfertaAdapter.viewHolder
         PacoteDto pacote = listPacote.get(position);
         holder.textViewNome.setText(pacote.getNomePacote());
         holder.textViewValor.setText("R$"+pacote.getVlPacote());
-        Picasso.get().load("http://192.168.0.106/"+pacote.getImg()).into(holder.img);
+        Picasso.get().load("http://"+ RetrofitTask.IP +"/"+pacote.getImg()).into(holder.img);
     }
 
     @Override

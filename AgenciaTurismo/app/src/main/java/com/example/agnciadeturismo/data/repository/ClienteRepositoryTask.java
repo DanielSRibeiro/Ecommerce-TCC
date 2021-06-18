@@ -13,7 +13,8 @@ import retrofit2.Response;
 public class ClienteRepositoryTask {
 
     private static final String TAG = "RepositoryTask";
-    public boolean resultado;
+    public boolean resultadoCadastrado;
+    public boolean resultadoUpdate;
 
     public boolean inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha){
         Call<Boolean> api = RetrofitTask.getRetrofit()
@@ -23,9 +24,9 @@ public class ClienteRepositoryTask {
             Response<Boolean> response = api.execute();
             if(response.isSuccessful()){
                 if(response.body()){
-                    resultado = true;
+                    resultadoCadastrado = true;
                 } else{
-                    resultado = false;
+                    resultadoCadastrado = false;
                 }
             } else{
                 Log.d(TAG, response.code()+"");
@@ -34,7 +35,7 @@ public class ClienteRepositoryTask {
             e.printStackTrace();
         }
 
-        return resultado;
+        return resultadoCadastrado;
     }
 
     public boolean alterarCliente(String nome, String email, String cpf, String rg, String telefone, String senha, String img){
@@ -44,9 +45,9 @@ public class ClienteRepositoryTask {
             Response<Boolean> response = api.execute();
             if(response.isSuccessful()){
                 if(response.body()){
-                    resultado = true;
+                    resultadoUpdate = true;
                 } else{
-                    resultado = false;
+                    resultadoUpdate = false;
                 }
             } else{
                 Log.d(TAG, response.code()+"");
@@ -55,6 +56,6 @@ public class ClienteRepositoryTask {
             e.printStackTrace();
         }
 
-        return resultado;
+        return resultadoUpdate;
     }
 }

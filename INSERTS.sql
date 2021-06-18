@@ -1,11 +1,64 @@
 use db_horizon;
 
-/*drop table `cidades`;
-CREATE TABLE `cidades` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(120) DEFAULT NULL,
-  `id_estado` int(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;*/
+INSERT INTO CLiente VALUES
+('Daniel','112121221','daniel@gmail.com','000.000.000-00','123456789','1234567890', '' ,'3'),
+('Teste','112121221','teste@gmail.com','000.000.000-01','123456789','1234567890', '' ,'3');
+
+--
+INSERT INTO Funcionario VALUES
+('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', ''),
+('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', ''),
+('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', '');
+
+INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, img_transporte ) VALUES
+(3, 'Porto do Rio Janeiro', 1, "" ),
+(1, 'Porto Itajai', 1,"");
+
+-- Mudar diaria para varchar
+INSERT INTO Hotel(cd_cidade, nome_hotel, diaria_hotel, descricao_hotel, endereco_hotel, telefone_hotel , img_hotel ) VALUES 
+(1, 'Nome do Hotel', 3, 'Descrição', 'Endereço' , '1212121', ''),
+(3, 'Nome do Hotel do Rio', 7, 'Descrição', 'Endereço' , '11111', '');
+--
+
+-- Insert na tabela TipoTransporte
+INSERT INTO TipoTransporte(cd_tipotransporte,tipo_transporte) VALUES
+('1','Avião'),
+('2','Cruzeiro'),
+('3','Ônibus');
+
+-- Insert na tabela Categoria
+INSERT INTO Categoria(cd_categoria,Categoria) VALUES
+('1','Destaques'),
+('2','Em Oferta');
+
+INSERT INTO Estado (cd_estado, estado, uf) VALUES
+(1, 'Acre', 'AC'),
+(2, 'Alagoas', 'AL'),
+(3, 'Amazonas', 'AM'),
+(4, 'Amapá', 'AP'),
+(5, 'Bahia', 'BA'),
+(6, 'Ceará', 'CE'),
+(7, 'Distrito Federal', 'DF'),
+(8, 'Espírito Santo', 'ES'),
+(9, 'Goiás', 'GO'),
+(10, 'Maranhão', 'MA'),
+(11, 'Minas Gerais', 'MG'),
+(12, 'Mato Grosso do Sul', 'MS'),
+(13, 'Mato Grosso', 'MT'),
+(14, 'Pará', 'PA'),
+(15, 'Paraíba', 'PB'),
+(16, 'Pernambuco', 'PE'),
+(17, 'Piauí', 'PI'),
+(18, 'Paraná', 'PR'),
+(19, 'Rio de Janeiro', 'RJ'),
+(20, 'Rio Grande do Norte', 'RN'),
+(21, 'Rondônia', 'RO'),
+(22, 'Roraima', 'RR'),
+(23, 'Rio Grande do Sul', 'RS'),
+(24, 'Santa Catarina', 'SC'),
+(25, 'Sergipe', 'SE'),
+(26, 'São Paulo', 'SP'),
+(27, 'Tocantins', 'TO');
 
 INSERT INTO Cidade (cd_cidade, cidade, cd_estado) VALUES
 (1, 'Afonso Cláudio', 8),
@@ -5574,45 +5627,3 @@ INSERT INTO Cidade (cd_cidade, cidade, cd_estado) VALUES
 (5562, 'Tupiratins', 27),
 (5563, 'Wanderlândia', 27),
 (5564, 'Xambioá', 27);
-
-INSERT INTO Estado (cd_estado, estado, uf) VALUES
-(1, 'Acre', 'AC'),
-(2, 'Alagoas', 'AL'),
-(3, 'Amazonas', 'AM'),
-(4, 'Amapá', 'AP'),
-(5, 'Bahia', 'BA'),
-(6, 'Ceará', 'CE'),
-(7, 'Distrito Federal', 'DF'),
-(8, 'Espírito Santo', 'ES'),
-(9, 'Goiás', 'GO'),
-(10, 'Maranhão', 'MA'),
-(11, 'Minas Gerais', 'MG'),
-(12, 'Mato Grosso do Sul', 'MS'),
-(13, 'Mato Grosso', 'MT'),
-(14, 'Pará', 'PA'),
-(15, 'Paraíba', 'PB'),
-(16, 'Pernambuco', 'PE'),
-(17, 'Piauí', 'PI'),
-(18, 'Paraná', 'PR'),
-(19, 'Rio de Janeiro', 'RJ'),
-(20, 'Rio Grande do Norte', 'RN'),
-(21, 'Rondônia', 'RO'),
-(22, 'Roraima', 'RR'),
-(23, 'Rio Grande do Sul', 'RS'),
-(24, 'Santa Catarina', 'SC'),
-(25, 'Sergipe', 'SE'),
-(26, 'São Paulo', 'SP'),
-(27, 'Tocantins', 'TO');
-
-/*ALTER TABLE `cidades`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_Cidade_estado` (`id_estado`);
-  
-ALTER TABLE `estados`
-  ADD PRIMARY KEY (`id`);
-
-ALTER TABLE `cidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5565;
-
-ALTER TABLE `estados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2*/

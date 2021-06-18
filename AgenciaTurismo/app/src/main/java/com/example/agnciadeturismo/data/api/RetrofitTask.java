@@ -5,8 +5,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitTask {
 
+    public static String IP = "192.168.0.106";
     private static Retrofit retrofit;
-    private static String BASE_URL = "http://192.168.0.106/APIs/";
+    private static String BASE_URL = "http://"+IP+"/APIs/";
 
     private static Retrofit instanceRetrofit(){
         if(retrofit == null){
