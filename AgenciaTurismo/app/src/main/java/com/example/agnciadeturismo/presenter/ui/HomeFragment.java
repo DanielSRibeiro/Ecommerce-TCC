@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.PacoteDto;
@@ -102,11 +103,11 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     private void buscarPacote() {
         if (cdOrigem != -1 && cdDestino != -1) {
             int transporte = -1;
-            if(autoCompleteTextViewTransporte.equals("Avião")){
+            if(autoCompleteTextViewTransporte.getText().toString().equals("Avião")){
                 transporte = 1;
-            }else if(autoCompleteTextViewTransporte.equals("Cruzeiro")){
+            }else if(autoCompleteTextViewTransporte.getText().toString().equals("Cruzeiro")){
                 transporte = 2;
-            }else if(autoCompleteTextViewTransporte.equals("Ônibus")){
+            }else if(autoCompleteTextViewTransporte.getText().toString().equals("Ônibus")){
                 transporte = 3;
             }
             Intent intent = new Intent(getActivity(), BuscarActivity.class);
@@ -114,8 +115,6 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
             intent.putExtra("cdOrigem", cdOrigem);
             intent.putExtra("cdDestino", cdDestino);
             intent.putExtra("destino", autoCompleteTextViewDestino.getText().toString());
-            cdOrigem = -1;
-            cdDestino = -1;
             startActivity(intent);
         }
     }
@@ -151,7 +150,6 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     @Override
     public void onClick(int posicao) {
         PacoteDto pacote = listPacote.get(posicao);
-
         Intent intent = new Intent(getActivity(), DetalhesActivity.class);
         intent.putExtra("codigo", pacote.getCd());
         intent.putExtra("viagem", pacote.getCdViagem());

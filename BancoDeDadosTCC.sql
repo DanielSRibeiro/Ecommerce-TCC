@@ -122,6 +122,11 @@ CREATE TABLE Pacote (
     FOREIGN KEY (cd_tipotransporte) REFERENCES TipoTransporte(cd_tipotransporte)
 );
 
+SELECT * FROM Pacote;
+SELECT * FROM Pacote WHERE cd_cidOrigem = '5270' and cd_cidDestino = '3315';
+SELECT * FROM Viagem;
+SELECT * FROM Hotel;
+
 /* Criando a tabela Cartão */
 CREATE TABLE Cartao (
     cd_cartao INTEGER not null primary key auto_increment,
@@ -141,6 +146,7 @@ CREATE TABLE Reserva (
     cd_cartao INTEGER not null,
     vl_total Decimal(14,0) not null,
 	status_reserva bit not null,
+    dthr_reserva datetime not null,
     FOREIGN KEY (CPF) REFERENCES Cliente (CPF), /*Referencia */
     FOREIGN KEY (cd_cartao) REFERENCES Cartao (cd_cartao) /*Referencia */
 );
@@ -166,18 +172,18 @@ SELECT * FROM Estado;
 SELECT * FROM Categoria;
 SELECT * FROM tipotransporte;
 SELECT * FROM Cliente;
-
+SELECT * FROM Hotel;
+SELECT * FROM Cartao;
 SELECT * FROM Funcionario;
 SELECT * FROM Viagem;
 SELECT * FROM Transporte;
-SELECT * FROM Cartao;
 SELECT * FROM Pacote;
-SELECT * FROM Hotel;
+
 SELECT * FROM Reserva;
 
 update Pacote set cd_categoria = 2 where cd_pacote = 4;
 SELECT * FROM Itens_escolhidos;
-select * from Cidade where cidade like 'porto seguro';
+select * from Cidade where cidade like '%Floria%';
 select * from Pacote where cd_cidDestino = 4816 and cd_cidOrigem = 591;
 Select * from Funcionario where rg = '241574230';
 

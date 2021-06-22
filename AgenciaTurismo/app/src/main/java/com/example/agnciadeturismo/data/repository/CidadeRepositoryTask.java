@@ -49,6 +49,7 @@ public class CidadeRepositoryTask {
                 if(listCidade.size() != 0){
                     cdOrigem = listCidade.get(0).getCd();
                 }else{
+                    cdOrigem = null;
                     Log.d(TAG, "Não encontrado a cidade origem");
                 }
 
@@ -72,6 +73,7 @@ public class CidadeRepositoryTask {
                 if(listCidade.size() != 0){
                     cdDestino = listCidade.get(0).getCd();
                 }else{
+                    cdDestino = null;
                     Log.d(TAG, "Não encontrado a cidade destino");
                 }
 

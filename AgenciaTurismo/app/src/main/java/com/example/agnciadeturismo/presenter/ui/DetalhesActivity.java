@@ -69,22 +69,22 @@ public class DetalhesActivity extends AppCompatActivity {
             tipoTransporte = bundle.getInt("tipoTransporte");
             categoria = bundle.getInt("categoria");
             codigo = bundle.getInt("codigo");
-//            textViewDiaria.setText("diária:"+bundle.getString(""));
             textViewOrigem.setText("Origem: "+bundle.getString("origem"));
             textViewDestino.setText("Destino: "+bundle.getString("destino"));
             textViewNomePacote.setText(bundle.getString("nomePacote"));
             textViewDescricao.setText(bundle.getString("descricao"));
 
-            SimpleDateFormat in = new SimpleDateFormat("dd-MM-yyyy HH:MM:SS");
-            String data = bundle.getString("checkin");
+//            textViewDiaria.setText("diária:"+bundle.getString(""));
+//            SimpleDateFormat in = new SimpleDateFormat("dd-MM-yyyy HH:MM:SS");
+//            String data = bundle.getString("checkin");
 //            String dataChegada = in.format(new Date(data));
-            Log.d(TAG, data);
+//            Log.d(TAG, data);
 //            Log.d(TAG, dataChegada);
 
-            textViewDataChegada.setText("Data de chegada: ");
+            textViewDataChegada.setText("Data de chegada: "+bundle.getString("checkin"));
             textViewDataSaida.setText("Data de saída: "+bundle.getString("checkout"));
             Picasso.get().load("http://192.168.0.106/"+bundle.getString("img")).into(ImageViewPacote);
-            textViewValor.setText("R$"+bundle.getDouble("valor"));
+            textViewValor.setText("R$"+bundle.getString("valor"));
         }
     }
 

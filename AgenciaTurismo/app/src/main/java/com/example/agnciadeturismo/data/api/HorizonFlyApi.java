@@ -72,6 +72,13 @@ public interface HorizonFlyApi {
     @GET("pacote_oferta.php")
     Call<ArrayList<PacoteDto>> consultarOferta();
 
+    @GET("pacote_consultar.php")
+    Call<ArrayList<PacoteDto>> buscarPacotes(
+            @Query("origem") int origem,
+            @Query("destino") int destino,
+            @Query("tipoTransporte") int tipo
+    );
+
     @GET("cidade_consultarTudo.php")
     Call<ArrayList<CidadeDto>> getAllCidades();
 

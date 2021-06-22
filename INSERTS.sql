@@ -4,7 +4,6 @@ INSERT INTO CLiente VALUES
 ('Daniel','112121221','daniel@gmail.com','000.000.000-00','123456789','1234567890', '' ,'3'),
 ('Teste','112121221','teste@gmail.com','000.000.000-01','123456789','1234567890', '' ,'3');
 
---
 INSERT INTO Funcionario VALUES
 ('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', ''),
 ('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', ''),
@@ -14,11 +13,10 @@ INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, im
 (3, 'Porto do Rio Janeiro', 1, "" ),
 (1, 'Porto Itajai', 1,"");
 
--- Mudar diaria para varchar
 INSERT INTO Hotel(cd_cidade, nome_hotel, diaria_hotel, descricao_hotel, endereco_hotel, telefone_hotel , img_hotel ) VALUES 
-(1, 'Nome do Hotel', 3, 'Descrição', 'Endereço' , '1212121', ''),
-(3, 'Nome do Hotel do Rio', 7, 'Descrição', 'Endereço' , '11111', '');
---
+(5270, 'Hotel de São Paulo', '80', 'Descrição', 'Endereço' , '1212121', ''),
+(3658, 'Hotel do Rio de Janeiro', '100', 'Descrição', 'Endereço' , '11111', ''),
+(3315, 'Hotel do Recife', '140', 'Descrição', 'Endereço' , '11111', '');
 
 -- Insert na tabela TipoTransporte
 INSERT INTO TipoTransporte(cd_tipotransporte,tipo_transporte) VALUES
@@ -30,6 +28,31 @@ INSERT INTO TipoTransporte(cd_tipotransporte,tipo_transporte) VALUES
 INSERT INTO Categoria(cd_categoria,Categoria) VALUES
 ('1','Destaques'),
 ('2','Em Oferta');
+
+INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, img_transporte )
+VALUES(5270, 'Aeroporto de guarulhos', 1, "" ),
+(3658, 'Aeroporto Santos Dumont', 1,""),
+(3658, 'Rodoviaria Tiete', 3,""),
+(3315, 'Porto de Galinhas', 2, "" );
+
+insert into Viagem(nome_viagem,  cd_tipotransporte, origem,
+destino,  dt_ida, dt_chegada, descricao, vl_total, img_viagem)values
+('São Paulo para Rio de Janeiro', 1, 1, 2, '2021-06-05', '2021-06-30' , 'Descrição', '790.00', ''),
+('Rio de Janeiro para São Paulo', 2, 2, 1, '2021-06-05', '2021-07-25' , 'Descrição', '1090.00', '' ),
+('São Paulo para Recide',  3, 1, 4, '2021-06-05', '2021-08-12' , 'Descrição', '1220.00', '' );
+
+/*Com categoria*/
+INSERT INTO Pacote
+(cd_viagem, cd_hotel, cd_categoria, cd_tipotransporte, cd_cidOrigem, cd_cidDestino, 
+nome_pacote, descricao_pacote, dtChekin_hotel, dtChekout_hotel, vl_pacote, img_pacote) VALUES 
+(29, 1, 2, 1, 5270, 3658, 'Pacote para o Rio de Janeiro', 'Um fim de semana no Rio de Janeiro é tudo o que você precisa para renovar as energias. O contato com a natureza, combinado com as amenidades da hospedagem levarão você a desfrutar ao máximo dessa experiência.', '2021-06-07','2021-07-30', '890.00', '/img/rio.jpg'),
+(30, 2, 2, 1, 3658, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', '/img/saopaulo.jpg');
+
+/*Sem categoria*/
+INSERT INTO Pacote(cd_viagem, cd_hotel, cd_tipotransporte, cd_cidOrigem, cd_cidDestino, 
+nome_pacote, descricao_pacote, dtChekin_hotel, dtChekout_hotel, vl_pacote, img_pacote)VALUES 
+(31, 7, 3, 5270,3315,'Pacote para o Recife', 'Melhor pacote para o Recife, saindo de São Paulo', '2021-06-07','2021-06-26','590.00', '/img/recife.jpg'),
+(30, 2, 2, 3658, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', 'img/saopaulo.jpg');
 
 INSERT INTO Estado (cd_estado, estado, uf) VALUES
 (1, 'Acre', 'AC'),

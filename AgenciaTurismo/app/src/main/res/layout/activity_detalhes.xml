@@ -38,7 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/img_detalhes"
-                android:layout_margin="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="Nome do Pacote"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -57,9 +59,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_descricaoDetalhes"
-                android:layout_margin="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Esse pacote inclui"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -67,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_inclui"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/white"
                 android:elevation="4dp"
                 app:cardCornerRadius="10dp">

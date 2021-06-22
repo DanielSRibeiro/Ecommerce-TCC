@@ -41,9 +41,9 @@ public class PacoteDto {
     private String img;
 
     @SerializedName("valor")
-    private double vlPacote;
+    private String vlPacote;
 
-    public PacoteDto(int cd, int cdViagem, int cdHotel, int cdCategoria, int cdTipoTranporte, int cdOrigem, int cdDestino, String nomePacote, String descricaoPacote, String dtCheckin, String dtCheckout, String img, double vlPacote) {
+    public PacoteDto(int cd, int cdViagem, int cdHotel, int cdCategoria, int cdTipoTranporte, int cdOrigem, int cdDestino, String nomePacote, String descricaoPacote, String dtCheckin, String dtCheckout, String img, String vlPacote) {
         this.cd = cd;
         this.cdViagem = cdViagem;
         this.cdHotel = cdHotel;
@@ -157,11 +157,11 @@ public class PacoteDto {
         this.img = img;
     }
 
-    public double getVlPacote() {
+    public String getVlPacote() {
         return vlPacote;
     }
 
-    public void setVlPacote(double vlPacote) {
+    public void setVlPacote(String vlPacote) {
         this.vlPacote = vlPacote;
     }
 }
