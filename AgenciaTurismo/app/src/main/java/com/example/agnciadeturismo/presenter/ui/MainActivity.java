@@ -5,21 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Fragment fragment = new HomeFragment();
     static ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    static ArrayList<CarrinhoDto> listCarrinho = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,4 +74,19 @@ public class MainActivity extends AppCompatActivity {
         return cliente;
     }
 
+    public static void clearUsuario(){
+        cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    }
+
+    public static void setListCarrinho(CarrinhoDto itensReserva) {
+        MainActivity.listCarrinho.add(itensReserva);
+    }
+
+    public static ArrayList<CarrinhoDto> getListCarrinho() {
+        return listCarrinho;
+    }
+
+    public static void clearListCarrinho(){
+        listCarrinho.clear();
+    }
 }

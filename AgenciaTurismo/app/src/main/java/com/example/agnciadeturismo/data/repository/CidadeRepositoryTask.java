@@ -19,7 +19,7 @@ public class CidadeRepositoryTask {
     private static Integer cdDestino;
 
     public static ArrayList<String> getAllCidades(){
-
+        listCidade.clear();
         Call<ArrayList<CidadeDto>> api = RetrofitTask.getRetrofit().getAllCidades();
         try {
             Response<ArrayList<CidadeDto>> response = api.execute();

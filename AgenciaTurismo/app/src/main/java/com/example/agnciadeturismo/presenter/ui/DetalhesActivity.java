@@ -5,19 +5,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.squareup.picasso.Picasso;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DetalhesActivity extends AppCompatActivity {
 
@@ -26,7 +23,8 @@ public class DetalhesActivity extends AppCompatActivity {
     TextView textViewNomePacote, textViewDescricao, textViewOrigem, textViewDestino, textViewDiaria;
     TextView textViewIdaVolta, textViewDataChegada, textViewDataSaida, textViewValor;
     ImageView ImageViewPacote;
-    int codigo, tipoTransporte, categoria;
+    int codigo, tipoTransporte, categoria, hotel, viagem, destino, origem;
+    String valor, img, nomePacote;
     private static final String TAG = "DetalhesActivity";
 
     @Override
@@ -38,10 +36,20 @@ public class DetalhesActivity extends AppCompatActivity {
         buttonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
-                intent.putExtra("activity", "carrinho");
-                startActivity(intent);
+                ClienteDto cliente  = MainActivity.getUsuario();
+                if(cliente.getCpf() != null){
+                    CarrinhoDto carrinho = new CarrinhoDto(
+                            -1, -1, codigo, cliente.getCpf(),
+                            valor, 1, img, "", nomePacote, tipoTransporte
+                    );
+                    MainActivity.setListCarrinho(carrinho);
+                    Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
+                    intent.putExtra("activity", "carrinho");
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(DetalhesActivity.this, "É necessário realizar o login para poder comprar", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -68,23 +76,24 @@ public class DetalhesActivity extends AppCompatActivity {
             codigo = bundle.getInt("codigo");
             tipoTransporte = bundle.getInt("tipoTransporte");
             categoria = bundle.getInt("categoria");
-            codigo = bundle.getInt("codigo");
-            textViewOrigem.setText("Origem: "+bundle.getString("origem"));
-            textViewDestino.setText("Destino: "+bundle.getString("destino"));
-            textViewNomePacote.setText(bundle.getString("nomePacote"));
+            viagem = bundle.getInt("viagem");
+            hotel = bundle.getInt("hotel");
+            String checkin = bundle.getString("checkin");
+            String checkout = bundle.getString("checkout");
+            nomePacote = bundle.getString("nomePacote");
+            img = bundle.getString("img");
+            valor = bundle.getString("valor");
+            origem = bundle.getInt("origem");
+            destino = bundle.getInt("destino");
+
+            textViewOrigem.setText("Origem: "+origem);
+            textViewDestino.setText("Destino: "+destino);
+            textViewNomePacote.setText(nomePacote);
             textViewDescricao.setText(bundle.getString("descricao"));
-
-//            textViewDiaria.setText("diária:"+bundle.getString(""));
-//            SimpleDateFormat in = new SimpleDateFormat("dd-MM-yyyy HH:MM:SS");
-//            String data = bundle.getString("checkin");
-//            String dataChegada = in.format(new Date(data));
-//            Log.d(TAG, data);
-//            Log.d(TAG, dataChegada);
-
-            textViewDataChegada.setText("Data de chegada: "+bundle.getString("checkin"));
-            textViewDataSaida.setText("Data de saída: "+bundle.getString("checkout"));
-            Picasso.get().load("http://192.168.0.106/"+bundle.getString("img")).into(ImageViewPacote);
-            textViewValor.setText("R$"+bundle.getString("valor"));
+            textViewDataChegada.setText("Data de chegada: "+checkin);
+            textViewDataSaida.setText("Data de saída: "+checkout);
+            Picasso.get().load("http://192.168.0.106/"+img).into(ImageViewPacote);
+            textViewValor.setText("R$"+valor);
         }
     }
 

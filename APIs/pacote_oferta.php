@@ -4,7 +4,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     ("Problema com a conexão");
 
     $array = array();
-    $sqlComando = "SELECT * FROM Pacote where cd_categoria = 1 order by cd_pacote desc;";
+    $sqlComando = "SELECT * FROM Pacote where cd_categoria = 2 order by cd_pacote desc;";
     $sql = $con->prepare("$sqlComando");
     $sql->execute();
     $sql->bind_result($cd_pacote, $cd_viagem, $cd_hotel, $cd_categoria, $cd_tipotransporte, $cd_cidOrigem, $cd_cidDestino, 
@@ -21,10 +21,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
             "cdDestino" => $cd_cidDestino,
             "nomePacote" => $nome_pacote,
             "descricao" => $descricao_pacote,
-            "chekin" => $dtChekin_hotel,
-            "chekout" => $dtChekout_hotel,
+            "checkin" => $dtChekin_hotel,
+            "checkout" => $dtChekout_hotel,
             "img" => $img_pacote,
-            "valor" => $vl_pacote,
+            "valor" => $vl_pacote
         ];
         
         array_push($array, $json);

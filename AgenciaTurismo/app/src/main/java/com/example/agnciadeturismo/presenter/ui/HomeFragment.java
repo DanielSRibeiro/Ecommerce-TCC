@@ -67,11 +67,12 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
 
         cidadeViewModel.todasCidades.observe(getActivity(), new Observer<String[]>() {
             @Override
-            public void onChanged(String[] listCidades) {
+            public void onChanged(String[] cidades) {
+                String[] listCidades = cidades;
                 ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, listCidades);
                 autoCompleteTextViewOrigem.setAdapter(adapter);
                 autoCompleteTextViewDestino.setAdapter(adapter);
-                Log.d(TAG, "Sucesso");
+                Log.d(TAG, "Lista de cidades feito com sucesso");
             }
         });
 

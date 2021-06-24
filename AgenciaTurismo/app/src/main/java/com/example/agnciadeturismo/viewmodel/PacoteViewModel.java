@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class PacoteViewModel extends ViewModel{
 
     PacoteRepositoryTask repositoryTask = new PacoteRepositoryTask();
-    private MutableLiveData<ArrayList<PacoteDto>> mOfertas = new MutableLiveData();
-    private MutableLiveData<ArrayList<PacoteDto>> mPacotes = new MutableLiveData();
+    private MutableLiveData<ArrayList<PacoteDto>> mOfertas = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<PacoteDto>> mPacotes = new MutableLiveData<>();
     public LiveData pacote = mPacotes;
     public LiveData oferta = mOfertas;
 

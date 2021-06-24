@@ -3,7 +3,6 @@ package com.example.agnciadeturismo.presenter.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,13 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.data.api.RetrofitTask;
+import com.example.agnciadeturismo.model.CarrinhoDto;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.viewHolder> {
 
     OnClickItemCarrinho listener;
+    ArrayList<CarrinhoDto> listCarrinho;
 
-    public CarrinhoAdapter(OnClickItemCarrinho listener) {
+    public CarrinhoAdapter(OnClickItemCarrinho listener, ArrayList<CarrinhoDto> listCarrinho) {
         this.listener = listener;
+        this.listCarrinho = listCarrinho;
     }
 
     @NonNull
@@ -29,39 +35,33 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.viewHo
 
     @Override
     public int getItemCount() {
-        return 3;
+        return listCarrinho.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        holder.textViewNome.setText("Pacote para o Rio de Janeiro");
-        holder.textViewValor.setText("R$700");
-        holder.textViewOrigemDestino.setText("Origem e Destino");
+        CarrinhoDto carrinho = listCarrinho.get(position);
+        holder.textViewNome.setText(carrinho.getNomePacote());
+        holder.textViewValor.setText("R$"+carrinho.getValor());
+        holder.textViewDestino.setText("Destino: "+carrinho.getDestino());
+        Picasso.get().load("http://"+ RetrofitTask.IP +"/"+carrinho.getImg()).into(holder.img);
+
     }
 
     class viewHolder extends RecyclerView.ViewHolder {
 
-        Button buttonComprar;
-        TextView textViewRemover, textViewOrigemDestino, textViewValor, textViewNome;
-        ImageView imageView;
+        TextView textViewRemover, textViewDestino, textViewValor, textViewNome;
+        ImageView img;
 
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            buttonComprar = itemView.findViewById(R.id.btn_comprarCarrinho);
             textViewRemover = itemView.findViewById(R.id.txt_removerCarrinho);
-            imageView = itemView.findViewById(R.id.img_carrinho);
+            img = itemView.findViewById(R.id.img_carrinho);
             textViewNome = itemView.findViewById(R.id.txt_nomeCarrinho);
             textViewValor = itemView.findViewById(R.id.txt_valorCarrinho);
-            textViewOrigemDestino = itemView.findViewById(R.id.txt_destinoCarrinho);
+            textViewDestino = itemView.findViewById(R.id.txt_destinoCarrinho);
 
-
-            buttonComprar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onClickComprar(getAdapterPosition());
-                }
-            });
             textViewRemover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

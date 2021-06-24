@@ -29,8 +29,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             Fragment fragment = null;

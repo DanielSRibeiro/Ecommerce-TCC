@@ -9,15 +9,16 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     $sqlComando = "SELECT * FROM Reserva WHERE CPF = '$CPF' and status_reserva = 1";
     $sql = $con->prepare("$sqlComando");
     $sql->execute();
-    $sql->bind_result($cdReserva, $CPF, $cdCartao, $valorTotal,$statusReserva);
+    $sql->bind_result($cdReserva, $CPF, $cdCartao, $valorTotal,$dthrReserva);
 
     while($sql->fetch()){
         $json = [
             "cd" => $cdReserva,
-            "CPF" => $CPF,
+            "cpf" => $CPF,
             "cdCartao" => $cdCartao,
             "valorTotal" => $valorTotal,
-            "statusReserva" => $statusReserva
+            "statusReserva" => $statusReserva,
+            "dthrReserva" => $dthrReserva
         ];
         
         array_push($array, $json);

@@ -5,9 +5,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
 
     $origem = $_GET["origem"];
     $destino = $_GET["destino"];
+    $tipo = $_GET["tipoTransporte"];
 
     $array = array();
-    $sqlComando = "SELECT * FROM Pacote WHERE cd_cidOrigem = '$origem' and cd_cidDestino = '$destino'";
+    if($tipo != -1){
+        $sqlComando = "SELECT * FROM Pacote WHERE cd_cidOrigem = '$origem' and cd_cidDestino = '$destino' and cd_tipotransporte = $tipo";
+    }else{
+        $sqlComando = "SELECT * FROM Pacote WHERE cd_cidOrigem = '$origem' and cd_cidDestino = '$destino' order by cd_pacote desc;";
+    }
     $sql = $con->prepare("$sqlComando");
     $sql->execute();
     $sql->bind_result($cd_pacote, $cd_viagem, $cd_hotel, $cd_categoria, $cd_tipotransporte, $cd_cidOrigem, $cd_cidDestino, 
@@ -16,18 +21,18 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     while($sql->fetch()){
         $json = [
             "cd" => $cd_pacote,
-            "cd_viagem" => $cd_viagem,
-            "cd_hotel" => $cd_hotel,
-            "cd_categoria" => $cd_categoria,
-            "cd_tipoTransporte" => $cd_tipotransporte,
-            "cd_origem" => $cd_cidOrigem,
-            "cd_destino" => $cd_cidDestino,
-            "nome_pacote" => $nome_pacote,
+            "cdViagem" => $cd_viagem,
+            "cdHotel" => $cd_hotel,
+            "cdCategoria" => $cd_categoria,
+            "cdTipoTransporte" => $cd_tipotransporte,
+            "cdOrigem" => $cd_cidOrigem,
+            "cdDestino" => $cd_cidDestino,
+            "nomePacote" => $nome_pacote,
             "descricao" => $descricao_pacote,
-            "chekin" => $dtChekin_hotel,
-            "chekout" => $dtChekout_hotel,
+            "checkin" => $dtChekin_hotel,
+            "checkout" => $dtChekout_hotel,
             "img" => $img_pacote,
-            "valor" => $vl_pacote,
+            "valor" => $vl_pacote
         ];
         
         array_push($array, $json);

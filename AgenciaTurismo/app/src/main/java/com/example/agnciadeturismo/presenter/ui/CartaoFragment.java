@@ -22,12 +22,13 @@ import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.adapter.CartaoAdapter;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
+import com.example.agnciadeturismo.presenter.adapter.OnClickItemCartao;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
+public class CartaoFragment extends Fragment implements OnClickItemCartao {
 
     private static final String TAG = "CartaoFragment";
     FloatingActionButton fabCadastrar;
@@ -35,7 +36,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
     String cpf = "";
     CartaoViewModel cartaoViewModel;
     ArrayList<CartaoDto> listCartao = new ArrayList<>();
-    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    ClienteDto cliente = new ClienteDto();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,13 +95,27 @@ public class CartaoFragment extends Fragment implements OnClickItemCarrinho {
         recyclerViewCartao.setAdapter(adapter);
     }
 
+
     @Override
-    public void onClickComprar(int posicao) {
-        Toast.makeText(getActivity(), "Compra realizada com sucesso!!!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(getActivity(), DashboardActivity.class);
-        intent.putExtra("activity", "Compras");
-        intent.putExtra("cpf", cpf);
-        startActivity(intent);
+    public void onClickComprar(int codigo) {
+        if(MainActivity.getListCarrinho().size() < 1){
+            Toast.makeText(getActivity(), "O Carrinho está vazio", Toast.LENGTH_SHORT).show();
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("Deseja compra os itens do Carrinho?");
+            builder.setNegativeButton("Não", null);
+            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getActivity(), "Compra realizada com sucesso!!!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                    intent.putExtra("activity", "Compras");
+                    intent.putExtra("cdCartao", codigo);
+                    startActivity(intent);
+                }
+            });
+            builder.show();
+        }
     }
 
     @Override

@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     while($sql->fetch()){
         $json = [
             "cd" => $cdCartao,
-            "CPF" => $CPF,
+            "cpf" => $CPF,
             "nome" => $nomeCartao,
             "nomeImpresso" => $nomeImpresso,
             "numero" => $numeroCartao,

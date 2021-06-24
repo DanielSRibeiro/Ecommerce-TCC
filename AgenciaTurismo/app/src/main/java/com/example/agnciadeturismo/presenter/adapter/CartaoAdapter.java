@@ -17,10 +17,10 @@ import java.util.ArrayList;
 
 public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder> {
 
-    OnClickItemCarrinho listener;
+    OnClickItemCartao listener;
     ArrayList<CartaoDto> listCartao;
 
-    public CartaoAdapter(OnClickItemCarrinho listener, ArrayList<CartaoDto> listCartao) {
+    public CartaoAdapter(OnClickItemCartao listener, ArrayList<CartaoDto> listCartao) {
         this.listener = listener;
         this.listCartao = listCartao;
     }
@@ -51,7 +51,7 @@ public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder
 
         TextView textViewNome, textViewNumero;
 
-        public viewHolder(@NonNull View itemView, OnClickItemCarrinho listener) {
+        public viewHolder(@NonNull View itemView, OnClickItemCartao listener) {
             super(itemView);
 
             textViewNome = itemView.findViewById(R.id.txt_nomeCartao);
@@ -60,7 +60,7 @@ public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onClickComprar(getAdapterPosition());
+                    listener.onClickComprar(listCartao.get(getAdapterPosition()).getCd());
                 }
             });
 

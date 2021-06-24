@@ -51,7 +51,8 @@ public class PerfilFragment extends Fragment {
         layoutSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).setUsuario(new ClienteDto(null, null, null, null, null, null, null, null));
+                ((MainActivity) getActivity()).clearUsuario();
+                ((MainActivity) getActivity()).clearListCarrinho();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_home, new LoginFragment())
                         .commit();

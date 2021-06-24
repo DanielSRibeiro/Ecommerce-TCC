@@ -6,9 +6,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     $cdPacote = $_POST["cdPacote"];
     $CPF = $_POST["cpf"];
-    $vlUnitario = $_POST["vlUnitario"];
     $cdReserva = $_POST["cdReserva"];
     $qtItens = $_POST["qtItens"];
+    $vlUnitario = $_POST["vlUnitario"];
     $vlParcial = $vlUnitario * $qtItens;
 
     $sqlComando =  "INSERT INTO ItensReserva(cd_pacote, cd_reserva, vl_unit, vl_parcial, qt_itens, status_itens, CPF)

@@ -71,7 +71,7 @@ CREATE TABLE Hotel (
     descricao_hotel VARCHAR(400) not null,
     telefone_hotel VARCHAR(17) not null,
     endereco_hotel VARCHAR(100) not null,
-    diaria_hotel VARCHAR(50) not null,
+    diaria_hotel decimal (10,2) not null,
     img_hotel VARCHAR(500) not null,
     FOREIGN KEY (cd_cidade) REFERENCES Cidade (cd_cidade) /*Referencia */
 );
@@ -122,11 +122,6 @@ CREATE TABLE Pacote (
     FOREIGN KEY (cd_tipotransporte) REFERENCES TipoTransporte(cd_tipotransporte)
 );
 
-SELECT * FROM Pacote;
-SELECT * FROM Pacote WHERE cd_cidOrigem = '5270' and cd_cidDestino = '3315';
-SELECT * FROM Viagem;
-SELECT * FROM Hotel;
-
 /* Criando a tabela Cartão */
 CREATE TABLE Cartao (
     cd_cartao INTEGER not null primary key auto_increment,
@@ -151,9 +146,14 @@ CREATE TABLE Reserva (
     FOREIGN KEY (cd_cartao) REFERENCES Cartao (cd_cartao) /*Referencia */
 );
 
+select * from Cartao;
+
+insert into Reserva(CPF, cd_cartao, vl_total, status_reserva, dthr_reserva)
+values('00000000000000', 2, 1400.00, 1, '2021-06-02'); 
+
 /* Criando a tabela Itens_Reservas*/
 CREATE TABLE ItensReserva(
- cd_itensreserva INTEGER not null primary key,
+ cd_itensreserva INTEGER auto_increment not null primary key,
  cd_pacote INTEGER not null,
  cd_reserva INTEGER not null,
  vl_unit DECIMAL(14,0) not null,
@@ -165,6 +165,10 @@ CREATE TABLE ItensReserva(
  FOREIGN KEY (cd_reserva) REFERENCES Reserva (cd_reserva),
   FOREIGN KEY (CPF) REFERENCES Cliente (CPF)  /*Referencia *//*Referencia */
 );
+select * from pacote;
+
+insert into ItensReserva(cd_pacote, cd_reserva, vl_unit, vl_parcial, qt_itens, status_itens, CPF)
+values(5,1,1400, 1400, 1, 1, '00000000000000'); 
 
 -- Selecionando as Tabelas ( Selects de cada tabela);
 SELECT * FROM Cidade;
@@ -178,8 +182,8 @@ SELECT * FROM Funcionario;
 SELECT * FROM Viagem;
 SELECT * FROM Transporte;
 SELECT * FROM Pacote;
-
 SELECT * FROM Reserva;
+SELECT * FROM ItensReserva;
 
 update Pacote set cd_categoria = 2 where cd_pacote = 4;
 SELECT * FROM Itens_escolhidos;
@@ -192,12 +196,26 @@ SELECT nome,telefone from Cliente;
 
 SELECT nome,telefone from Funcionário;
 
-/* */
-
-
 -- Views logo Abaixo;
-    
 
+CREATE VIEW vwCarrinho as select
+	carrinho.cd_itensreserva,
+    carrinho.cd_pacote,
+    carrinho.cd_reserva,
+    carrinho.CPF,
+    carrinho.vl_unit,
+    carrinho.vl_parcial,
+    carrinho.qt_itens,
+    pacote.img_pacote,
+    cidade.cidade as destino,
+    pacote.nome_pacote
+from ItensReserva as carrinho 
+inner join pacote on pacote.cd_pacote = carrinho.cd_pacote
+inner join cidade on cidade.cd_cidade = pacote.cd_cidDestino;
+
+select * from vwCarrinho;
+select * from reserva;
+select * from itensreserva;
 
 /* VIEW DE DETALHES DE Pacote */
 CREATE VIEW
@@ -273,8 +291,6 @@ INNER JOIN TipoTransporte on Transporte.cd_transporte = TipoTransporte.cd_tipotr
 
 select * from Transportes;
 
-
-
 /*VIEW DE VIAGENS */
 CREATE VIEW
  vw_MostraViagem
@@ -303,7 +319,13 @@ Transporte.nome_transporte as TransporteDestino
 from Viagem 
 inner join Transporte on Transporte.cd_transporte = Viagem.destino ;
 
-
+CREATE VIEW
+ teste
+ as select 
+ Viagem.cd_viagem,
+Transporte.nome_transporte
+from viagem
+inner join Transporte on transporte.cd_transporte = viagem.destino;
 
 delimiter //
     drop procedure if exists buscarViagem;
