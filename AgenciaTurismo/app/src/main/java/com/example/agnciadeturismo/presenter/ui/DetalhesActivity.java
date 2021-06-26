@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,6 +17,10 @@ import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DetalhesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -23,7 +28,7 @@ public class DetalhesActivity extends AppCompatActivity {
     TextView textViewNomePacote, textViewDescricao, textViewOrigem, textViewDestino, textViewDiaria;
     TextView textViewIdaVolta, textViewDataChegada, textViewDataSaida, textViewValor;
     ImageView ImageViewPacote;
-    int codigo, tipoTransporte, categoria, hotel, viagem, destino, origem;
+    int codigo, codigoTransporte, categoria, hotel, viagem, destino, origem;
     String valor, img, nomePacote;
     private static final String TAG = "DetalhesActivity";
 
@@ -40,7 +45,7 @@ public class DetalhesActivity extends AppCompatActivity {
                 if(cliente.getCpf() != null){
                     CarrinhoDto carrinho = new CarrinhoDto(
                             -1, -1, codigo, cliente.getCpf(),
-                            valor, 1, img, "", nomePacote, tipoTransporte
+                            Double.parseDouble(valor), Double.parseDouble(valor), 1, img, "", nomePacote, codigoTransporte
                     );
                     MainActivity.setListCarrinho(carrinho);
                     Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
@@ -74,7 +79,7 @@ public class DetalhesActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if(bundle != null){
             codigo = bundle.getInt("codigo");
-            tipoTransporte = bundle.getInt("tipoTransporte");
+            codigoTransporte = bundle.getInt("tipoTransporte");
             categoria = bundle.getInt("categoria");
             viagem = bundle.getInt("viagem");
             hotel = bundle.getInt("hotel");
@@ -85,6 +90,11 @@ public class DetalhesActivity extends AppCompatActivity {
             valor = bundle.getString("valor");
             origem = bundle.getInt("origem");
             destino = bundle.getInt("destino");
+
+//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//            String data = dateFormat.format(checkin);
+
+            Log.d(TAG, "Data: "+checkin);
 
             textViewOrigem.setText("Origem: "+origem);
             textViewDestino.setText("Destino: "+destino);

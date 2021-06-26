@@ -4,22 +4,28 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     ("Problema com a conexão");
 
     $CPF = $_GET["cpf"];
+    $cdReserva = $_GET["cdReserva"];
 
     $array = array();
-    $sqlComando = "SELECT * FROM ItensReserva WHERE CPF = '$CPF' AND status_itens = 1";
+    $sqlComando =  "SELECT * FROM vwItensReserva
+    WHERE cpf = '$CPF' AND codigoReseva = $cdReserva order by codigo desc;";
     $sql = $con->prepare("$sqlComando");
     $sql->execute();
-    $sql->bind_result($cd, $cdPacote, $cdReserva, $vlUnitario, $vlParcial, $qtItens, $status,$CPF);
+    $sql->bind_result($cd, $cdPacote, $cdReserva, $cpf, $unit, $parcial, $quantidade, $img, $destino, $nomePacote, $codigoTransporte);
 
     while($sql->fetch()){
         $json = [
             "cd" => $cd,
+            "cdReserva" => $cdReserva,
             "cdPacote" => $cdPacote,
-            "cdReserva" =>$cdReserva,
-            "CPF" => $CPF,
-            "valorlUnitario" => $vlUnitario,
-            "valorlParcial" => $vlParcial,
-            "quantidade" => $qtItens
+            "cpf" => $cpf,
+            "valorUnitario" => $unit,
+            "valorTotal" => $parcial,
+            "quantidade" => $quantidade,
+            "img" => $img,
+            "destino" => $destino,
+            "nomePacote" => $nomePacote,
+            "codigoTransporte" => $codigoTransporte
         ];
         
         array_push($array, $json);

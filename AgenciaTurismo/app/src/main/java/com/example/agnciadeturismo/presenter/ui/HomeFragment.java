@@ -25,7 +25,10 @@ import com.example.agnciadeturismo.presenter.adapter.OfertaAdapter;
 import com.example.agnciadeturismo.viewmodel.CidadeViewModel;
 import com.example.agnciadeturismo.viewmodel.PacoteViewModel;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeFragment extends Fragment implements OnClickItemPacote {
 

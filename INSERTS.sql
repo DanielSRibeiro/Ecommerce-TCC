@@ -1,6 +1,6 @@
 use db_horizon;
 
-INSERT INTO CLiente VALUES
+INSERT INTO Cliente VALUES
 ('Daniel','112121221','daniel@gmail.com','000.000.000-00','123456789','1234567890', '' ,'3'),
 ('Teste','112121221','teste@gmail.com','000.000.000-01','123456789','1234567890', '' ,'3');
 

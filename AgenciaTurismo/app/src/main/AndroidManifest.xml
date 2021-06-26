@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agnciadeturismo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ui.DetalhesActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".presenter.ui.ItensReservaActivity"></activity>
+        <activity
+            android:name=".presenter.ui.DetalhesActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presenter.ui.DashboardActivity"
             android:screenOrientation="portrait" />

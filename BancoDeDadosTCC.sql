@@ -184,7 +184,7 @@ SELECT * FROM Transporte;
 SELECT * FROM Pacote;
 SELECT * FROM Reserva;
 SELECT * FROM ItensReserva;
-
+24/06/2021 23:43:19
 update Pacote set cd_categoria = 2 where cd_pacote = 4;
 SELECT * FROM Itens_escolhidos;
 select * from Cidade where cidade like '%Floria%';
@@ -198,17 +198,19 @@ SELECT nome,telefone from Funcionário;
 
 -- Views logo Abaixo;
 
+drop view  if exists vwCarinho;
 CREATE VIEW vwCarrinho as select
-	carrinho.cd_itensreserva,
-    carrinho.cd_pacote,
-    carrinho.cd_reserva,
-    carrinho.CPF,
-    carrinho.vl_unit,
-    carrinho.vl_parcial,
-    carrinho.qt_itens,
-    pacote.img_pacote,
+	carrinho.cd_itensreserva as codigo,
+    carrinho.cd_pacote as codigoPacote,
+    carrinho.cd_reserva as codigoReseva,
+    carrinho.CPF as cpf,
+    carrinho.vl_unit as valorUnitario,
+    carrinho.vl_parcial as valorParcial,
+    carrinho.qt_itens as quantidade,
+    pacote.img_pacote as imagemPacote,
     cidade.cidade as destino,
-    pacote.nome_pacote
+    pacote.nome_pacote as nomePacote,
+    pacote.cd_tipotransporte as codigoTransporte
 from ItensReserva as carrinho 
 inner join pacote on pacote.cd_pacote = carrinho.cd_pacote
 inner join cidade on cidade.cd_cidade = pacote.cd_cidDestino;
@@ -216,6 +218,34 @@ inner join cidade on cidade.cd_cidade = pacote.cd_cidDestino;
 select * from vwCarrinho;
 select * from reserva;
 select * from itensreserva;
+
+select * from last_insert;
+
+
+Create View ResumoReserva
+as select 
+Reserva.cd_reserva,
+Reserva.dthr_reserva,
+Reserva.CPF,
+Reserva.cd_cartao,
+Reserva.vl_total,
+ItensReserva.cd_itensreserva,
+ItensReserva.cd_pacote,
+ItensReserva.vl_unit,
+ItensReserva.qt_itens,
+Cliente.nome,
+Cartao.nome_cartao,
+Pacote.img_pacote,
+Pacote.nome_pacote
+from Reserva inner join ItensReserva on ItensReserva.cd_reserva = Reserva.cd_reserva
+inner join Cliente on Cliente.CPF = Reserva.CPF
+inner join Cartao on Cartao.cd_cartao = Reserva.cd_cartao
+inner join Pacote on Pacote.cd_pacote = ItensReserva.cd_pacote;
+select * from ResumoReserva ;
+
+select * from reserva;
+select * from itensreserva;
+SELECT cd_reserva FROM reserva where CPF = '00000000000000';
 
 /* VIEW DE DETALHES DE Pacote */
 CREATE VIEW
@@ -336,11 +366,7 @@ delimiter //
     end //
 delimiter ;
 
-call buscarViagem();
-
-
-    
-    
+call buscarViagem();    
     delimiter //
     drop procedure if exists SPViagem;
     create procedure SPViagem(

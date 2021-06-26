@@ -1,25 +1,18 @@
 package com.example.agnciadeturismo.model;
 
-import com.google.gson.annotations.SerializedName;
+public class ItensReservaDto {
 
-public class CarrinhoDto {
-
-    @SerializedName("cd")
     private int cd;
 
-    @SerializedName("cdReserva")
     private int cdReserva;
 
-    @SerializedName("cdPacote")
     private int cdPacote;
 
     private String cpf;
 
-    @SerializedName("valorUnitario")
     private double valorUnitario;
 
-    @SerializedName("valorTotal")
-    private double valor;
+    private double valorTotal;
 
     private int quantidade;
 
@@ -29,18 +22,17 @@ public class CarrinhoDto {
 
     private String nomePacote;
 
-    @SerializedName("codigoTransporte")
     private int codigoTransporte;
 
-    public CarrinhoDto(){}
+    public ItensReservaDto(){}
 
-    public CarrinhoDto(int cd, int cdReserva, int cdPacote, String cpf, double valorUnitario, double valor, int quantidade, String img, String destino, String nomePacote, int codigoTransporte) {
+    public ItensReservaDto(int cd, int cdReserva, int cdPacote, String cpf, double valorUnitario, double valorTotal, int quantidade, String img, String destino, String nomePacote, int codigoTransporte) {
         this.cd = cd;
         this.cdReserva = cdReserva;
         this.cdPacote = cdPacote;
         this.cpf = cpf;
         this.valorUnitario = valorUnitario;
-        this.valor = valor;
+        this.valorTotal = valorTotal;
         this.quantidade = quantidade;
         this.img = img;
         this.destino = destino;
@@ -88,12 +80,12 @@ public class CarrinhoDto {
         this.valorUnitario = valorUnitario;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValorTotal() {
+        return valorTotal;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public int getQuantidade() {

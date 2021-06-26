@@ -3,7 +3,9 @@ package com.example.agnciadeturismo.data.api;
 import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.CidadeDto;
 import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.model.ItensReservaDto;
 import com.example.agnciadeturismo.model.PacoteDto;
+import com.example.agnciadeturismo.model.ReservaDto;
 
 import java.util.ArrayList;
 
@@ -15,7 +17,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface HorizonFlyApi {
-
 
     @GET("usuario_consultar.php")
     Call<ArrayList<ClienteDto>> consultarCliente(
@@ -87,4 +88,43 @@ public interface HorizonFlyApi {
             @Query("cidade") String nome
     );
 
+    @FormUrlEncoded
+    @POST("reserva_cadastrar.php")
+    Call<Boolean> cadastrarReserva(
+            @Field("cdCartao") int codigoCartao,
+            @Field("cpf") String cpf,
+            @Field("vlTotal") double valorTotal,
+            @Field("statusReserva") int status,
+            @Field("dthrReserva") String data
+    );
+
+    @FormUrlEncoded
+    @POST("itensReserva_cadastrar.php")
+    Call<Boolean> cadastrarItemReserva(
+            @Field("cdPacote") int codigoPacote,
+            @Field("cpf") String cpf,
+            @Field("cdReserva") int codigoReserval,
+            @Field("qtItens") int quantidade,
+            @Field("vlUnitario") double unitario
+    );
+
+    @GET("reserva_pegarCodigo.php")
+    Call<ArrayList<ReservaDto>> getCodigoReserva(
+            @Query("cdCartao") int codigo,
+            @Query("cpf") String cpf,
+            @Query("valorTotal") double valorTotal,
+            @Query("statusReserva") int status,
+            @Query("data") String data
+    );
+
+    @GET("reserva_consultar.php")
+    Call<ArrayList<ReservaDto>> getAllReserva(
+            @Query("cpf") String cpf
+    );
+
+    @GET("ItensReserva_consultar.php")
+    Call<ArrayList<ItensReservaDto>> getAllItemReserva(
+            @Query("cpf") String cpf,
+            @Query("cdReserva") int codigoReserva
+    );
 }

@@ -102,9 +102,9 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
             Toast.makeText(getActivity(), "O Carrinho está vazio", Toast.LENGTH_SHORT).show();
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("Deseja compra os itens do Carrinho?");
+            builder.setMessage("Clica em confirmar para efetuar a compra");
             builder.setNegativeButton("Não", null);
-            builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Comfirmar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(getActivity(), "Compra realizada com sucesso!!!", Toast.LENGTH_SHORT).show();

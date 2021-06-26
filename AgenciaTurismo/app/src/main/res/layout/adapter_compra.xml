@@ -1,88 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="16dp"
     android:elevation="15sp">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_relativo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/layout_bord_top">
+        android:background="@drawable/layout_bord_top"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="16dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:layout_marginLeft="16dp"
-            android:text="Voo de Ida e Volta + Hospedagem" />
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="24dp">
 
-    <ImageView
-        android:id="@+id/img_compra"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@+id/layout_relativo"
-        android:scaleType="centerCrop"
-        android:src="@drawable/imagem" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total:"
+                android:textColor="@color/primaryColor"/>
 
-    <TextView
-        android:id="@+id/txt_nomeCompra"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/img_compra"
-        android:layout_margin="16dp"
-        android:singleLine="true"
-        android:text="Nome do Pacote"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="sans" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pagamento:"
+                android:layout_marginVertical="8dp"
+                android:textColor="@color/primaryColor"/>
 
-    <TextView
-        android:id="@+id/txt_valorCompra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/img_compra"
-        android:layout_alignBottom="@id/img_compra"
-        android:layout_margin="16dp"
-        android:text="R$Valor"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cliente:"
+                android:textColor="@color/primaryColor"/>
 
-    <TextView
-        android:id="@+id/txt_destinoCompra"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/img_compra"
-        android:layout_marginStart="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        android:layout_toStartOf="@id/txt_valorCompra"
-        android:singleLine="true"
-        android:text="Origem e Destino"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data:"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/primaryColor"/>
+        </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/img_compra"
-        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_data"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Data de Ida e Volta"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/txt_valorItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Valor"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txt_nomeCartaoItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pagamento:"
+                android:layout_marginVertical="8dp"/>
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/txt_nomeClienteItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cliente:"/>
+
+            <TextView
+                android:id="@+id/txt_dataItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data:"
+                android:layout_marginTop="8dp"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
