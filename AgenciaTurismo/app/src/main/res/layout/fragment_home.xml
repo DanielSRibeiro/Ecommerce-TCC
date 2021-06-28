@@ -57,8 +57,7 @@
                 android:id="@+id/autoCompleteTextView_origem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:maxLength="20"
-                android:text="São Paulo"/>
+                android:maxLength="20"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,8 +74,7 @@
                 android:id="@+id/autoCompleteTextView_destino"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:maxLength="20"
-                android:text="Rio de Janeiro"/>
+                android:maxLength="20"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

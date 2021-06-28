@@ -40,9 +40,12 @@ public class CompraAdapter extends RecyclerView.Adapter<CompraAdapter.viewHolder
         holder.textViewValor.setText("R$"+reserva.getValorTotal());
         holder.textViewCartao.setText(reserva.getNomeCartao());
         holder.textViewCliente.setText(reserva.getNomeCliente());
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        String data = dateFormat.format(reserva.getData());
-        holder.textViewData.setText(reserva.getData());
+        String ano = reserva.getData().substring(0,4);
+        String mes = reserva.getData().substring(5,7);
+        String dia = reserva.getData().substring(8,10);
+        String horas = reserva.getData().substring(11,19);
+        String data = dia+"/"+mes+"/"+ano+" às "+horas;
+        holder.textViewData.setText(data);
     }
 
     @Override

@@ -198,8 +198,8 @@ SELECT nome,telefone from Funcionário;
 
 -- Views logo Abaixo;
 
-drop view  if exists vwCarinho;
-CREATE VIEW vwCarrinho as select
+drop view  if exists vwItensReserva;
+CREATE VIEW vwItensReserva as select
 	carrinho.cd_itensreserva as codigo,
     carrinho.cd_pacote as codigoPacote,
     carrinho.cd_reserva as codigoReseva,
@@ -215,12 +215,25 @@ from ItensReserva as carrinho
 inner join pacote on pacote.cd_pacote = carrinho.cd_pacote
 inner join cidade on cidade.cd_cidade = pacote.cd_cidDestino;
 
-select * from vwCarrinho;
-select * from reserva;
-select * from itensreserva;
+select * from vwItensReserva;
 
-select * from last_insert;
+SELECT * FROM vwItensReserva    
+WHERE cpf = '00000000000000' AND codigoReseva = 8 order by codigo desc;
 
+drop view  if exists vwReserva;
+CREATE VIEW vwReserva as select
+	reserva.cd_reserva as codigoReserva,
+    cartao.nome_cartao as cartao,
+    cliente.CPF,
+    cliente.nome as nomeCliente,
+    reserva.dthr_reserva,
+    reserva.vl_total as valorTotal
+from reserva 
+inner join cartao on cartao.cd_cartao = reserva.cd_cartao
+inner join cliente on cliente.CPF = reserva.CPF;
+
+select * from vwReserva;
+SELECT * FROM vwReserva WHERE CPF = '00000000000000' order by dthr_reserva desc;
 
 Create View ResumoReserva
 as select 
@@ -349,14 +362,6 @@ Transporte.nome_transporte as TransporteDestino
 from Viagem 
 inner join Transporte on Transporte.cd_transporte = Viagem.destino ;
 
-CREATE VIEW
- teste
- as select 
- Viagem.cd_viagem,
-Transporte.nome_transporte
-from viagem
-inner join Transporte on transporte.cd_transporte = viagem.destino;
-
 delimiter //
     drop procedure if exists buscarViagem;
     create procedure buscarViagem()
@@ -387,19 +392,12 @@ select *from  Viagem;
         
         select max(cidade)  from Cidade where cd_cidade = cdOrigem ;
           select max(cidade)  from Cidade where cd_cidade = cdDestino  ;
-/* */
-
 
 drop view Resumo_Compra;
 select * from Resumo_Compra ;
 
-
-/* */
-
 -- Procedures logo abaixo;
 
-
-/* */
 drop procedure if exists Login;
 -- Procedure para efetuar o login de Funcionário e Cliente (Verificação);
 DELIMITER $$

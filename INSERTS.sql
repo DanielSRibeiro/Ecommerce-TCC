@@ -4,10 +4,10 @@ INSERT INTO Cliente VALUES
 ('Daniel','112121221','daniel@gmail.com','000.000.000-00','123456789','1234567890', '' ,'3'),
 ('Teste','112121221','teste@gmail.com','000.000.000-01','123456789','1234567890', '' ,'3');
 
-INSERT INTO Funcionario VALUES
-('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', ''),
-('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', ''),
-('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', '');
+INSERT INTO Funcionario(nome, senha, CPF, rg, email, telefone, img, tipo, cargo) VALUES
+('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', 'Desenvolvedor Android'),
+('Julia','123','111.111.111-12','123456789','ju@gmail.com','1234567890', '' ,'1', '', 'Desenvolvedor Web'),
+('Vitor','123','111.111.111-13','123456789','vitor@gmail.com','1234567890', '' ,'1', '', 'Analista de dados');
 
 INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, img_transporte ) VALUES
 (3, 'Porto do Rio Janeiro', 1, "" ),

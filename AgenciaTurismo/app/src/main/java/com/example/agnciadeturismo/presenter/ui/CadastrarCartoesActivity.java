@@ -7,17 +7,19 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.data.repository.CartaoRepositoryTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.google.android.material.textfield.TextInputLayout;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,8 +29,12 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     EditText editTextNomeCartao, editTextNumero, editTextNomeImpresso, editTextData, editTextCVV;
     Toolbar toolbar;
     CartaoViewModel cartaoViewModel;
+    TextInputLayout inputNome, inputNumero, inputNomeImpresso, inputData, inputCVV;
     private static final String TAG = "CadastrarCartoesActivit";
     ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    boolean valido;
+    String nome, numero, impresso, cvv, data;
+    CartaoRepositoryTask repositoryTask = new CartaoRepositoryTask();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +46,62 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         buttonCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nomeCartao = editTextNomeCartao.getText().toString();
-                String numero = editTextNumero.getText().toString();
-                String nomeImpresso = editTextNomeImpresso.getText().toString();
-                String cvv = editTextCVV.getText().toString();
-
-                SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
-                String data = in.format(new Date(editTextData.getText().toString()));
-
+                nome = editTextNomeCartao.getText().toString();
+                numero = editTextNumero.getText().toString();
+                impresso = editTextNomeImpresso.getText().toString();
+                cvv = editTextCVV.getText().toString();
                 cliente = MainActivity.getUsuario();
-                if(cliente.getCpf() != null){
-                    cartaoViewModel.cadastrarCartao(cliente.getCpf(), nomeCartao, nomeImpresso, numero, cvv, data);
-                }else{
-                    Log.d(TAG, "CPF inválido");
+                data = editTextData.getText().toString();
+
+                validarFormulario();
+
+                if(valido){
+                    SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+                    String dataValidade = in.format(new Date(data));
+                    cartaoViewModel.cadastrarCartao(cliente.getCpf(), nome, impresso, numero, cvv, dataValidade);
                 }
             }
         });
+    }
+
+
+    private void validarFormulario() {
+        valido = true;
+
+        if(nome.isEmpty()){
+            validacaoFormulario(inputNome, false);
+        }else{
+            validacaoFormulario(inputNome, true);
+        }
+        if(numero.length() < 16){
+            validacaoFormulario(inputNumero, false);
+        }else{
+            validacaoFormulario(inputNumero, true);
+        }
+        if(impresso.isEmpty()){
+            validacaoFormulario(inputNomeImpresso, false);
+        }else{
+            validacaoFormulario(inputNomeImpresso, true);
+        }
+        if(data.length() < 10){
+            validacaoFormulario(inputData, false);
+        }else{
+            validacaoFormulario(inputData, true);
+        }
+        if(cvv.length() < 3){
+            validacaoFormulario(inputCVV, false);
+        }else{
+            validacaoFormulario(inputCVV, true);
+        }
+    }
+
+    private void validacaoFormulario(TextInputLayout input, boolean campo){
+        if(campo){
+            input.setError("");
+        }else{
+            input.setError("Campo obrigatório");
+            valido = false;
+        }
     }
 
     private void initView() {
@@ -68,8 +114,26 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         editTextCVV = findViewById(R.id.edt_cvv);
         toolbar = findViewById(R.id.toolbar_cadastrar_cartoes);
 
+        inputNome = findViewById(R.id.textInputLayoutNomeCarta);
+        inputNumero = findViewById(R.id.textInputLayoutNumero);
+        inputNomeImpresso = findViewById(R.id.textInputLayoutImpresso);
+        inputData = findViewById(R.id.textInputLayoutDataCartao);
+        inputCVV = findViewById(R.id.textInputLayoutCVV);
+
+        MaskFormatter();
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void MaskFormatter() {
+        SimpleMaskFormatter maskData = new SimpleMaskFormatter("NN/NN/NNNN");
+        MaskTextWatcher mtwData = new MaskTextWatcher(editTextData, maskData);
+        editTextData.addTextChangedListener(mtwData);
+
+        SimpleMaskFormatter maskNumero = new SimpleMaskFormatter("NNNN NNNN NNNN NNNN");
+        MaskTextWatcher mtwNumero = new MaskTextWatcher(editTextNumero, maskNumero);
+        editTextNumero.addTextChangedListener(mtwNumero);
     }
 
     private void initObserve() {

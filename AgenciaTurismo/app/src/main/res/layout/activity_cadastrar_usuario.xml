@@ -16,10 +16,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Crie sua conta" />
 
-
-
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayoutNome"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,15 +37,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout1"
+        android:id="@+id/textInputLayoutEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutNome"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutNome"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNome"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -66,11 +64,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1">
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutEmail"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutEmail"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCPF"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -78,10 +77,9 @@
             android:hint="CPF"
             app:counterEnabled="true"
             app:counterMaxLength="14"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@android:color/holo_red_light">
+            app:helperTextEnabled="true">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_cpf"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -91,6 +89,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutRG"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -100,11 +99,9 @@
             app:counterEnabled="true"
             app:counterMaxLength="9"
             app:endIconMode="clear_text"
-            app:helperText="Apenas números"
-            app:helperTextEnabled="true"
-            app:helperTextTextColor="@android:color/holo_red_light">
+            app:helperTextEnabled="true">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_rg"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -116,7 +113,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout6"
+        android:id="@+id/textInputLayoutTelefone"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -139,16 +136,16 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/textInputLayoutSenha"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
         app:counterMaxLength="10"
         app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6"
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutTelefone"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutTelefone"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutTelefone"
         app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -167,7 +164,7 @@
         android:layout_marginTop="8dp"
         android:text="Criar conta"
         android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutSenha"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutSenha"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSenha" />
 </androidx.constraintlayout.widget.ConstraintLayout>

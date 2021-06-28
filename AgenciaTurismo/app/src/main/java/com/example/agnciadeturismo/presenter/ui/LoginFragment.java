@@ -23,6 +23,8 @@ import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.util.ArrayList;
 
@@ -72,6 +74,10 @@ public class LoginFragment extends Fragment {
         textViewCadastrar = view.findViewById(R.id.txt_cadastrarUsuario);
         editTextCPF = view.findViewById(R.id.edt_cpfLogin);
         editTextSenha = view.findViewById(R.id.edt_senhaLogin);
+
+        SimpleMaskFormatter maskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(editTextCPF, maskCPF);
+        editTextCPF.addTextChangedListener(mtw);
 
         controleSessao();
     }

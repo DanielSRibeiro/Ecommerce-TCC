@@ -2,6 +2,8 @@ package com.example.agnciadeturismo.presenter.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +17,11 @@ import android.widget.Toast;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.model.CarrinhoDto;
+import com.example.agnciadeturismo.viewmodel.CidadeViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -29,8 +33,9 @@ public class DetalhesActivity extends AppCompatActivity {
     TextView textViewIdaVolta, textViewDataChegada, textViewDataSaida, textViewValor;
     ImageView ImageViewPacote;
     int codigo, codigoTransporte, categoria, hotel, viagem, destino, origem;
-    String valor, img, nomePacote;
+    String valor, img, nomePacote, nomeOrigem, nomeDestino;
     private static final String TAG = "DetalhesActivity";
+    CidadeViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +43,7 @@ public class DetalhesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhes);
 
         initView();
+        initObserver();
         buttonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,7 +51,7 @@ public class DetalhesActivity extends AppCompatActivity {
                 if(cliente.getCpf() != null){
                     CarrinhoDto carrinho = new CarrinhoDto(
                             -1, -1, codigo, cliente.getCpf(),
-                            Double.parseDouble(valor), Double.parseDouble(valor), 1, img, "", nomePacote, codigoTransporte
+                            Double.parseDouble(valor), Double.parseDouble(valor), 1, img, nomeOrigem+" para "+nomeDestino, nomePacote, codigoTransporte
                     );
                     MainActivity.setListCarrinho(carrinho);
                     Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
@@ -61,12 +67,12 @@ public class DetalhesActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        viewModel = new ViewModelProvider(this).get(CidadeViewModel.class);
         toolbar = findViewById(R.id.toolbar_detalhes);
         textViewNomePacote = findViewById(R.id.txt_nomeDetalhes);
         textViewDescricao = findViewById(R.id.txt_descricaoDetalhes);
         textViewOrigem = findViewById(R.id.txt_origemDetalhes);
         textViewDestino = findViewById(R.id.txt_destinoDetalhes);
-        textViewDiaria = findViewById(R.id.txt_diariasDetalhes);
         textViewDataChegada = findViewById(R.id.txt_dataChegada);
         textViewDataSaida = findViewById(R.id.txt_dataSaida);
         textViewValor = findViewById(R.id.txt_valorDetalhes);
@@ -90,21 +96,45 @@ public class DetalhesActivity extends AppCompatActivity {
             valor = bundle.getString("valor");
             origem = bundle.getInt("origem");
             destino = bundle.getInt("destino");
+            viewModel.getNomeCidade(origem, destino);
 
-//            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//            String data = dateFormat.format(checkin);
+            String ano = checkin.substring(0,4);
+            String mes = checkin.substring(5,7);
+            String dia = checkin.substring(8,10);
+            String horas = checkin.substring(11,19);
+            String novoCheckin = dia+"/"+mes+"/"+ano+" às "+horas;
 
-            Log.d(TAG, "Data: "+checkin);
+            String cAno = checkout.substring(0,4);
+            String cMes = checkout.substring(5,7);
+            String cDia = checkout.substring(8,10);
+            String cHoras = checkout.substring(11,19);
+            String novoCheckout = cDia+"/"+cMes+"/"+cAno+" às "+cHoras;
 
-            textViewOrigem.setText("Origem: "+origem);
-            textViewDestino.setText("Destino: "+destino);
             textViewNomePacote.setText(nomePacote);
             textViewDescricao.setText(bundle.getString("descricao"));
-            textViewDataChegada.setText("Data de chegada: "+checkin);
-            textViewDataSaida.setText("Data de saída: "+checkout);
+            textViewDataChegada.setText("Data de chegada: "+novoCheckin);
+            textViewDataSaida.setText("Data de saída: "+novoCheckout);
             Picasso.get().load("http://192.168.0.106/"+img).into(ImageViewPacote);
             textViewValor.setText("R$"+valor);
         }
+    }
+
+    private void initObserver() {
+        viewModel.nomeOrigem.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String response) {
+                nomeOrigem = response;
+                textViewOrigem.setText("Origem: "+nomeOrigem);
+            }
+        });
+
+        viewModel.nomeDestino.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String response) {
+                nomeDestino = response;
+                textViewDestino.setText("Destino: "+nomeDestino);
+            }
+        });
     }
 
     @Override

@@ -88,6 +88,11 @@ public interface HorizonFlyApi {
             @Query("cidade") String nome
     );
 
+    @GET("cidade_consultarCodigo.php")
+    Call<ArrayList<CidadeDto>> getCodigoCidade(
+            @Query("cdCidade") int cidade
+    );
+
     @FormUrlEncoded
     @POST("reserva_cadastrar.php")
     Call<Boolean> cadastrarReserva(

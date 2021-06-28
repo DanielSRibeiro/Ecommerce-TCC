@@ -13,6 +13,11 @@ public class CidadeViewModel extends ViewModel {
     private MutableLiveData<String[]> mTodasCidades = new MutableLiveData<>();
     private MutableLiveData<Integer> mCodigoOrigem = new MutableLiveData<>();
     private MutableLiveData<Integer> mCodigoDestino = new MutableLiveData<>();
+    private MutableLiveData<String> mOrigemCidade = new MutableLiveData<>();
+    private MutableLiveData<String> mDestinoCidade = new MutableLiveData<>();
+
+    public LiveData nomeOrigem = mOrigemCidade;
+    public LiveData nomeDestino = mDestinoCidade;
     public LiveData todasCidades = mTodasCidades;
     public LiveData codigoOrigem = mCodigoOrigem;
     public LiveData codigoDestino = mCodigoDestino;
@@ -31,8 +36,18 @@ public class CidadeViewModel extends ViewModel {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                mCodigoOrigem.postValue(CidadeRepositoryTask.getOrigemCidade(origem));
-                mCodigoDestino.postValue(CidadeRepositoryTask.getDestinoCidade(destino));
+                mCodigoOrigem.postValue(CidadeRepositoryTask.getCodigoCidade(origem));
+                mCodigoDestino.postValue(CidadeRepositoryTask.getCodigoCidade(destino));
+            }
+        }).start();
+    }
+
+    public void getNomeCidade(int origem, int destino){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mOrigemCidade.postValue(CidadeRepositoryTask.getNomeCidade(origem));
+                mDestinoCidade.postValue(CidadeRepositoryTask.getNomeCidade(destino));
             }
         }).start();
     }

@@ -43,7 +43,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.viewHo
         CarrinhoDto carrinho = listCarrinho.get(position);
         holder.textViewNome.setText(carrinho.getNomePacote());
         holder.textViewValor.setText("R$"+carrinho.getValor());
-        holder.textViewDestino.setText("Destino: "+carrinho.getDestino());
+        holder.textViewDestino.setText(carrinho.getDestino());
         Picasso.get().load("http://"+ RetrofitTask.IP +"/"+carrinho.getImg()).into(holder.img);
 
     }

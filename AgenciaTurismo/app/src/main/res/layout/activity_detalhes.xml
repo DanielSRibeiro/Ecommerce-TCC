@@ -97,7 +97,7 @@
                         android:layout_alignBottom="@id/img_voo"
                         android:layout_toEndOf="@id/img_voo"
                         android:gravity="center_vertical"
-                        android:text="Voo de Ida e Volta" />
+                        android:text="Passagens de Ida e Volta"/>
 
                     <TextView
                         android:id="@+id/txt_origemDetalhes"
@@ -145,6 +145,7 @@
                         android:backgroundTint="@color/black" />
 
                     <TextView
+                        android:id="@+id/txt_hospendagem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_alignTop="@id/img_hotel"
@@ -154,19 +155,11 @@
                         android:text="Hospedagem" />
 
                     <TextView
-                        android:id="@+id/txt_diariasDetalhes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/img_hotel"
-                        android:layout_marginTop="16dp"
-                        android:text="3 diárias: " />
-
-                    <TextView
                         android:id="@+id/txt_dataChegada"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/txt_diariasDetalhes"
-                        android:layout_marginTop="8dp"
+                        android:layout_below="@id/txt_hospendagem"
+                        android:layout_marginTop="16dp"
                         android:text="Data de chegada: " />
 
                     <TextView

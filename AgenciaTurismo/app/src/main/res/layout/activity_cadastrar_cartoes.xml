@@ -18,7 +18,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/textInputLayoutNomeCarta"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,17 +37,17 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout1"
+        android:id="@+id/textInputLayoutNumero"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         app:counterEnabled="true"
-        app:counterMaxLength="16"
+        app:counterMaxLength="19"
         app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutNomeCarta"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutNomeCarta"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNomeCarta">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_numeroCartao"
@@ -55,20 +55,20 @@
             android:layout_height="match_parent"
             android:hint="Nº"
             android:inputType="number"
-            android:maxLength="16" />
+            android:maxLength="19" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout6"
+        android:id="@+id/textInputLayoutImpresso"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="16dp"
         app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout1"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout1"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout1">
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutNumero"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutNumero"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutNumero">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edt_nomeImpresso"
@@ -86,11 +86,12 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="16dp"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout6"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout6">
+        app:layout_constraintEnd_toEndOf="@+id/textInputLayoutImpresso"
+        app:layout_constraintStart_toStartOf="@+id/textInputLayoutImpresso"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutImpresso">
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDataCartao"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -107,12 +108,12 @@
                 android:layout_height="match_parent"
                 android:hint="Data de validade"
                 android:inputType="date"
-                android:maxLength="10"
-                android:text="12/22/2021"/>
+                android:maxLength="10"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutCVV"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

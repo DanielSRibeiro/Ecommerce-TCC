@@ -21,7 +21,6 @@ import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.adapter.CartaoAdapter;
-import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCartao;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

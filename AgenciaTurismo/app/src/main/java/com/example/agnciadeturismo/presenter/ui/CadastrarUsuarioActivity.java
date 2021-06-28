@@ -14,6 +14,10 @@ import android.widget.Toast;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 
 public class CadastrarUsuarioActivity extends AppCompatActivity {
@@ -23,8 +27,9 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
     Button buttonCadastrar;
     ClienteViewModel clienteViewModel;
     EditText editTextNome, editTextSenha, editTextTelefone, editTextCPF, editTextRG, editTextEmail;
+    TextInputLayout inputNome, inputSenha, inputTelefone, inputCPF, inputRG, inputEmail;
     String nome, email, cpf, rg, telefone, senha, img;
-    boolean alterar = false;
+    boolean alterar = false, valido;
     ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
 
     @Override
@@ -42,10 +47,57 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
                 rg = editTextRG.getText().toString();
                 telefone = editTextTelefone.getText().toString();
                 senha = editTextSenha.getText().toString();
+                validarFormulario();
 
-                clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+                if(valido){
+                    clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+                }
             }
         });
+    }
+
+    private void validarFormulario() {
+        valido = true;
+
+        if(nome.isEmpty()){
+            validacaoFormulario(inputNome, false);
+        }else{
+            validacaoFormulario(inputNome, true);
+        }
+        if(cpf.length() < 14){
+            validacaoFormulario(inputCPF, false);
+        }else{
+            validacaoFormulario(inputCPF, true);
+        }
+        if(email.isEmpty()){
+            validacaoFormulario(inputEmail, false);
+        }else{
+            validacaoFormulario(inputEmail, true);
+        }
+        if(rg.length() < 9){
+            validacaoFormulario(inputRG, false);
+        }else{
+            validacaoFormulario(inputRG, true);
+        }
+        if(telefone.length() < 11){
+            validacaoFormulario(inputTelefone, false);
+        }else{
+            validacaoFormulario(inputTelefone, true);
+        }
+        if(senha.length() < 3){
+            validacaoFormulario(inputSenha, false);
+        }else{
+            validacaoFormulario(inputSenha, true);
+        }
+    }
+
+    private void validacaoFormulario(TextInputLayout input, boolean campo){
+        if(campo){
+            input.setError("");
+        }else{
+            input.setError("Campo obrigatório");
+            valido = false;
+        }
     }
 
     private void initView() {
@@ -58,6 +110,15 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         editTextRG = findViewById(R.id.edt_rg);
         editTextTelefone = findViewById(R.id.edt_telefone);
         editTextSenha = findViewById(R.id.edt_senha);
+
+        inputNome = findViewById(R.id.textInputLayoutNome);
+        inputEmail = findViewById(R.id.textInputLayoutEmail);
+        inputCPF = findViewById(R.id.textInputLayoutCPF);
+        inputRG = findViewById(R.id.textInputLayoutRG);
+        inputTelefone = findViewById(R.id.textInputLayoutTelefone);
+        inputSenha = findViewById(R.id.textInputLayoutSenha);
+
+        MaskFormatter();
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -77,6 +138,16 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
             editTextSenha.setText(cliente.getSenha());
             img = cliente.getImg();
         }
+    }
+
+    private void MaskFormatter() {
+        SimpleMaskFormatter maskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(editTextCPF, maskCPF);
+        editTextCPF.addTextChangedListener(mtw);
+
+        SimpleMaskFormatter maskTel = new SimpleMaskFormatter("(NN)NNNNN-NNNN");
+        MaskTextWatcher mtwTel = new MaskTextWatcher(editTextTelefone, maskTel);
+        editTextTelefone.addTextChangedListener(mtwTel);
     }
 
     private void initObeserve() {

@@ -15,8 +15,8 @@ public class CidadeRepositoryTask {
 
     private static final String TAG = "CidadeRepositoryTask";
     private static ArrayList<String> listCidade = new ArrayList<>();
-    private static Integer cdOrigem;
-    private static Integer cdDestino;
+    private static Integer codigoCidade;
+    private static String cidade;
 
     public static ArrayList<String> getAllCidades(){
         listCidade.clear();
@@ -40,17 +40,17 @@ public class CidadeRepositoryTask {
         return listCidade;
     }
 
-    public static Integer getOrigemCidade(String origem){
-        Call<ArrayList<CidadeDto>> api = RetrofitTask.getRetrofit().getNomeCidade(origem);
+    public static Integer getCodigoCidade(String cidade){
+        Call<ArrayList<CidadeDto>> api = RetrofitTask.getRetrofit().getNomeCidade(cidade);
         try {
             Response<ArrayList<CidadeDto>> response = api.execute();
             if(response.isSuccessful()){
                 ArrayList<CidadeDto> listCidade = response.body();
                 if(listCidade.size() != 0){
-                    cdOrigem = listCidade.get(0).getCd();
+                    codigoCidade = listCidade.get(0).getCd();
                 }else{
-                    cdOrigem = null;
-                    Log.d(TAG, "Não encontrado a cidade origem");
+                    codigoCidade = null;
+                    Log.d(TAG, "Não encontrado a cidade");
                 }
 
             }else{
@@ -60,21 +60,20 @@ public class CidadeRepositoryTask {
             Log.d(TAG, "ERRO: "+e.getMessage());
         }
 
-        return cdOrigem;
+        return codigoCidade;
     }
 
-    public static Integer getDestinoCidade(String nome){
-
-        Call<ArrayList<CidadeDto>> api = RetrofitTask.getRetrofit().getNomeCidade(nome);
+    public static String getNomeCidade(int codigo){
+        Call<ArrayList<CidadeDto>> api = RetrofitTask.getRetrofit().getCodigoCidade(codigo);
         try {
             Response<ArrayList<CidadeDto>> response = api.execute();
             if(response.isSuccessful()){
                 ArrayList<CidadeDto> listCidade = response.body();
                 if(listCidade.size() != 0){
-                    cdDestino = listCidade.get(0).getCd();
+                    cidade = listCidade.get(0).getCidade();
                 }else{
-                    cdDestino = null;
-                    Log.d(TAG, "Não encontrado a cidade destino");
+                    cidade = null;
+                    Log.d(TAG, "Não encontrado a cidade");
                 }
 
             }else{
@@ -84,6 +83,7 @@ public class CidadeRepositoryTask {
             Log.d(TAG, "ERRO: "+e.getMessage());
         }
 
-        return cdDestino;
+        return cidade;
     }
+
 }
