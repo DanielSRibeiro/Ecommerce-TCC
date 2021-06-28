@@ -52,7 +52,6 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
 
                 if(valido){
                     if(validarCPF()){
-                        Toast.makeText(CadastrarUsuarioActivity.this, "true", Toast.LENGTH_SHORT).show();
                         clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
                     }else{
                         Toast.makeText(CadastrarUsuarioActivity.this, "CPF inválido", Toast.LENGTH_SHORT).show();
