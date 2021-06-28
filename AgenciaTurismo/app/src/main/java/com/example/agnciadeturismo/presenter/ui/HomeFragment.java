@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
         return view;
     }
 
+
     private void initObserver() {
         pacoteViewModel.oferta.observe(getActivity(), new Observer<ArrayList<PacoteDto>>() {
             @Override
