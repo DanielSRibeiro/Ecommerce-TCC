@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "854911488597",
+    "project_id": "agencia-de-turismo---tcc",
+    "storage_bucket": "agencia-de-turismo---tcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854911488597:android:b08d3c25cf70f4a16cbadc",
+        "android_client_info": {
+          "package_name": "com.example.agnciadeturismo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854911488597-66qv5ht1nag8l6middiuncot8iaparb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYazSIOmr3RjZTnxheogG2voqlWdDN0Nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854911488597-66qv5ht1nag8l6middiuncot8iaparb8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

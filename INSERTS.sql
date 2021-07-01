@@ -1,58 +1,76 @@
 use db_horizon;
 
 INSERT INTO Cliente VALUES
-('Daniel','112121221','daniel@gmail.com','000.000.000-00','123456789','1234567890', '' ,'3'),
-('Teste','112121221','teste@gmail.com','000.000.000-01','123456789','1234567890', '' ,'3');
+('Daniel','112121221','daniel@gmail.com','356.537.440-34','123456789','1234567890', '' ,'3'),
+('Teste','112121221','teste@gmail.com','531.402.600-75','123456789','1234567890', '' ,'3');
 
-INSERT INTO Funcionario(nome, senha, CPF, rg, email, telefone, img, tipo, cargo) VALUES
-('Daniel','123','111.111.111-11','123456789','daniel@gmail.com','1234567890', '' ,'1', 'Desenvolvedor Android'),
-('Julia','123','111.111.111-12','123456789','ju@gmail.com','1234567890', '' ,'1', '', 'Desenvolvedor Web'),
-('Vitor','123','111.111.111-13','123456789','vitor@gmail.com','1234567890', '' ,'1', '', 'Analista de dados');
+INSERT INTO Funcionario(nome, senha, CPF, telefone, email,  rg, cargo, tipo, img) VALUES
+('Daniel','123','632.748.440-98','(11) 95282-2503','daniel@gmail.com','503354299', 'Desenvolvedor Android','1', ''),
+('Julia','123','511.738.940-98','(11) 96612-8517','ju@gmail.com','515087124', 'Desenvolvedor Web','1', ''),
+('Vitor','123','369.706.060-07','(11) 93242-1513','vitor@gmail.com','873265319', 'Analista de dados','1', '');
 
-INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, img_transporte ) VALUES
-(3, 'Porto do Rio Janeiro', 1, "" ),
-(1, 'Porto Itajai', 1,"");
-
-INSERT INTO Hotel(cd_cidade, nome_hotel, diaria_hotel, descricao_hotel, endereco_hotel, telefone_hotel , img_hotel ) VALUES 
-(5270, 'Hotel de São Paulo', '80', 'Descrição', 'Endereço' , '1212121', ''),
-(3658, 'Hotel do Rio de Janeiro', '100', 'Descrição', 'Endereço' , '11111', ''),
-(3315, 'Hotel do Recife', '140', 'Descrição', 'Endereço' , '11111', '');
-
--- Insert na tabela TipoTransporte
 INSERT INTO TipoTransporte(cd_tipotransporte,tipo_transporte) VALUES
 ('1','Avião'),
 ('2','Cruzeiro'),
 ('3','Ônibus');
 
--- Insert na tabela Categoria
 INSERT INTO Categoria(cd_categoria,Categoria) VALUES
 ('1','Destaques'),
 ('2','Em Oferta');
 
-INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, img_transporte )
-VALUES(5270, 'Aeroporto de guarulhos', 1, "" ),
-(3658, 'Aeroporto Santos Dumont', 1,""),
-(3658, 'Rodoviaria Tiete', 3,""),
-(3315, 'Porto de Galinhas', 2, "" );
+INSERT INTO Transporte(cidade_transporte, nome_transporte, cd_tipotransporte, img_transporte ) VALUES
+(3658, 'Porto do Rio Janeiro', 1, ''),
+(4920, 'GRU Airport', 1, '/Imagens/ImagensTransporte/gruAirport.png'),
+(5270, 'Congonhas Aeroporto', 1, '/Imagens/ImagensTransporte/AeroportoDeCongonhas.jpg'),
+(882, 'Aeroporto Inframerica', 1, '/Imagens/ImagensTransporte/bsb.jpg'),
+(4538, 'Porto Itajaí', 2, '/Imagens/ImagensTransporte/portoItajai.jpg'),
+(5250, 'Porto Santos', 2, '/Imagens/ImagensTransporte/portoSantos.jpg'),
+(4816, 'Rod. Campos do Jordão', 3, '/Imagens/ImagensTransporte/rodCamposJordao.png'),
+(591, 'Rod. Porto Seguro', 3, '/Imagens/ImagensTransporte/rodPortoSeguro.png'),
+(3315, 'Porto de Galinhas', 3, '/Imagens/ImagensTransporte/rodPortoSeguro.png');
+
+INSERT INTO Hotel(cd_cidade, nome_hotel, diaria_hotel, descricao_hotel, endereco_hotel, telefone_hotel ,img_hotel ) VALUES 
+(5270, 'Hotel Dan Inn Planalto São Paulo', '160', 'Os quartos incluem TV de tela plana a cabo, guarda-roupa e banheiro privativo com chuveiro e secador de cabelo.A propriedade fica poucos passos da Estação de Metrô da Luz, da Praça da República e dos locais de compras mais importantes de São Paulo.', 'Av. Casper Libero, 115, São Paulo, CEP 01033-001' , '(11)97783-1381', ''),
+(3658, 'Hotel Atlantico Prime', '84', 'O Hotel Atlantico Prime está situado no centro do Rio de Janeiro e oferece acomodação com restaurante, estacionamento privativo, academia e um bar', 'Rua do Rezende, 87 , Centro, Rio de Janeiro' , '(11)95283-4012', ''),
+(3315, 'Fly Hotel', '191', 'Idealmente localizado em uma das regiões mais privilegiadas de Recife, o Fity Hotel fica no bairro de Boa Viagem, a poucos quarteirões da praia e a 1 km do Shopping Recife. Você vai encontrar diversas opções de restaurantes e compras a uma curta caminhada. O Fity Hotel está localizado a 8 km do Parque Histórico Nacional dos Guararapes, onde o mirante Henrique Dias está situado.', 'Rua Dhalia, 67, Boa Viagem, Recife' , '(11)95232-3212', ''),
+(4816, 'Hotel Serra da Estrela', '500', 'Lindo Hotel em áreas verdes, acomodação 5 estrelas, Com inclusão de pessoas Veganas e Vegetarianas. Próximo aos pontos turísticos mais cobiçados de campos do jordão. ', 'Av. Dr Mário Otoni Rezende, 160, 12460-000, Campos do Jordão' , '(12) 3669 - 8050', '/Imagens/ImagensHoteis/serraDaEstrela.jpg'),
+(4920, 'Bristol Guarulhos', '200', 'Traslado do aeroporto incluso. Outras comodidades incluem um restaurante aconchegante, academia, piscina coberta aquecida, sauna e espaço para reuniões e eventos. Café da manhã e estacionamento disponíveis.', 'R. Sd. José de Andrade, 63 - Jardim Santa Francisca' , '(11) 94083 - 8000', '/Imagens/ImagensHoteis/bristolhotelGRU.png'),
+(4942, 'Barra Piúva', '421', 'Este hotel casual à beira-mar e próximo à rodovia SP-131 fica a 1,6 km do terminal de balsas para São Sebastião,Os quartos minimalistas com piso de madeira dispõem de TV com tela plana e frigobar. ', 'Av. Brasil, 1140 - Piúva, Ilhabela' , '(11) 2241 - 5023', '/Imagens/ImagensHoteis/barrapiuva.jpg'),
+(882, 'Cullinan Hplus', '255', 'Este hotel elegante próximo a lojas fica a 12 minutos de caminhada do Eixo Monumental e a 3 km da Catedral de Brasília, projetada por Oscar Niemeyer', 'SHN Q. 4 - Brasília' , '1212121', '/Imagens/ImagensHoteis/hotelbrasilia.jpg'),
+(4920, 'Panamby Guarulhos', '380', 'Hotel com piscina e acomodação 5 estrelas', 'Endereço' , '(11) 2714 - 7355', '/Imagens/ImagensHoteis/hotel-panamby-guarulhos.jpg'),
+(5270, 'Hotel Unique', '350', 'Situado em uma propriedade modernista impressionante, projetada pelo arquiteto Ruy Ohtake, este hotel de luxo fica a 10 minutos a pé do Parque Ibirapuera e a 3,2 km do Museu de Arte de São Paulo Assis Chateaubriand.', 'Endereço' , '(11) 3055 - 4700', '/Imagens/ImagensHoteis/hotelunique.jpg');
 
 insert into Viagem(nome_viagem,  cd_tipotransporte, origem,
 destino,  dt_ida, dt_chegada, descricao, vl_total, img_viagem)values
-('São Paulo para Rio de Janeiro', 1, 1, 2, '2021-06-05', '2021-06-30' , 'Descrição', '790.00', ''),
-('Rio de Janeiro para São Paulo', 2, 2, 1, '2021-06-05', '2021-07-25' , 'Descrição', '1090.00', '' ),
-('São Paulo para Recide',  3, 1, 4, '2021-06-05', '2021-08-12' , 'Descrição', '1220.00', '' );
+('São Paulo para Rio de Janeiro', 1, 3, 1, '2021-06-05', '2021-06-30' , '', '790.00', ''),
+('Rio de Janeiro para São Paulo', 2, 1, 3, '2021-07-05', '2021-08-25' , '', '1090.00', '' ),
+('São Paulo para Recide',  3, 3, 9, '2021-06-30', '2021-08-12' , '', '1220.00', '' ),
+('Ônibus PortoSeguro/Camp.Jordão',  3, 8, 7, '2021/06/20  07:10:00', '2021/06/23  10:53:00' , '', '655.00', '/Imagens/ImagensViagem/camposJordão.png' ),
+('Voo para Guarulhos', 1, 4, 2, '2021/06/29  09:30:00', '2021/07/01  10:50:00' , '', '450.00', '/Imagens/ImagensViagem/voo.jpg' ),
+('Voo para Brasilia',  1, 3, 4, '2021/07/05  10:05:00', '2021/07/07  11:30:00' , '', '350.00', '/Imagens/ImagensViagem/voo2.png' ),
+('Voo para Guarulhos', 1, 9, 2, '2021/08/10  10:30:00', '2021/08/12  12:45:00' , '', '425.00', '/Imagens/ImagensViagem/gruair.jpg' ),
+('Voo para São Paulo', 1, 1, 3, '2021/07/13  16:33:00', '2021/06/15  08:40:00' , '', '475.99', '/Imagens/ImagensViagem/masp.jfif' );
 
 /*Com categoria*/
 INSERT INTO Pacote
 (cd_viagem, cd_hotel, cd_categoria, cd_tipotransporte, cd_cidOrigem, cd_cidDestino, 
 nome_pacote, descricao_pacote, dtChekin_hotel, dtChekout_hotel, vl_pacote, img_pacote) VALUES 
-(29, 1, 2, 1, 5270, 3658, 'Pacote para o Rio de Janeiro', 'Um fim de semana no Rio de Janeiro é tudo o que você precisa para renovar as energias. O contato com a natureza, combinado com as amenidades da hospedagem levarão você a desfrutar ao máximo dessa experiência.', '2021-06-07','2021-07-30', '890.00', '/img/rio.jpg'),
-(30, 2, 2, 1, 3658, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', '/img/saopaulo.jpg');
+(1, 1, 2, 1, 5270, 3658, 'Pacote para o Rio de Janeiro', 'Um fim de semana no Rio de Janeiro é tudo o que você precisa para renovar as energias. O contato com a natureza, combinado com as amenidades da hospedagem levarão você a desfrutar ao máximo dessa experiência.', '2021-06-07','2021-07-30', '890.00', '/Imagens/ImagensPacote/rio.jpg'),
+(2, 2, 2, 1, 3658, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', '/Imagens/ImagensPacote/saopaulo.jpg'),
+(5, 5, 2, 3, 882, 4920, 'Pacote para Guarulhos - SP', 'Conheça as maravilhas da cidade de Guarulhos', '2021/07/15  20:22:00','2021/08/30  10:20:00', '1050.00', '/Imagens/ImagensPacote/guarulhos.jpg'),
+(6, 7, 2, 1, 4920, 882, 'Pacote para Brasília - DP', 'Aproveite as maravilhas de Brasília por 4 dias em um dos melhores hotéis do DF', '2021/07/27  14:53:00','2021/09/08  12:30:00', '1352.00', '/Imagens/ImagensPacote/brasilia.jpg'),
+(8, 7, 2, 1, 882, 5270, 'Pacote para São Paulo - SP', 'Conheça a capital mais famosa do brasil', '2021/07/04  07:12:50','2021/07/24  19:55:30', '1525.00', '/Imagens/ImagensPacote/saopaulo2.jpg');
 
 /*Sem categoria*/
 INSERT INTO Pacote(cd_viagem, cd_hotel, cd_tipotransporte, cd_cidOrigem, cd_cidDestino, 
 nome_pacote, descricao_pacote, dtChekin_hotel, dtChekout_hotel, vl_pacote, img_pacote)VALUES 
-(31, 7, 3, 5270,3315,'Pacote para o Recife', 'Melhor pacote para o Recife, saindo de São Paulo', '2021-06-07','2021-06-26','590.00', '/img/recife.jpg'),
-(30, 2, 2, 3658, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', 'img/saopaulo.jpg');
+(3, 7, 1, 5270, 3315,'Pacote para o Recife', 'Melhor lugar do Brasil para passar as suas férias, você não pode perder essa oportunidade', '2021-02-23','2021-08-8','1020.00', '/Imagens/ImagensPacote/recife2.jpg'),
+(3, 7, 3, 5270, 3315,'Pacote para o Recife', 'Melhor pacote para o Recife, saindo de São Paulo', '2021-06-07','2021-06-26','590.00', 'Imagens/ImagensPacote/recife.jpg'),
+(8, 1, 2, 3315, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', 'Imagens/ImagensPacote/saopaulo2.jpg');
+
+select * from pacote;
+delete from pacote
+where cd_pacote= 9;
 
 INSERT INTO Estado (cd_estado, estado, uf) VALUES
 (1, 'Acre', 'AC'),

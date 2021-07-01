@@ -20,7 +20,7 @@ public class ClienteViewModel extends ViewModel {
             @Override
             public void run() {
                 if(!alterar){
-                    inserirCliente(nome, email, cpf, rg, telefone, senha);
+                    inserirCliente(nome, email, cpf, rg, telefone, senha, img);
                 }else{
                     updateCliente(nome, email, cpf, rg, telefone, senha, img);
                 }
@@ -28,8 +28,8 @@ public class ClienteViewModel extends ViewModel {
         }).start();
     }
 
-    private void inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha) {
-        postCliente = clienteRepositoryTask.inserirCliente(nome, email, cpf, rg, telefone, senha);
+    private void inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha, String img) {
+        postCliente = clienteRepositoryTask.inserirCliente(nome, email, cpf, rg, telefone, senha, img);
         cadastradoSucesso = "Cadastrado com Sucesso!!";
         mCadastrado.postValue(postCliente);
     }

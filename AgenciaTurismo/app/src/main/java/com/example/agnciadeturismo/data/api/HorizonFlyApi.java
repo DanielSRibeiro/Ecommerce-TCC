@@ -32,7 +32,8 @@ public interface HorizonFlyApi {
             @Field("cpf") String cpf,
             @Field("rg") String rg,
             @Field("telefone") String telefone,
-            @Field("senha") String senha
+            @Field("senha") String senha,
+            @Field("img") String img
     );
 
     @FormUrlEncoded

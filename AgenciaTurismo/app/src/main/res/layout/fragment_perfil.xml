@@ -11,7 +11,8 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/ic_aviao_de_papel" />
 
     <TextView
@@ -26,44 +27,52 @@
         android:textSize="20sp"
         android:typeface="sans" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/imageView"
-        android:layout_marginStart="16dp"
-        android:backgroundTint="#C6C6C6"
-        app:cardCornerRadius="50dp">
 
-        <ImageView
-            android:id="@+id/img_usuario"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_baseline_person_24"
-            android:backgroundTint="@color/white" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/txt_nomeUsuario"
+    <LinearLayout
+        android:id="@+id/linearPerfil"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/cardView"
-        android:layout_alignBottom="@id/cardView"
-        android:layout_toEndOf="@id/cardView"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:text="Nome do Usuario"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_below="@+id/imageView"
+        android:padding="16dp"
+        android:background="?attr/selectableItemBackground">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_below="@id/imageView"
+            android:backgroundTint="#C6C6C6"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+                android:id="@+id/img_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_baseline_person_24"
+                android:backgroundTint="@color/white" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txt_nomeUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@id/cardView"
+            android:layout_alignBottom="@id/cardView"
+            android:layout_toEndOf="@id/cardView"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:text="Nome do Usuario"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/cardView"
-        android:layout_marginVertical="16dp"
+        android:layout_below="@id/linearPerfil"
+        android:layout_marginBottom="8dp"
         android:background="@color/black" />
 
     <RelativeLayout
@@ -173,4 +182,5 @@
             android:text="Sair da conta" />
 
     </RelativeLayout>
+
 </RelativeLayout>

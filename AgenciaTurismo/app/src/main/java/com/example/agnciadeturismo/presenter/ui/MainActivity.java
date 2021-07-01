@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,6 +13,8 @@ import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment = new HomeFragment();
     static ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
     static ArrayList<CarrinhoDto> listCarrinho = new ArrayList<>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

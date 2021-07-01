@@ -10,19 +10,24 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
+import com.squareup.picasso.Picasso;
 
 public class PerfilFragment extends Fragment {
 
     RelativeLayout layoutCompras, layoutCartoes, layoutSair;
-    TextView textViewNome;
+    ImageView imageViewCliente;
+    LinearLayout linearLayoutPerfil;
     ClienteDto cliente;
     ClienteViewModel clienteViewModel;
+    TextView textViewNomeUsuario;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,11 +44,16 @@ public class PerfilFragment extends Fragment {
         layoutCompras = view.findViewById(R.id.layoutCompras);
         layoutCartoes = view.findViewById(R.id.layoutCartoes);
         layoutSair = view.findViewById(R.id.layoutSair);
-        textViewNome = view.findViewById(R.id.txt_nomeUsuario);
+        linearLayoutPerfil = view.findViewById(R.id.linearPerfil);
+        imageViewCliente = view.findViewById(R.id.img_usuario);
+        textViewNomeUsuario = view.findViewById(R.id.txt_nomeUsuario);
 
         cliente = ((MainActivity) getActivity()).getUsuario();
         if(cliente.getCpf() != null){
-            textViewNome.setText(cliente.getNome());
+            textViewNomeUsuario.setText(cliente.getNome());
+        }
+        if(cliente.getImg() != null){
+            Picasso.get().load(cliente.getImg()).into(imageViewCliente);
         }
     }
 
@@ -75,7 +85,7 @@ public class PerfilFragment extends Fragment {
             }
         });
 
-        textViewNome.setOnClickListener(new View.OnClickListener() {
+        linearLayoutPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CadastrarUsuarioActivity.class);

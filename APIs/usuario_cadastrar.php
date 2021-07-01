@@ -10,9 +10,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $rg = $_POST["rg"];
     $telefone = $_POST["telefone"];
     $senha = $_POST["senha"];
+    $img = $_POST["img"];
 
-    $sqlComando = "INSERT INTO Cliente(nome, email, CPF, rg, telefone, senha, tipo)
-    VALUES ('$nome', '$email', '$CPF', '$rg', '$telefone', '$senha', '3')";
+    $sqlComando = "INSERT INTO Cliente(nome, email, CPF, rg, telefone, senha, tipo, img)
+    VALUES ('$nome', '$email', '$CPF', '$rg', '$telefone', '$senha', '3', '$img')";
 
     if(mysqli_query($con, $sqlComando)){
         echo("true");

@@ -146,11 +146,6 @@ CREATE TABLE Reserva (
     FOREIGN KEY (cd_cartao) REFERENCES Cartao (cd_cartao) /*Referencia */
 );
 
-select * from Cartao;
-
-insert into Reserva(CPF, cd_cartao, vl_total, status_reserva, dthr_reserva)
-values('00000000000000', 2, 1400.00, 1, '2021-06-02'); 
-
 /* Criando a tabela Itens_Reservas*/
 CREATE TABLE ItensReserva(
  cd_itensreserva INTEGER auto_increment not null primary key,
@@ -163,41 +158,10 @@ CREATE TABLE ItensReserva(
  CPF VARCHAR(20) not null,
  FOREIGN KEY (cd_pacote) REFERENCES Pacote (cd_pacote),  /*Referencia */
  FOREIGN KEY (cd_reserva) REFERENCES Reserva (cd_reserva),
-  FOREIGN KEY (CPF) REFERENCES Cliente (CPF)  /*Referencia *//*Referencia */
+ FOREIGN KEY (CPF) REFERENCES Cliente (CPF)  /*Referencia *//*Referencia */
 );
-select * from pacote;
-
-insert into ItensReserva(cd_pacote, cd_reserva, vl_unit, vl_parcial, qt_itens, status_itens, CPF)
-values(5,1,1400, 1400, 1, 1, '00000000000000'); 
-
--- Selecionando as Tabelas ( Selects de cada tabela);
-SELECT * FROM Cidade;
-SELECT * FROM Estado;
-SELECT * FROM Categoria;
-SELECT * FROM tipotransporte;
-SELECT * FROM Cliente;
-SELECT * FROM Hotel;
-SELECT * FROM Cartao;
-SELECT * FROM Funcionario;
-SELECT * FROM Viagem;
-SELECT * FROM Transporte;
-SELECT * FROM Pacote;
-SELECT * FROM Reserva;
-SELECT * FROM ItensReserva;
-24/06/2021 23:43:19
-update Pacote set cd_categoria = 2 where cd_pacote = 4;
-SELECT * FROM Itens_escolhidos;
-select * from Cidade where cidade like '%Floria%';
-select * from Pacote where cd_cidDestino = 4816 and cd_cidOrigem = 591;
-Select * from Funcionario where rg = '241574230';
-
--- Select nome e telefone de clientes e funcionários
-SELECT nome,telefone from Cliente;
-
-SELECT nome,telefone from Funcionário;
 
 -- Views logo Abaixo;
-
 drop view  if exists vwItensReserva;
 CREATE VIEW vwItensReserva as select
 	carrinho.cd_itensreserva as codigo,
@@ -215,11 +179,6 @@ from ItensReserva as carrinho
 inner join pacote on pacote.cd_pacote = carrinho.cd_pacote
 inner join cidade on cidade.cd_cidade = pacote.cd_cidDestino;
 
-select * from vwItensReserva;
-
-SELECT * FROM vwItensReserva    
-WHERE cpf = '00000000000000' AND codigoReseva = 8 order by codigo desc;
-
 drop view  if exists vwReserva;
 CREATE VIEW vwReserva as select
 	reserva.cd_reserva as codigoReserva,
@@ -232,296 +191,23 @@ from reserva
 inner join cartao on cartao.cd_cartao = reserva.cd_cartao
 inner join cliente on cliente.CPF = reserva.CPF;
 
+-- Selecionando as Tabelas ( Selects de cada tabela);
+SELECT * FROM Cidade;
+SELECT * FROM Estado;
+SELECT * FROM Categoria;
+SELECT * FROM tipotransporte;
+SELECT * FROM Cliente;
+SELECT * FROM Hotel;
+SELECT * FROM Cartao;
+SELECT * FROM Funcionario;
+SELECT * FROM Viagem;
+SELECT * FROM Transporte;
+SELECT * FROM Pacote;
+SELECT * FROM Reserva;
+SELECT * FROM ItensReserva;
+SELECT * FROM Itens_escolhidos;
+select * from Cidade where cidade like '%recife%';
+select * from Pacote where cd_cidDestino = 4816 and cd_cidOrigem = 591;
+Select * from Funcionario where rg = '241574230';
 select * from vwReserva;
-SELECT * FROM vwReserva WHERE CPF = '00000000000000' order by dthr_reserva desc;
-
-Create View ResumoReserva
-as select 
-Reserva.cd_reserva,
-Reserva.dthr_reserva,
-Reserva.CPF,
-Reserva.cd_cartao,
-Reserva.vl_total,
-ItensReserva.cd_itensreserva,
-ItensReserva.cd_pacote,
-ItensReserva.vl_unit,
-ItensReserva.qt_itens,
-Cliente.nome,
-Cartao.nome_cartao,
-Pacote.img_pacote,
-Pacote.nome_pacote
-from Reserva inner join ItensReserva on ItensReserva.cd_reserva = Reserva.cd_reserva
-inner join Cliente on Cliente.CPF = Reserva.CPF
-inner join Cartao on Cartao.cd_cartao = Reserva.cd_cartao
-inner join Pacote on Pacote.cd_pacote = ItensReserva.cd_pacote;
-select * from ResumoReserva ;
-
-select * from reserva;
-select * from itensreserva;
-SELECT cd_reserva FROM reserva where CPF = '00000000000000';
-
-/* VIEW DE DETALHES DE Pacote */
-CREATE VIEW
--- Nome da View
- DetalhesPacote
-as select -- Seleciona
-Pacote.cd_pacote,
-Pacote.cd_hotel,
-Pacote.cd_viagem,
-Pacote.nome_pacote,
-Pacote.descricao_pacote,
-Pacote.dtChekin_hotel,
-Pacote.dtChekout_hotel,
-Pacote.img_pacote,
-Pacote.cd_cidOrigem,
-Viagem.destino,
-Pacote.vl_pacote,
-Hotel.cd_cidade,
-Hotel.nome_hotel,
-Hotel.descricao_hotel,
-Hotel.telefone_hotel,
-Hotel.endereco_hotel,
-Hotel.diaria_hotel,
-Hotel.img_hotel,
-Viagem.cd_tipotransporte,
-TipoTransporte.tipo_transporte,
-Viagem.dt_ida,
-Viagem.dt_chegada,
-Viagem.vl_total,
-Viagem.img_viagem,
-Viagem.descricao,
- Transporte.nome_transporte as TransporteDestino,
-Cidade.cidade as CidadeOrigem
-from Pacote inner join Hotel on Hotel.cd_hotel = Pacote.cd_hotel
-inner join Viagem on  Viagem.cd_viagem = Pacote.cd_viagem 
-INNER JOIN TipoTransporte  on TipoTransporte.cd_tipotransporte =  Viagem.cd_tipotransporte
-inner join Cidade on Cidade.cd_cidade = Pacote.cd_cidOrigem 
-inner join Transporte on Transporte.cd_transporte = Viagem.destino 
-;
-
-SELECT * FROM DetalhesPacote;
-/* VIEW DE TRANSPORTES */
-CREATE VIEW
--- Nome da view
- Hoteis
-as select -- seleciona
-Hotel.cd_cidade,
-hotel.cd_hotel,
-Hotel.nome_hotel,
-Hotel.descricao_hotel,
-Hotel.telefone_hotel,
-Hotel.endereco_hotel,
-Hotel.diaria_hotel,
-Hotel.img_hotel,
-Cidade.cidade
-from Hotel inner join Cidade on Hotel.cd_cidade = Cidade.cd_cidade;
-
-select * from hoteis;
-
-/* VIEW DE HOTEIS */
-CREATE VIEW
--- Nome da view
-Transportes
-as select -- seleciona
-Transporte.nome_transporte,
-Transporte.cd_tipotransporte,
-TipoTransporte.tipo_transporte,
-Transporte.img_transporte,
-Transporte.cd_transporte,
-Cidade.cidade
-from Transporte inner join Cidade on Transporte.cidade_transporte = Cidade.cd_cidade 
-INNER JOIN TipoTransporte on Transporte.cd_transporte = TipoTransporte.cd_tipotransporte;
-
-select * from Transportes;
-
-/*VIEW DE VIAGENS */
-CREATE VIEW
- vw_MostraViagem
- as select 
- Viagem.cd_viagem,
- Viagem.nome_viagem,
- Viagem.cd_tipotransporte,
- TipoTransporte.tipo_transporte,
- Viagem.nome_viagem as nome,
- Viagem.destino,
- Viagem.dt_ida,
- Viagem.dt_chegada,
- Viagem.descricao,
- Viagem.vl_total,
- Viagem.img_viagem,
-Transporte.nome_transporte as TransporteDestino
-from Viagem 
-INNER JOIN TipoTransporte on TipoTransporte.cd_tipotransporte =  Viagem.cd_tipotransporte inner join Transporte 
-on Transporte.cd_transporte = Viagem.destino ;
-
-CREATE VIEW
- vw_MostraViagemDestino
- as select 
- Viagem.cd_viagem,
-Transporte.nome_transporte as TransporteDestino
-from Viagem 
-inner join Transporte on Transporte.cd_transporte = Viagem.destino ;
-
-delimiter //
-    drop procedure if exists buscarViagem;
-    create procedure buscarViagem()
-    begin
-        select * from  vw_MostraViagemOrigem;
-        select * from vw_MostraViagemDestino;
-    end //
-delimiter ;
-
-call buscarViagem();    
-    delimiter //
-    drop procedure if exists SPViagem;
-    create procedure SPViagem(
-    out Destino VARCHAR(100),
-    out Origem VARCHAR(100)
-    )
-    begin
-    declare cdDestino int;
-    declare cdOrigem int;
-        select (cd_viagem, nome_viagem, cd_tipotransporte, origem as cdOrigem ,destino as cdDestino,  dt_ida, dt_chegada,			descricao, vl_total, img_viagem) from  Viagem;
-        
-        select max(cidade)  from Cidade where cd_cidade = cdOrigem ;
-          select max(cidade)  from Cidade where cd_cidade = cdDestino  ;
-    end //
-delimiter ;
-
-select *from  Viagem;
-        
-        select max(cidade)  from Cidade where cd_cidade = cdOrigem ;
-          select max(cidade)  from Cidade where cd_cidade = cdDestino  ;
-
-drop view Resumo_Compra;
-select * from Resumo_Compra ;
-
--- Procedures logo abaixo;
-
-drop procedure if exists Login;
--- Procedure para efetuar o login de Funcionário e Cliente (Verificação);
-DELIMITER $$
-CREATE PROCEDURE 
--- Nome da procedure
-Login (-- Parametro de entrada e saida
- IN  VCPF varchar(20), IN VSenha varchar(10)) 
-BEGIN
-  SELECT * FROM  Funcionario WHERE CPF = VCPF and senha = VSenha;
-  SELECT *  FROM Cliente WHERE CPF  = VCPF and senha = VSenha;
-END$$
-DELIMITER ;
-call Login('123.456.789-11','ione123');
-call Login('49969549812','jucas2111');
-
-
--- procedure de bsucarPacotes
-delimiter //
-    drop procedure if exists buscarPacote;
-    create procedure buscarPacote(
-        in Origem varchar(50),
-        in Destino varchar(50)
-)
-    begin
-        select * from vw_MostraPacotesOrigem
-        where cidade like concat('%',Origem,'%');
-        select * from vw_MostraPacotesDestino where cidade like concat('%',Destino,'%');
-    end //
-delimiter ;
-call buscarPacote('aguia branca','aguia');
-
-/* */
-
--- Funcionário e Cliente alterações de senha;
-
--- Altera Senha do Funcionário
-UPDATE Funcionario SET senha_func = ''
-WHERE CPF_func = '' ;
-
-
--- Altera Senha do Cliente
-UPDATE Cliente SET senha = ''
-WHERE cpf_cliente = '';
-
-/* */
-
-
--- Esta procedure ira calcular as passagens 
-drop procedure if exists Calc_Passagens
-DELIMITER $$
-CREATE PROCEDURE Calc_Passagens
-(
-in vn1 decimal(10,2),
-in vn2 int
-)
-begin
- declare resultado decimal(10,2);
- set resultado = vn1 * vn2;
- select resultado as total_Compra;
- end $$
- DELIMITER ;
-
-call Calc_Passagens();
-
-
-
--- Esta procedure ira contar a quantidade GERAL de tudo;
-DELIMITER $$
-CREATE PROCEDURE 
--- Nome da procedure 
-Resumo_Geral (-- Parametro de entrada e saida
-OUT quantidadeFuncionarios int, OUT quantidadeClientes int,
-OUT quantidadeViagens int ,  OUT quantidadeTransportes int, OUT quantidadePacotes int,
-OUT quantidadeReservas int, OUT quantidadeHoteis int)
-BEGIN
--- Instrução SQL que realizará a contagem dos seguintes comandos abaixo
-
-Select count(*) INTO quantidadeFuncionarios FROM Funcionario;
-Select count(*) INTO quantidadeClientes FROM Cliente;
-Select count(*) INTO quantidadeViagens FROM Viagem;
-Select count(*) INTO quantidadeTransportes FROM Transporte;
-Select count(*) INTO quantidadePacotes FROM Pacote;
-Select count(*) INTO quantidadeReservas FROM Reserva;
-Select count(*) INTO quantidadeHoteis FROM Hotel;
-END$$
-DELIMITER  ;
-
-
-call Resumo_Geral(@quantidadeFuncionarios, @quantidadeClientes, @quantidadeViagens, @quantidadeTransportes, @quantidadePacotes, @quantidadeReservas , @quantidadeHoteis);
-
-select @quantidadeFuncionarios as 'Funcionários', @quantidadeClientes as 'Cliente',
- @quantidadeViagens as 'Viagens', @quantidadeTransportes as 'Transportes', @quantidadePacotes as 'Pacotes', @quantidadeReservas;
-
-
-DELIMITER $$
-CREATE PROCEDURE 
--- Nome da procedure 
-ChamaResumo( )
-BEGIN
-select @quantidadeFuncionarios as 'Funcionários',@quantidadeClientes as 'Clientes',@quantidadeViagens as 'Viagens', @quantidadeTransportes as 'Transportes',
-@quantidadePacotes as 'Pacotes', @quantidadeReservas as 'Vendas', @quantidadeHoteis as 'Hoteis'; 
-
-END $$
-DELIMITER ;
-
-call ChamaResumo();
-
-
-
-/* TRANSACTION */
-START TRANSACTION;
-INSERT INTO CLiente (nome,senha,CPF,tipo,telefone,email,rg,img) 
-VALUES ('Julia','jucas2111','499.695.498-12','4','(11)98053-5577','j@gmail.com','393416136','oi');
-UPDATE Funcionario SET tipo = '4'  WHERE CPF = '499.695.498-12';
-COMMIT;
-
-
-/* TRANSACTION */
-START TRANSACTION;
-SELECT * FROM Funcionario  WHERE CPF = CPF and senha = Senha;
-  SELECT * FROM Cliente WHERE CPF  = CPF and senha = Senha;
-COMMIT;
-delete  from Cliente where CPF = '499.695.178-80';
-update funcionario set img = '~/ImagensFuncionario/vitor.jfif' where CPF = '599.695.498-12';
-INSERT INTO Funcionario (nome,senha,CPF,cargo,tipo,telefone,email,rg,img) VALUES ('Julia','jucas2111','499.695.498-12','Gerente','1','(11)98053-5577','j@gmail.com','393416136','oi');
-
-Select * from Cidade where cd_cidade = 500;
+select * from vwitensreserva;

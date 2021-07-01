@@ -3,7 +3,9 @@
     package="com.example.agnciadeturismo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ui.ItensReservaActivity"></activity>
+        <activity android:name=".presenter.ui.ItensReservaActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presenter.ui.DetalhesActivity"
             android:screenOrientation="portrait" />

@@ -16,9 +16,9 @@ public class ClienteRepositoryTask {
     public boolean resultadoCadastrado;
     public boolean resultadoUpdate;
 
-    public boolean inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha){
+    public boolean inserirCliente(String nome, String email, String cpf, String rg, String telefone, String senha, String img){
         Call<Boolean> api = RetrofitTask.getRetrofit()
-                .cadastrarCliente(nome, email, cpf, rg, telefone, senha);
+                .cadastrarCliente(nome, email, cpf, rg, telefone, senha, img);
 
         try {
             Response<Boolean> response = api.execute();
@@ -58,4 +58,5 @@ public class ClienteRepositoryTask {
 
         return resultadoUpdate;
     }
+
 }

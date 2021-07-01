@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.CarrinhoDto;
+import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.adapter.CarrinhoAdapter;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
 
@@ -33,9 +35,14 @@ public class CarrinhoFragment extends Fragment implements OnClickItemCarrinho {
         buttonCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DashboardActivity.class);
-                intent.putExtra("activity", "Cartão");
-                startActivity(intent);
+                ClienteDto cliente  = MainActivity.getUsuario();
+                if(cliente.getCpf() != null){
+                    Intent intent = new Intent(getActivity(), DashboardActivity.class);
+                    intent.putExtra("activity", "Cartão");
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getActivity(), "É necessário realizar o login para poder comprar", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

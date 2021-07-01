@@ -47,20 +47,15 @@ public class DetalhesActivity extends AppCompatActivity {
         buttonComprar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClienteDto cliente  = MainActivity.getUsuario();
-                if(cliente.getCpf() != null){
-                    CarrinhoDto carrinho = new CarrinhoDto(
-                            -1, -1, codigo, cliente.getCpf(),
-                            Double.parseDouble(valor), Double.parseDouble(valor), 1, img, nomeOrigem+" para "+nomeDestino, nomePacote, codigoTransporte
-                    );
-                    MainActivity.setListCarrinho(carrinho);
-                    Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
-                    intent.putExtra("activity", "carrinho");
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(DetalhesActivity.this, "É necessário realizar o login para poder comprar", Toast.LENGTH_SHORT).show();
-                }
+                CarrinhoDto carrinho = new CarrinhoDto(
+                        -1, -1, codigo, "-1",
+                        Double.parseDouble(valor), Double.parseDouble(valor), 1, img, nomeOrigem+" para "+nomeDestino, nomePacote, codigoTransporte
+                );
+                MainActivity.setListCarrinho(carrinho);
+                Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
+                intent.putExtra("activity", "carrinho");
+                startActivity(intent);
             }
         });
 
