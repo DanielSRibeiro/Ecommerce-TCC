@@ -12,12 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.agnciadeturismo.services.UsuarioServices;
+import com.example.agnciadeturismo.services.MascaraServices;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.data.repository.CartaoRepositoryTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
-import com.github.rtoshiro.util.format.SimpleMaskFormatter;
-import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
@@ -25,15 +25,14 @@ import java.util.Date;
 
 public class CadastrarCartoesActivity extends AppCompatActivity {
 
+    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    Toolbar toolbar;
     Button buttonCadastrar;
     EditText editTextNomeCartao, editTextNumero, editTextNomeImpresso, editTextData, editTextCVV;
-    Toolbar toolbar;
-    CartaoViewModel cartaoViewModel;
     TextInputLayout inputNome, inputNumero, inputNomeImpresso, inputData, inputCVV;
-    private static final String TAG = "CadastrarCartoesActivit";
-    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
-    boolean valido;
     String nome, numero, impresso, cvv, data;
+    boolean valido;
+    CartaoViewModel cartaoViewModel;
     CartaoRepositoryTask repositoryTask = new CartaoRepositoryTask();
 
     @Override
@@ -50,9 +49,8 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
                 numero = editTextNumero.getText().toString();
                 impresso = editTextNomeImpresso.getText().toString();
                 cvv = editTextCVV.getText().toString();
-                cliente = MainActivity.getUsuario();
+                cliente = UsuarioServices.getUsuario();
                 data = editTextData.getText().toString();
-
                 validarFormulario();
 
                 if(valido){
@@ -64,10 +62,44 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         });
     }
 
+    private void initView() {
+        cartaoViewModel = new ViewModelProvider(this).get(CartaoViewModel.class);
+        buttonCadastrar = findViewById(R.id.btn_cadastrarCartoes);
+        editTextNomeCartao = findViewById(R.id.edt_nomeCartao);
+        editTextNumero = findViewById(R.id.edt_numeroCartao);
+        editTextNomeImpresso = findViewById(R.id.edt_nomeImpresso);
+        editTextData = findViewById(R.id.edt_dataValidade);
+        editTextCVV = findViewById(R.id.edt_cvv);
+        toolbar = findViewById(R.id.toolbar_cadastrar_cartoes);
+        inputNome = findViewById(R.id.textInputLayoutNomeCarta);
+        inputNumero = findViewById(R.id.textInputLayoutNumero);
+        inputNomeImpresso = findViewById(R.id.textInputLayoutImpresso);
+        inputData = findViewById(R.id.textInputLayoutDataCartao);
+        inputCVV = findViewById(R.id.textInputLayoutCVV);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        MascaraServices.maskFormatter(editTextNumero, "NNNN NNNN NNNN NNNN");
+        MascaraServices.maskFormatter(editTextData, "NN/NN/NNNN");
+    }
+
+    private void initObserve() {
+        cartaoViewModel.cadastrar.observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean resultado) {
+                if(resultado){
+                    Toast.makeText(CadastrarCartoesActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
+                    mudarTela();
+                }else{
+                    Toast.makeText(CadastrarCartoesActivity.this, "O formato da data esta errado", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     private void validarFormulario() {
         valido = true;
-
         if(nome.isEmpty()){
             validacaoFormulario(inputNome, false);
         }else{
@@ -99,55 +131,9 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         if(campo){
             input.setError("");
         }else{
-            input.setError("Campo obrigatório");
+            input.setError("Obrigatório");
             valido = false;
         }
-    }
-
-    private void initView() {
-        cartaoViewModel = new ViewModelProvider(this).get(CartaoViewModel.class);
-        buttonCadastrar = findViewById(R.id.btn_cadastrarCartoes);
-        editTextNomeCartao = findViewById(R.id.edt_nomeCartao);
-        editTextNumero = findViewById(R.id.edt_numeroCartao);
-        editTextNomeImpresso = findViewById(R.id.edt_nomeImpresso);
-        editTextData = findViewById(R.id.edt_dataValidade);
-        editTextCVV = findViewById(R.id.edt_cvv);
-        toolbar = findViewById(R.id.toolbar_cadastrar_cartoes);
-
-        inputNome = findViewById(R.id.textInputLayoutNomeCarta);
-        inputNumero = findViewById(R.id.textInputLayoutNumero);
-        inputNomeImpresso = findViewById(R.id.textInputLayoutImpresso);
-        inputData = findViewById(R.id.textInputLayoutDataCartao);
-        inputCVV = findViewById(R.id.textInputLayoutCVV);
-
-        MaskFormatter();
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    private void MaskFormatter() {
-        SimpleMaskFormatter maskData = new SimpleMaskFormatter("NN/NN/NNNN");
-        MaskTextWatcher mtwData = new MaskTextWatcher(editTextData, maskData);
-        editTextData.addTextChangedListener(mtwData);
-
-        SimpleMaskFormatter maskNumero = new SimpleMaskFormatter("NNNN NNNN NNNN NNNN");
-        MaskTextWatcher mtwNumero = new MaskTextWatcher(editTextNumero, maskNumero);
-        editTextNumero.addTextChangedListener(mtwNumero);
-    }
-
-    private void initObserve() {
-        cartaoViewModel.cadastrar.observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean resultado) {
-                if(resultado){
-                    Toast.makeText(CadastrarCartoesActivity.this, "Cadastrado com sucesso!!", Toast.LENGTH_SHORT).show();
-                    mudarTela();
-                }else{
-                    Toast.makeText(CadastrarCartoesActivity.this, "O formato da data esta errado", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void mudarTela() {

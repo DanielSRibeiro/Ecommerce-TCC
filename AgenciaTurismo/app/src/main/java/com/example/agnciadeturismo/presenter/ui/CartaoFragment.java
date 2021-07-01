@@ -22,6 +22,8 @@ import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.adapter.CartaoAdapter;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCartao;
+import com.example.agnciadeturismo.services.CarrinhoServices;
+import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -60,11 +62,9 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
         recyclerViewCartao = view.findViewById(R.id.recycler_cartao);
         ((DashboardActivity) getActivity()).setTitulo("Cartão", "Selecionar o Cartão para efetuar a compra");
 
-        cliente = MainActivity.getUsuario();
-        if(cliente.getCpf() != null){
-            cpf = cliente.getCpf();
-            cartaoViewModel.init(cpf);
-        }
+        cliente = UsuarioServices.getUsuario();
+        cpf = cliente.getCpf();
+        cartaoViewModel.init(cpf);
     }
 
     private void initObserver() {
@@ -97,7 +97,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
 
     @Override
     public void onClickComprar(int codigo) {
-        if(MainActivity.getListCarrinho().size() < 1){
+        if(CarrinhoServices.getListCarrinho().size() < 1){
             Toast.makeText(getActivity(), "O Carrinho está vazio", Toast.LENGTH_SHORT).show();
         }else{
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

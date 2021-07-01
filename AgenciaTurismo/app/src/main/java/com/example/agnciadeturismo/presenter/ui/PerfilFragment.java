@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -47,28 +48,21 @@ public class PerfilFragment extends Fragment {
         linearLayoutPerfil = view.findViewById(R.id.linearPerfil);
         imageViewCliente = view.findViewById(R.id.img_usuario);
         textViewNomeUsuario = view.findViewById(R.id.txt_nomeUsuario);
-
-        cliente = ((MainActivity) getActivity()).getUsuario();
-        if(cliente.getCpf() != null){
-            textViewNomeUsuario.setText(cliente.getNome());
-        }
-        if(cliente.getImg() != null){
-            Picasso.get().load(cliente.getImg()).into(imageViewCliente);
-        }
+        Picasso.get().load(cliente.getImg()).into(imageViewCliente);
+        cliente = UsuarioServices.getUsuario();
+        textViewNomeUsuario.setText(cliente.getNome());
     }
 
     private void onClick() {
         layoutSair.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).clearUsuario();
-                ((MainActivity) getActivity()).clearListCarrinho();
+                UsuarioServices.clearUsuario();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_home, new LoginFragment())
                         .commit();
             }
         });
-
         layoutCompras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +70,6 @@ public class PerfilFragment extends Fragment {
                 mudarTela("Compras", intent);
             }
         });
-
         layoutCartoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +77,6 @@ public class PerfilFragment extends Fragment {
                 mudarTela("Cartão", intent);
             }
         });
-
         linearLayoutPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,8 +1,8 @@
-use db_horizon;
+USE db_horizon;
 
-INSERT INTO Cliente VALUES
-('Daniel','112121221','daniel@gmail.com','356.537.440-34','123456789','1234567890', '' ,'3'),
-('Teste','112121221','teste@gmail.com','531.402.600-75','123456789','1234567890', '' ,'3');
+/* 
+	É NECESSÁRIO CADASTRAR PRIMEIRO OS ESTADOS E AS CIDADES PARA PODER CADASTRAR AS OUTRAS TABELAS!!!!
+*/
 
 INSERT INTO Funcionario(nome, senha, CPF, telefone, email,  rg, cargo, tipo, img) VALUES
 ('Daniel','123','632.748.440-98','(11) 95282-2503','daniel@gmail.com','503354299', 'Desenvolvedor Android','1', ''),
@@ -40,8 +40,7 @@ INSERT INTO Hotel(cd_cidade, nome_hotel, diaria_hotel, descricao_hotel, endereco
 (4920, 'Panamby Guarulhos', '380', 'Hotel com piscina e acomodação 5 estrelas', 'Endereço' , '(11) 2714 - 7355', '/Imagens/ImagensHoteis/hotel-panamby-guarulhos.jpg'),
 (5270, 'Hotel Unique', '350', 'Situado em uma propriedade modernista impressionante, projetada pelo arquiteto Ruy Ohtake, este hotel de luxo fica a 10 minutos a pé do Parque Ibirapuera e a 3,2 km do Museu de Arte de São Paulo Assis Chateaubriand.', 'Endereço' , '(11) 3055 - 4700', '/Imagens/ImagensHoteis/hotelunique.jpg');
 
-insert into Viagem(nome_viagem,  cd_tipotransporte, origem,
-destino,  dt_ida, dt_chegada, descricao, vl_total, img_viagem)values
+INSERT INTO Viagem(nome_viagem,  cd_tipotransporte, origem, destino, dt_ida, dt_chegada, descricao, vl_total, img_viagem) VALUES
 ('São Paulo para Rio de Janeiro', 1, 3, 1, '2021-06-05', '2021-06-30' , '', '790.00', ''),
 ('Rio de Janeiro para São Paulo', 2, 1, 3, '2021-07-05', '2021-08-25' , '', '1090.00', '' ),
 ('São Paulo para Recide',  3, 3, 9, '2021-06-30', '2021-08-12' , '', '1220.00', '' ),
@@ -67,10 +66,6 @@ nome_pacote, descricao_pacote, dtChekin_hotel, dtChekout_hotel, vl_pacote, img_p
 (3, 7, 1, 5270, 3315,'Pacote para o Recife', 'Melhor lugar do Brasil para passar as suas férias, você não pode perder essa oportunidade', '2021-02-23','2021-08-8','1020.00', '/Imagens/ImagensPacote/recife2.jpg'),
 (3, 7, 3, 5270, 3315,'Pacote para o Recife', 'Melhor pacote para o Recife, saindo de São Paulo', '2021-06-07','2021-06-26','590.00', 'Imagens/ImagensPacote/recife.jpg'),
 (8, 1, 2, 3315, 5270, 'Pacote para São Paulo', 'Viagem para a maior cidade da américa latino', '2021-06-07','2021-07-10', '1790.00', 'Imagens/ImagensPacote/saopaulo2.jpg');
-
-select * from pacote;
-delete from pacote
-where cd_pacote= 9;
 
 INSERT INTO Estado (cd_estado, estado, uf) VALUES
 (1, 'Acre', 'AC'),

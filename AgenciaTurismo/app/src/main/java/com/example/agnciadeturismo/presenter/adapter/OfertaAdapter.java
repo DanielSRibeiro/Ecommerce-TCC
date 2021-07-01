@@ -1,7 +1,5 @@
 package com.example.agnciadeturismo.presenter.adapter;
 
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.data.api.HorizonFlyApi;
 import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.PacoteDto;
 import com.squareup.picasso.Picasso;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class OfertaAdapter extends RecyclerView.Adapter<OfertaAdapter.viewHolder> {
@@ -44,7 +38,7 @@ public class OfertaAdapter extends RecyclerView.Adapter<OfertaAdapter.viewHolder
         PacoteDto pacote = listPacote.get(position);
         holder.textViewNome.setText(pacote.getNomePacote());
         holder.textViewValor.setText("R$"+pacote.getVlPacote());
-        Picasso.get().load("http://"+ RetrofitTask.IP +"/"+pacote.getImg()).into(holder.img);
+        Picasso.get().load("http://"+ RetrofitTask.IP+"/"+pacote.getImg()).into(holder.img);
     }
 
     @Override
@@ -57,7 +51,6 @@ public class OfertaAdapter extends RecyclerView.Adapter<OfertaAdapter.viewHolder
         ImageView img;
         public viewHolder(@NonNull View itemView, OnClickItemPacote listener) {
             super(itemView);
-
             textViewNome = itemView.findViewById(R.id.txt_nomeOferta);
             textViewValor = itemView.findViewById(R.id.txt_valorOferta);
             img = itemView.findViewById(R.id.img_oferta);

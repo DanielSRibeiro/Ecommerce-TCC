@@ -37,7 +37,7 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensAdapter.viewHolder> 
         holder.textViewNome.setText(itens.getNomePacote());
         holder.textViewValor.setText("R$"+itens.getValorTotal());
         holder.textViewOrigemDestino.setText("Destino: "+itens.getDestino());
-        Picasso.get().load("http://"+ RetrofitTask.IP +"/"+itens.getImg()).into(holder.img);
+        Picasso.get().load("http://"+ RetrofitTask.IP+"/"+itens.getImg()).into(holder.img);
     }
 
     @Override
@@ -46,13 +46,10 @@ public class ItensAdapter extends RecyclerView.Adapter<ItensAdapter.viewHolder> 
     }
 
     class viewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewOrigemDestino, textViewValor, textViewNome;
         ImageView img;
-
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-
             img = itemView.findViewById(R.id.img_compra);
             textViewNome = itemView.findViewById(R.id.txt_nomeCompra);
             textViewValor = itemView.findViewById(R.id.txt_valorCompra);

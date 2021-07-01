@@ -37,7 +37,6 @@ public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder
         CartaoDto cartaoDto = listCartao.get(position);
         String nome = cartaoDto.getNomeCartao();
         String numero = cartaoDto.getNumeroCartao();
-        Log.d("TAG",nome );
         holder.textViewNome.setText(nome);
         holder.textViewNumero.setText("Nº "+numero);
     }
@@ -48,22 +47,18 @@ public class CartaoAdapter extends RecyclerView.Adapter<CartaoAdapter.viewHolder
     }
 
     class viewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewNome, textViewNumero;
 
         public viewHolder(@NonNull View itemView, OnClickItemCartao listener) {
             super(itemView);
-
             textViewNome = itemView.findViewById(R.id.txt_nomeCartao);
             textViewNumero = itemView.findViewById(R.id.txt_numeroCartao);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     listener.onClickComprar(listCartao.get(getAdapterPosition()).getCd());
                 }
             });
-
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {

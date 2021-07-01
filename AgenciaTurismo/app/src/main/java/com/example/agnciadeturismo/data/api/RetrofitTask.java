@@ -15,7 +15,6 @@ public class RetrofitTask {
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
-
         return retrofit;
     }
 

@@ -1,4 +1,4 @@
-package com.example.agnciadeturismo;
+package com.example.agnciadeturismo.services;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
@@ -8,7 +8,7 @@ import androidx.core.app.ActivityCompat;
 
 import java.util.ArrayList;
 
-public class ConfigPermissoes {
+public class PermissoesServices {
 
     public static void validarPermissoes(Activity activity, String[] permissoes, int requestCode){
         if(Build.VERSION.SDK_INT >= 23){

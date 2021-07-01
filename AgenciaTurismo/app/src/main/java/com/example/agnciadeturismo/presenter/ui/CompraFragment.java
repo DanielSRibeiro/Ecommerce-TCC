@@ -19,6 +19,8 @@ import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.example.agnciadeturismo.model.ReservaDto;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCompra;
 import com.example.agnciadeturismo.presenter.adapter.CompraAdapter;
+import com.example.agnciadeturismo.services.CarrinhoServices;
+import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.viewmodel.ItemReservaViewModel;
 import com.example.agnciadeturismo.viewmodel.ReservaViewModel;
 
@@ -66,16 +68,15 @@ public class CompraFragment extends Fragment implements OnClickItemCompra {
             public void onChanged(Integer codigoReserva) {
                 if(codigoReserva != -1){
                     reservaViewModel.getAllReserva(cpf);
-                    ArrayList<CarrinhoDto> listPacote = MainActivity.getListCarrinho();
+                    ArrayList<CarrinhoDto> listPacote = CarrinhoServices.getListCarrinho();
                     for(CarrinhoDto carinho : listPacote){
                         valorTotal += carinho.getValor();
                         int pacote = carinho.getCdPacote();
                         int quantidade = carinho.getQuantidade();
                         double unitario = carinho.getValorUnitario();
-
                         itemReservaViewModel.cadastrarItemReserva(pacote, cpf, codigoReserva, quantidade, unitario);
                     }
-                    MainActivity.clearListCarrinho();
+                    CarrinhoServices.clearListCarrinho();
                 }else{
                     Log.d(TAG, "Erro no codigoReserva:"+codigoReserva);
                 }
@@ -107,13 +108,13 @@ public class CompraFragment extends Fragment implements OnClickItemCompra {
         itemReservaViewModel = new ViewModelProvider(getActivity()).get(ItemReservaViewModel.class);
         recyclerViewCompra = view.findViewById(R.id.recycler_compra);
         ((DashboardActivity) getActivity()).setTitulo("Reservas","Reservas compradas");
-        cpf = MainActivity.getUsuario().getCpf();
+        cpf = UsuarioServices.getUsuario().getCpf();
 
         Bundle bundle = getActivity().getIntent().getExtras();
         if(bundle != null){
-            if(MainActivity.getListCarrinho().size() > 0){
+            if(CarrinhoServices.getListCarrinho().size() > 0){
                 codigoCartao = bundle.getInt("cdCartao");
-                ArrayList<CarrinhoDto> listPacote = MainActivity.getListCarrinho();
+                ArrayList<CarrinhoDto> listPacote = CarrinhoServices.getListCarrinho();
                 for(CarrinhoDto carinho : listPacote){
                     valorTotal += carinho.getValor();
                 }

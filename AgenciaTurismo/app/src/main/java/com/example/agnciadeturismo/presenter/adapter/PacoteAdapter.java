@@ -26,10 +26,6 @@ public class PacoteAdapter extends RecyclerView.Adapter<PacoteAdapter.viewHolder
         this.listPacote = listPacote;
     }
 
-    public PacoteAdapter(OnClickItemPacote listener) {
-        this.listener = listener;
-    }
-
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,7 +39,7 @@ public class PacoteAdapter extends RecyclerView.Adapter<PacoteAdapter.viewHolder
         holder.textViewNome.setText(pacote.getNomePacote());
         holder.textViewDescricao.setText(pacote.getDescricaoPacote());
         holder.textViewValor.setText("R$"+pacote.getVlPacote());
-        Picasso.get().load("http://"+ RetrofitTask.IP +"/"+pacote.getImg()).into(holder.img);
+        Picasso.get().load("http://"+ RetrofitTask.IP+"/"+pacote.getImg()).into(holder.img);
     }
 
     @Override
@@ -56,7 +52,6 @@ public class PacoteAdapter extends RecyclerView.Adapter<PacoteAdapter.viewHolder
         ImageView img;
         public viewHolder(@NonNull View itemView, OnClickItemPacote listener) {
             super(itemView);
-
             textViewNome = itemView.findViewById(R.id.txt_nomePacote);
             textViewDescricao = itemView.findViewById(R.id.txt_descricaoPacote);
             textViewDiaria = itemView.findViewById(R.id.txt_totalDiaria);

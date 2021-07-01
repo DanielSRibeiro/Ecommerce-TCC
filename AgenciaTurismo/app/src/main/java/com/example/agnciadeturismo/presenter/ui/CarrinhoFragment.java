@@ -18,6 +18,8 @@ import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.adapter.CarrinhoAdapter;
 import com.example.agnciadeturismo.presenter.adapter.OnClickItemCarrinho;
+import com.example.agnciadeturismo.services.CarrinhoServices;
+import com.example.agnciadeturismo.services.UsuarioServices;
 
 import java.util.ArrayList;
 
@@ -35,7 +37,7 @@ public class CarrinhoFragment extends Fragment implements OnClickItemCarrinho {
         buttonCarrinho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ClienteDto cliente  = MainActivity.getUsuario();
+                ClienteDto cliente  = UsuarioServices.getUsuario();
                 if(cliente.getCpf() != null){
                     Intent intent = new Intent(getActivity(), DashboardActivity.class);
                     intent.putExtra("activity", "Cartão");
@@ -52,7 +54,7 @@ public class CarrinhoFragment extends Fragment implements OnClickItemCarrinho {
     private void initView(View view) {
         recyclerViewCarrinho = view.findViewById(R.id.recycler_carrinho);
         buttonCarrinho = view.findViewById(R.id.btn_comprarCarrinho);
-        listCarrinho = MainActivity.getListCarrinho();
+        listCarrinho = CarrinhoServices.getListCarrinho();
 
         if(listCarrinho.size() < 1 ){
             buttonCarrinho.setVisibility(View.INVISIBLE);

@@ -24,17 +24,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.agnciadeturismo.ConfigFirebase;
-import com.example.agnciadeturismo.ConfigPermissoes;
+import com.example.agnciadeturismo.services.UsuarioServices;
+import com.example.agnciadeturismo.services.FirebaseServices;
+import com.example.agnciadeturismo.services.PermissoesServices;
+import com.example.agnciadeturismo.services.MascaraServices;
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.services.ValidarCPFServices;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
-import com.github.rtoshiro.util.format.SimpleMaskFormatter;
-import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -47,25 +47,26 @@ import java.io.IOException;
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 
     private static final String TAG = "CadastrarUsuarioActivit";
+    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
     Toolbar toolbar;
     Button buttonCadastrar;
-    ClienteViewModel clienteViewModel;
+    ImageView imageViewCliente;
     EditText editTextNome, editTextSenha, editTextTelefone, editTextCPF, editTextRG, editTextEmail;
     TextInputLayout inputNome, inputSenha, inputTelefone, inputCPF, inputRG, inputEmail;
-    String nome, email, cpf, rg, telefone, senha, img = "-1";
-    boolean alterar = false, valido, validoCPF;
-    ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
+    String nome, email, cpf, rg, telefone, senha, img = "";
+    boolean alterar = false, valido;
     String[] permissoes = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
     int CAMERA = 1000, GALERIA = 2000;
     AlertDialog.Builder builder;
     Bitmap bitmap = null;
-    ImageView imageViewCliente;
     StorageReference storageReference;
+    ClienteViewModel clienteViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_usuario);
+
         initView();
         initObeserve();
         buttonCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -77,36 +78,12 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
                 rg = editTextRG.getText().toString();
                 telefone = editTextTelefone.getText().toString();
                 senha = editTextSenha.getText().toString();
+
                 validarFormulario();
-
                 if(valido){
-                    if(validarCPF()){
+                    if(ValidarCPFServices.validarCPF(cpf)){
                         if(bitmap != null){
-                            storageReference = ConfigFirebase.getFirebaseStorage().child("imagens").child("clientes").child(cpf+".jpg");
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
-                            byte[] byteArray = stream.toByteArray();
-
-                            UploadTask uploadTask = storageReference.putBytes(byteArray);
-                            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                                @Override
-                                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                    if(!task.isSuccessful()){
-                                        task.getException().printStackTrace();
-                                    }
-                                    return storageReference.getDownloadUrl();
-                                }
-                            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Uri> task) {
-                                    if(task.isSuccessful()){
-                                        Uri downloadUrl = task.getResult();
-                                        img = downloadUrl.toString();
-                                        Log.d(TAG, "URL: "+img);
-                                        clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
-                                    }
-                                }
-                            });
+                            cadastrarFirebase();
                         }else{
                             clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
                         }
@@ -136,7 +113,6 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         editTextTelefone = findViewById(R.id.edt_telefone);
         editTextSenha = findViewById(R.id.edt_senha);
         imageViewCliente = findViewById(R.id.imageViewCliente);
-
         inputNome = findViewById(R.id.textInputLayoutNome);
         inputEmail = findViewById(R.id.textInputLayoutEmail);
         inputCPF = findViewById(R.id.textInputLayoutCPF);
@@ -144,21 +120,22 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         inputTelefone = findViewById(R.id.textInputLayoutTelefone);
         inputSenha = findViewById(R.id.textInputLayoutSenha);
 
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         builder = new AlertDialog.Builder(this);
         builder.setMessage("Você precisa conceder pelo menos uma permissão");
         builder.setNeutralButton("Cancelar", null);
 
-        MaskFormatter();
+        MascaraServices.maskFormatter(editTextCPF, "NNN.NNN.NNN-NN");
+        MascaraServices.maskFormatter(editTextTelefone, "(NN)NNNNN-NNNN");
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        cliente = MainActivity.getUsuario();
+        cliente = UsuarioServices.getUsuario();
         if(cliente.getCpf() != null){
             alterar = true;
-            buttonCadastrar.setText("Alterar conta");
             getSupportActionBar().setTitle("Alterar sua conta");
-
+            img = cliente.getImg();
+            Picasso.get().load(img).into(imageViewCliente);
+            buttonCadastrar.setText("Alterar conta");
             editTextCPF.setEnabled(false);
             editTextNome.setText(cliente.getNome());
             editTextCPF.setText(cliente.getCpf());
@@ -166,8 +143,6 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
             editTextRG.setText(cliente.getRg());
             editTextTelefone.setText(cliente.getTelefone());
             editTextSenha.setText(cliente.getSenha());
-            Picasso.get().load(cliente.getImg()).into(imageViewCliente);
-            img = cliente.getImg();
         }
     }
 
@@ -185,18 +160,8 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         });
     }
 
-    private void MaskFormatter() {
-        SimpleMaskFormatter maskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
-        MaskTextWatcher mtw = new MaskTextWatcher(editTextCPF, maskCPF);
-        editTextCPF.addTextChangedListener(mtw);
-
-        SimpleMaskFormatter maskTel = new SimpleMaskFormatter("(NN)NNNNN-NNNN");
-        MaskTextWatcher mtwTel = new MaskTextWatcher(editTextTelefone, maskTel);
-        editTextTelefone.addTextChangedListener(mtwTel);
-    }
-
     private void permissaoTask() {
-        ConfigPermissoes.validarPermissoes(CadastrarUsuarioActivity.this, permissoes, 1);
+        PermissoesServices.validarPermissoes(CadastrarUsuarioActivity.this, permissoes, 1);
 
         if(ActivityCompat.checkSelfPermission(CadastrarUsuarioActivity.this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED){
@@ -233,55 +198,8 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         });
     }
 
-    private boolean validarCPF() {
-        String s1, s2, s3, s4, s5, s6, s7, s8, s9, confere = "";
-        int n1, n2, n3, n4, n5, n6, n7, n8, n9, verificador1, verificador2;
-        s1 = cpf.substring(0,1); n1 = Integer.parseInt(s1);
-        s2 = cpf.substring(1,2); n2 = Integer.parseInt(s2);
-        s3 = cpf.substring(2,3); n3 = Integer.parseInt(s3);
-        s4 = cpf.substring(4,5); n4 = Integer.parseInt(s4);
-        s5 = cpf.substring(5,6); n5 = Integer.parseInt(s5);
-        s6 = cpf.substring(6,7); n6 = Integer.parseInt(s6);
-        s7 = cpf.substring(8,9); n7 = Integer.parseInt(s7);
-        s8 = cpf.substring(9,10); n8 = Integer.parseInt(s8);
-        s9 = cpf.substring(10,11); n9 = Integer.parseInt(s9);
-
-        if(n1 == n2 && n2 == n3 && n3 == n4 && n4 == n5 && n5 == n6 && n6 == n7 && n7 == n8 && n8 == n9){
-            validoCPF = false;
-            Log.d(TAG, "esse CPF: "+confere);
-        }else{
-            verificador1 = (n1*10 + n2*9 + n3*8 + n4*7 + n5*6 + n6*5 + n7*4 + n8*3 + n9*2);
-            if((verificador1 % 11) < 2){
-                verificador1 = 0;
-            }else{
-                verificador1 = 11 - (verificador1 % 11);
-            }
-
-            verificador2 = (n1*11 + n2*10 + n3*9 + n4*8 + n5*7 + n6*6 + n7*5 + n8*4 + n9*3 + verificador1 * 2);
-
-            if((verificador2 % 11) < 2){
-                verificador2 = 0;
-            }else{
-                verificador2 = 11 - (verificador2 % 11);
-            }
-
-            confere = (s1 + s2 + s3 + "."+ s4 + s5 + s6 + "."+ s7 +s8 + s9 + "-" + verificador1 + "" + verificador2);
-
-            if(confere.equals(cpf)){
-                validoCPF = true;
-            }else{
-                validoCPF = false;
-            }
-
-            Log.d(TAG, "CPF: "+confere);
-        }
-
-        return validoCPF;
-    }
-
     private void validarFormulario() {
         valido = true;
-
         if(nome.isEmpty()){
             validacaoFormulario(inputNome, false);
         }else{
@@ -307,7 +225,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         }else{
             validacaoFormulario(inputTelefone, true);
         }
-        if(senha.length() < 3){
+        if(senha.length() < 6){
             validacaoFormulario(inputSenha, false);
         }else{
             validacaoFormulario(inputSenha, true);
@@ -321,6 +239,33 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
             input.setError("Campo obrigatório");
             valido = false;
         }
+    }
+
+    private void cadastrarFirebase() {
+        storageReference = FirebaseServices.getFirebaseStorage().child("imagens").child("clientes").child(cpf+".jpg");
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);
+        byte[] byteArray = stream.toByteArray();
+
+        UploadTask uploadTask = storageReference.putBytes(byteArray);
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if(!task.isSuccessful()){
+                    task.getException().printStackTrace();
+                }
+                return storageReference.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if(task.isSuccessful()){
+                    Uri downloadUrl = task.getResult();
+                    img = downloadUrl.toString();
+                    clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+                }
+            }
+        });
     }
 
     @Override
@@ -344,10 +289,8 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         for (int i = 0; i < permissions.length; i++) {
             if(permissions[i].equals("android.permission.CAMERA") && grantResults[i] == 0){
-                Toast.makeText(this, "Concedida a Camera!!!", Toast.LENGTH_SHORT).show();
                 buttonPositive();
             }else if(permissions[i].equals("android.permission.READ_EXTERNAL_STORAGE") && grantResults[i] == 0){
-                Toast.makeText(this, "Concedida na Galeria!!!", Toast.LENGTH_SHORT).show();
                 buttonNegative();
             }
         }

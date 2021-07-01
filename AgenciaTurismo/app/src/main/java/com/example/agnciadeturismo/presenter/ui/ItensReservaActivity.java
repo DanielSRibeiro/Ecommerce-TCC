@@ -7,24 +7,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.example.agnciadeturismo.model.ItensReservaDto;
-import com.example.agnciadeturismo.model.PacoteDto;
-import com.example.agnciadeturismo.model.ReservaDto;
-import com.example.agnciadeturismo.presenter.adapter.CompraAdapter;
 import com.example.agnciadeturismo.presenter.adapter.ItensAdapter;
+import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.viewmodel.ItemReservaViewModel;
-import com.example.agnciadeturismo.viewmodel.ReservaViewModel;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ItensReservaActivity extends AppCompatActivity {
 
@@ -55,7 +46,7 @@ public class ItensReservaActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_itens);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        cpf = MainActivity.getUsuario().getCpf();
+        cpf = UsuarioServices.getUsuario().getCpf();
         Bundle bundle = getIntent().getExtras();
         codigoReserva = bundle.getInt("cdReserva");
 

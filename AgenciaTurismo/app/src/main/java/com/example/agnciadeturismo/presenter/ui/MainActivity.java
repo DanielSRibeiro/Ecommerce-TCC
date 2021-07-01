@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     Fragment fragment = new HomeFragment();
-    static ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
-    static ArrayList<CarrinhoDto> listCarrinho = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,27 +66,4 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    public static ClienteDto setUsuario(ClienteDto novoCliente){
-        return cliente = novoCliente;
-    }
-
-    public static ClienteDto getUsuario(){
-        return cliente;
-    }
-
-    public static void clearUsuario(){
-        cliente = new ClienteDto(null, null, null, null, null, null, null, null);
-    }
-
-    public static void setListCarrinho(CarrinhoDto itensReserva) {
-        MainActivity.listCarrinho.add(itensReserva);
-    }
-
-    public static ArrayList<CarrinhoDto> getListCarrinho() {
-        return listCarrinho;
-    }
-
-    public static void clearListCarrinho(){
-        listCarrinho.clear();
-    }
 }

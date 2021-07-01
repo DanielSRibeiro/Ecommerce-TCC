@@ -208,6 +208,5 @@ SELECT * FROM ItensReserva;
 SELECT * FROM Itens_escolhidos;
 select * from Cidade where cidade like '%recife%';
 select * from Pacote where cd_cidDestino = 4816 and cd_cidOrigem = 591;
-Select * from Funcionario where rg = '241574230';
 select * from vwReserva;
 select * from vwitensreserva;

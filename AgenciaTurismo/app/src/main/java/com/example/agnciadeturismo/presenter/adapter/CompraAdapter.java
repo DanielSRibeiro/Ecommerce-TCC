@@ -54,17 +54,13 @@ public class CompraAdapter extends RecyclerView.Adapter<CompraAdapter.viewHolder
     }
 
     class viewHolder extends RecyclerView.ViewHolder{
-
         TextView textViewValor, textViewCartao, textViewCliente, textViewData;
-
         public viewHolder(@NonNull View itemView, OnClickItemCompra listener) {
             super(itemView);
-
             textViewValor = itemView.findViewById(R.id.txt_valorItem);
             textViewCartao = itemView.findViewById(R.id.txt_nomeCartaoItem);
             textViewCliente = itemView.findViewById(R.id.txt_nomeClienteItem);
             textViewData = itemView.findViewById(R.id.txt_dataItem);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

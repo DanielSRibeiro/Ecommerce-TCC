@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,15 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.model.ClienteDto;
+import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.CarrinhoDto;
+import com.example.agnciadeturismo.services.CarrinhoServices;
+import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.viewmodel.CidadeViewModel;
 import com.squareup.picasso.Picasso;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class DetalhesActivity extends AppCompatActivity {
 
@@ -34,7 +30,6 @@ public class DetalhesActivity extends AppCompatActivity {
     ImageView ImageViewPacote;
     int codigo, codigoTransporte, categoria, hotel, viagem, destino, origem;
     String valor, img, nomePacote, nomeOrigem, nomeDestino;
-    private static final String TAG = "DetalhesActivity";
     CidadeViewModel viewModel;
 
     @Override
@@ -51,16 +46,14 @@ public class DetalhesActivity extends AppCompatActivity {
                         -1, -1, codigo, "-1",
                         Double.parseDouble(valor), Double.parseDouble(valor), 1, img, nomeOrigem+" para "+nomeDestino, nomePacote, codigoTransporte
                 );
-                MainActivity.setListCarrinho(carrinho);
+                CarrinhoServices.setListCarrinho(carrinho);
                 Toast.makeText(DetalhesActivity.this, "Adicionado no carrinho", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DetalhesActivity.this, MainActivity.class);
                 intent.putExtra("activity", "carrinho");
                 startActivity(intent);
             }
         });
-
     }
-
     private void initView() {
         viewModel = new ViewModelProvider(this).get(CidadeViewModel.class);
         toolbar = findViewById(R.id.toolbar_detalhes);
@@ -78,40 +71,24 @@ public class DetalhesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            codigo = bundle.getInt("codigo");
-            codigoTransporte = bundle.getInt("tipoTransporte");
-            categoria = bundle.getInt("categoria");
-            viagem = bundle.getInt("viagem");
-            hotel = bundle.getInt("hotel");
-            String checkin = bundle.getString("checkin");
-            String checkout = bundle.getString("checkout");
-            nomePacote = bundle.getString("nomePacote");
-            img = bundle.getString("img");
-            valor = bundle.getString("valor");
-            origem = bundle.getInt("origem");
-            destino = bundle.getInt("destino");
-            viewModel.getNomeCidade(origem, destino);
+        codigo = bundle.getInt("codigo");
+        codigoTransporte = bundle.getInt("tipoTransporte");
+        categoria = bundle.getInt("categoria");
+        viagem = bundle.getInt("viagem");
+        hotel = bundle.getInt("hotel");
+        nomePacote = bundle.getString("nomePacote");
+        img = bundle.getString("img");
+        valor = bundle.getString("valor");
+        origem = bundle.getInt("origem");
+        destino = bundle.getInt("destino");
+        viewModel.getNomeCidade(origem, destino);
 
-            String ano = checkin.substring(0,4);
-            String mes = checkin.substring(5,7);
-            String dia = checkin.substring(8,10);
-            String horas = checkin.substring(11,19);
-            String novoCheckin = dia+"/"+mes+"/"+ano+" às "+horas;
-
-            String cAno = checkout.substring(0,4);
-            String cMes = checkout.substring(5,7);
-            String cDia = checkout.substring(8,10);
-            String cHoras = checkout.substring(11,19);
-            String novoCheckout = cDia+"/"+cMes+"/"+cAno+" às "+cHoras;
-
-            textViewNomePacote.setText(nomePacote);
-            textViewDescricao.setText(bundle.getString("descricao"));
-            textViewDataChegada.setText("Data de chegada: "+novoCheckin);
-            textViewDataSaida.setText("Data de saída: "+novoCheckout);
-            Picasso.get().load("http://192.168.0.106/"+img).into(ImageViewPacote);
-            textViewValor.setText("R$"+valor);
-        }
+        textViewNomePacote.setText(nomePacote);
+        textViewDescricao.setText(bundle.getString("descricao"));
+        textViewDataChegada.setText("Data de chegada: "+transformarData(bundle.getString("checkin")));
+        textViewDataSaida.setText("Data de saída: "+transformarData(bundle.getString("checkout")));
+        textViewValor.setText("R$"+valor);
+        Picasso.get().load("http://"+RetrofitTask.IP+"/"+img).into(ImageViewPacote);
     }
 
     private void initObserver() {
@@ -122,7 +99,6 @@ public class DetalhesActivity extends AppCompatActivity {
                 textViewOrigem.setText("Origem: "+nomeOrigem);
             }
         });
-
         viewModel.nomeDestino.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String response) {
@@ -130,6 +106,14 @@ public class DetalhesActivity extends AppCompatActivity {
                 textViewDestino.setText("Destino: "+nomeDestino);
             }
         });
+    }
+
+    private String transformarData(String dataBanco){
+        String ano = dataBanco.substring(0,4);
+        String mes = dataBanco.substring(5,7);
+        String dia = dataBanco.substring(8,10);
+        String horas = dataBanco.substring(11,19);
+        return dia+"/"+mes+"/"+ano+" às "+horas;
     }
 
     @Override

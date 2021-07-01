@@ -44,24 +44,19 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.viewHo
         holder.textViewNome.setText(carrinho.getNomePacote());
         holder.textViewValor.setText("R$"+carrinho.getValor());
         holder.textViewDestino.setText(carrinho.getDestino());
-        Picasso.get().load("http://"+ RetrofitTask.IP +"/"+carrinho.getImg()).into(holder.img);
-
+        Picasso.get().load("http://"+ RetrofitTask.IP+"/"+carrinho.getImg()).into(holder.img);
     }
 
     class viewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewRemover, textViewDestino, textViewValor, textViewNome;
         ImageView img;
-
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewRemover = itemView.findViewById(R.id.txt_removerCarrinho);
             img = itemView.findViewById(R.id.img_carrinho);
             textViewNome = itemView.findViewById(R.id.txt_nomeCarrinho);
             textViewValor = itemView.findViewById(R.id.txt_valorCarrinho);
             textViewDestino = itemView.findViewById(R.id.txt_destinoCarrinho);
-
             textViewRemover.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

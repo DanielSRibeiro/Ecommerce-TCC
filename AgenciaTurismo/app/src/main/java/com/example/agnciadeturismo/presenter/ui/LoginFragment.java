@@ -18,10 +18,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.agnciadeturismo.data.api.HorizonFlyApi;
 import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.viewmodel.ClienteViewModel;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
@@ -84,7 +84,7 @@ public class LoginFragment extends Fragment {
 
     private void controleSessao() {
         SharedPreferences preferences = getActivity().getSharedPreferences("taLogado", Context.MODE_PRIVATE);
-        ClienteDto cliente = ((MainActivity) getActivity()).getUsuario();
+        ClienteDto cliente = UsuarioServices.getUsuario();
 
         if(cliente.getCpf() != null){
             cliente.setNome(preferences.getString("nome", ""));
@@ -94,7 +94,7 @@ public class LoginFragment extends Fragment {
             cliente.setTelefone(preferences.getString("tel", ""));
             cliente.setSenha(preferences.getString("senha", ""));
             cliente.setImg(preferences.getString("img", ""));
-            ((MainActivity) getActivity()).setUsuario(cliente);
+            UsuarioServices.setUsuario(cliente);
 
             mudarTela();
         }
@@ -107,7 +107,7 @@ public class LoginFragment extends Fragment {
                 if(response.isSuccessful()){
                     if(response.body().size() != 0){
                         cliente = response.body().get(0);
-                        ((MainActivity) getActivity()).setUsuario(cliente);
+                        UsuarioServices.setUsuario(cliente);
 
                         SharedPreferences preferences = getActivity().getSharedPreferences("taLogado", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
