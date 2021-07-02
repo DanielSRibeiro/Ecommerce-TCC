@@ -48,8 +48,8 @@ public class PerfilFragment extends Fragment {
         linearLayoutPerfil = view.findViewById(R.id.linearPerfil);
         imageViewCliente = view.findViewById(R.id.img_usuario);
         textViewNomeUsuario = view.findViewById(R.id.txt_nomeUsuario);
-        Picasso.get().load(cliente.getImg()).into(imageViewCliente);
         cliente = UsuarioServices.getUsuario();
+        Picasso.get().load(cliente.getImg()).into(imageViewCliente);
         textViewNomeUsuario.setText(cliente.getNome());
     }
 

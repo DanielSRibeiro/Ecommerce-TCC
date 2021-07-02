@@ -53,7 +53,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
     ImageView imageViewCliente;
     EditText editTextNome, editTextSenha, editTextTelefone, editTextCPF, editTextRG, editTextEmail;
     TextInputLayout inputNome, inputSenha, inputTelefone, inputCPF, inputRG, inputEmail;
-    String nome, email, cpf, rg, telefone, senha, img = "";
+    String nome, email, cpf, rg, telefone, senha, img = "-1";
     boolean alterar = false, valido;
     String[] permissoes = {Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
     int CAMERA = 1000, GALERIA = 2000;

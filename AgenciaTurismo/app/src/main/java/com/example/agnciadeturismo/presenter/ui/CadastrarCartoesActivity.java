@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.agnciadeturismo.data.repository.CartaoRepositoryTaskK;
 import com.example.agnciadeturismo.services.UsuarioServices;
 import com.example.agnciadeturismo.services.MascaraServices;
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.data.repository.CartaoRepositoryTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.viewmodel.CartaoViewModel;
 import com.google.android.material.textfield.TextInputLayout;
@@ -33,7 +33,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     String nome, numero, impresso, cvv, data;
     boolean valido;
     CartaoViewModel cartaoViewModel;
-    CartaoRepositoryTask repositoryTask = new CartaoRepositoryTask();
+    CartaoRepositoryTaskK repositoryTask = new CartaoRepositoryTaskK();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        cartaoViewModel = new ViewModelProvider(this).get(CartaoViewModel.class);
+        cartaoViewModel = new ViewModelProvider(this, new CartaoViewModel.ViewModelFactory(repositoryTask)).get(CartaoViewModel.class);
         buttonCadastrar = findViewById(R.id.btn_cadastrarCartoes);
         editTextNomeCartao = findViewById(R.id.edt_nomeCartao);
         editTextNumero = findViewById(R.id.edt_numeroCartao);
@@ -85,7 +85,7 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
     }
 
     private void initObserve() {
-        cartaoViewModel.cadastrar.observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
+        cartaoViewModel.getCadastrar().observe(CadastrarCartoesActivity.this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean resultado) {
                 if(resultado){

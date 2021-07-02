@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.data.repository.CartaoRepositoryTaskK;
 import com.example.agnciadeturismo.model.CartaoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.adapter.CartaoAdapter;
@@ -36,6 +37,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
     RecyclerView recyclerViewCartao;
     String cpf = "";
     CartaoViewModel cartaoViewModel;
+    CartaoRepositoryTaskK repositoryTask = new CartaoRepositoryTaskK();
     ArrayList<CartaoDto> listCartao = new ArrayList<>();
     ClienteDto cliente = new ClienteDto();
 
@@ -57,7 +59,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
     }
 
     private void initView(View view) {
-        cartaoViewModel = new ViewModelProvider(getActivity()).get(CartaoViewModel.class);
+        cartaoViewModel = new ViewModelProvider(getActivity(), new CartaoViewModel.ViewModelFactory(repositoryTask)).get(CartaoViewModel.class);
         fabCadastrar = view.findViewById(R.id.fab_cadastrar);
         recyclerViewCartao = view.findViewById(R.id.recycler_cartao);
         ((DashboardActivity) getActivity()).setTitulo("Cartão", "Selecionar o Cartão para efetuar a compra");
@@ -68,7 +70,7 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
     }
 
     private void initObserver() {
-        cartaoViewModel.cartao.observe(getActivity(), new Observer<ArrayList<CartaoDto>>() {
+        cartaoViewModel.getCartao().observe(getActivity(), new Observer<ArrayList<CartaoDto>>() {
             @Override
             public void onChanged(ArrayList<CartaoDto> list) {
                 listCartao = list;
@@ -76,12 +78,11 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
             }
         });
 
-        cartaoViewModel.excluir.observe(getActivity(), new Observer<Boolean>() {
+        cartaoViewModel.getExcluir().observe(getActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean resultado) {
-                if(resultado == true){
+                if(resultado){
                     Toast.makeText(getActivity(), "Excluido com Sucesso!!", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG, "CPF: "+cpf);
                     cartaoViewModel.init(cpf);
                 }
             }
@@ -93,7 +94,6 @@ public class CartaoFragment extends Fragment implements OnClickItemCartao {
         recyclerViewCartao.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerViewCartao.setAdapter(adapter);
     }
-
 
     @Override
     public void onClickComprar(int codigo) {
