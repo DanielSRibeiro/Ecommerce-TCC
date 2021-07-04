@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".presenter.ui.CadastrarCartoesActivity">
+    tools:context=".presenter.view.ui.CadastrarCartoesActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_cadastrar_cartoes"

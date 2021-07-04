@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".presenter.ui.BuscarActivity">
+    tools:context=".presenter.view.ui.BuscarActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_buscar"

@@ -14,25 +14,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgênciaDeTurismo"
         android:usesCleartextTraffic="true">
-        <activity android:name=".presenter.ui.ItensReservaActivity"
+        <activity android:name=".presenter.view.ui.ItensReservaActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".presenter.ui.DetalhesActivity"
+            android:name=".presenter.view.ui.DetalhesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presenter.ui.DashboardActivity"
+            android:name=".presenter.view.ui.DashboardActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presenter.ui.BuscarActivity"
+            android:name=".presenter.view.ui.BuscarActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presenter.ui.CadastrarCartoesActivity"
+            android:name=".presenter.view.ui.CadastrarCartoesActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presenter.ui.CadastrarUsuarioActivity"
+            android:name=".presenter.view.ui.CadastrarUsuarioActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presenter.ui.MainActivity"
+            android:name=".presenter.view.ui.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
