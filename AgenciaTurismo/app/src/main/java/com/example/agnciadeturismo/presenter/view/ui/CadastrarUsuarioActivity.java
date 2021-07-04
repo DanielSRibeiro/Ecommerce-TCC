@@ -46,7 +46,6 @@ import java.io.IOException;
 
 public class CadastrarUsuarioActivity extends AppCompatActivity {
 
-    private static final String TAG = "CadastrarUsuarioActivit";
     ClienteDto cliente = new ClienteDto(null, null, null, null, null, null, null, null);
     Toolbar toolbar;
     Button buttonCadastrar;

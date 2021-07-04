@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.data.repository.ClienteRepositoryTask;
@@ -50,7 +51,7 @@ public class PerfilFragment extends Fragment {
         imageViewCliente = view.findViewById(R.id.img_usuario);
         textViewNomeUsuario = view.findViewById(R.id.txt_nomeUsuario);
         cliente = UsuarioServices.getUsuario();
-        if(cliente.getImg() != null){
+        if(cliente.getImg() != "-1"){
             Picasso.get().load(cliente.getImg()).into(imageViewCliente);
         }
         textViewNomeUsuario.setText(cliente.getNome());

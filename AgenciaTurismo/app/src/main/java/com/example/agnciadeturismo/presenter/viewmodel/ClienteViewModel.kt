@@ -26,7 +26,7 @@ class ClienteViewModel(private val clienteRepositoryTask: ClienteRepositoryTask)
         }.start()
     }
 
-    private fun inserirCliente(nome: String, email: String, cpf: String, rg: String, telefone: String, senha: String, img: String) {
+    private fun inserirCliente(nome: String, email: String, cpf: String, rg: String, telefone: String, senha: String, img: String?) {
         postCliente = clienteRepositoryTask.inserirCliente(nome, email, cpf, rg, telefone, senha, img)
         cadastradoSucesso = "Cadastrado com Sucesso!!"
         mCadastrado.postValue(postCliente)
