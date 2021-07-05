@@ -22,6 +22,7 @@ import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.data.repository.ClienteRepositoryTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.R;
+import com.example.agnciadeturismo.presenter.view.services.MascaraServices;
 import com.example.agnciadeturismo.presenter.viewmodel.ClienteViewModel;
 import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
@@ -41,13 +42,50 @@ public class LoginFragment extends Fragment {
     ClienteViewModel clienteViewModel;
     private static final String TAG = "LoginFragment";
     ClienteDto cliente;
+    static String LOGIN_SHARED = "Login", TA_LOGADO_SHARED = "taLogado",CPF_SHARED = "cpf",
+            SENHA_SHARED = "senha", NOME_SHARED = "nome", IMG_SHARED = "img", TEL_SHARED = "tel",
+            EMAIL_SHARED = "email", RG_SHARED = "rg";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
+        controleSessao();
         initView(view);
+        onClick();
 
+        return view;
+    }
+
+    private void initView(View view) {
+        clienteViewModel = new ViewModelProvider(getActivity(), new ClienteViewModel.ViewModelFactory(new ClienteRepositoryTask())).get(ClienteViewModel.class);
+        buttonLogin = view.findViewById(R.id.btn_login);
+        textViewCadastrar = view.findViewById(R.id.txt_cadastrarUsuario);
+        editTextCPF = view.findViewById(R.id.edt_cpfLogin);
+        editTextSenha = view.findViewById(R.id.edt_senhaLogin);
+
+        MascaraServices.Companion.maskFormatter(editTextCPF, "NNN.NNN.NNN-NN");
+    }
+
+    private void controleSessao() {
+        SharedPreferences preferences = getActivity().getSharedPreferences(LOGIN_SHARED, Context.MODE_PRIVATE);
+        boolean taLogado = preferences.getBoolean(TA_LOGADO_SHARED, false);
+        cliente = UsuarioServices.getUsuario();
+        if(taLogado){
+            cliente.setNome(preferences.getString(NOME_SHARED, ""));
+            cliente.setEmail(preferences.getString(EMAIL_SHARED, ""));
+            cliente.setCpf(preferences.getString(CPF_SHARED, ""));
+            cliente.setRg(preferences.getString(RG_SHARED, ""));
+            cliente.setTelefone(preferences.getString(TEL_SHARED, ""));
+            cliente.setSenha(preferences.getString(SENHA_SHARED, ""));
+            cliente.setImg(preferences.getString(IMG_SHARED, "-1"));
+
+            UsuarioServices.setUsuario(cliente);
+            mudarTela();
+        }
+    }
+
+    private void onClick() {
         textViewCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,40 +103,6 @@ public class LoginFragment extends Fragment {
                 initRetrofit(cpf, senha);
             }
         });
-
-        return view;
-    }
-
-    private void initView(View view) {
-        clienteViewModel = new ViewModelProvider(getActivity(), new ClienteViewModel.ViewModelFactory(new ClienteRepositoryTask())).get(ClienteViewModel.class);
-        buttonLogin = view.findViewById(R.id.btn_login);
-        textViewCadastrar = view.findViewById(R.id.txt_cadastrarUsuario);
-        editTextCPF = view.findViewById(R.id.edt_cpfLogin);
-        editTextSenha = view.findViewById(R.id.edt_senhaLogin);
-
-        SimpleMaskFormatter maskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
-        MaskTextWatcher mtw = new MaskTextWatcher(editTextCPF, maskCPF);
-        editTextCPF.addTextChangedListener(mtw);
-
-        controleSessao();
-    }
-
-    private void controleSessao() {
-        SharedPreferences preferences = getActivity().getSharedPreferences("taLogado", Context.MODE_PRIVATE);
-        ClienteDto cliente = UsuarioServices.getUsuario();
-
-        if(cliente.getCpf() != null){
-            cliente.setNome(preferences.getString("nome", ""));
-            cliente.setEmail(preferences.getString("email", ""));
-            cliente.setCpf(preferences.getString("cpf", ""));
-            cliente.setRg(preferences.getString("rg", ""));
-            cliente.setTelefone(preferences.getString("tel", ""));
-            cliente.setSenha(preferences.getString("senha", ""));
-            cliente.setImg(preferences.getString("img", ""));
-            UsuarioServices.setUsuario(cliente);
-
-            mudarTela();
-        }
     }
 
     private void initRetrofit(String cpf, String senha) {
@@ -110,20 +114,21 @@ public class LoginFragment extends Fragment {
                         cliente = response.body().get(0);
                         UsuarioServices.setUsuario(cliente);
 
-                        SharedPreferences preferences = getActivity().getSharedPreferences("taLogado", Context.MODE_PRIVATE);
+                        SharedPreferences preferences = getActivity().getSharedPreferences(LOGIN_SHARED, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("nome", cliente.getNome());
-                        editor.putString("email", cliente.getEmail());
-                        editor.putString("cpf", cliente.getCpf());
-                        editor.putString("rg", cliente.getRg());
-                        editor.putString("tel", cliente.getTelefone());
-                        editor.putString("senha", cliente.getSenha());
-                        editor.putString("img", cliente.getImg());
-                        editor.commit();
+                        editor.putBoolean(TA_LOGADO_SHARED, true);
+                        editor.putString(CPF_SHARED, cliente.getCpf());
+                        editor.putString(SENHA_SHARED, cliente.getSenha());
+                        editor.putString(NOME_SHARED, cliente.getNome());
+                        editor.putString(EMAIL_SHARED, cliente.getEmail());
+                        editor.putString(RG_SHARED, cliente.getRg());
+                        editor.putString(TEL_SHARED, cliente.getTelefone());
+                        editor.putString(IMG_SHARED, cliente.getImg());
+                        editor.apply();
 
                         mudarTela();
                     }else{
-                        Toast.makeText(getActivity(), "E-Mail ou senha está incorreta!!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "CPF ou senha está incorreta!!!", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Log.d(TAG, "ERRO: "+response.code());

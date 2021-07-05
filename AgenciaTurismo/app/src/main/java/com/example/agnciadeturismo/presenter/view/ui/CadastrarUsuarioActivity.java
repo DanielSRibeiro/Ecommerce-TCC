@@ -10,8 +10,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -189,9 +191,22 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         clienteViewModel.getCadastrado().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean cadastrado) {
-                if(cadastrado == true){
+                if(cadastrado){
                     Toast.makeText(CadastrarUsuarioActivity.this, clienteViewModel.getCadastradoSucesso(), Toast.LENGTH_SHORT).show();
-                    finish();
+                    SharedPreferences preferences = getSharedPreferences(LoginFragment.LOGIN_SHARED, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putBoolean(LoginFragment.TA_LOGADO_SHARED, true);
+                    editor.putString(LoginFragment.CPF_SHARED, cpf);
+                    editor.putString(LoginFragment.SENHA_SHARED, senha);
+                    editor.putString(LoginFragment.NOME_SHARED, nome);
+                    editor.putString(LoginFragment.EMAIL_SHARED, email);
+                    editor.putString(LoginFragment.RG_SHARED, rg);
+                    editor.putString(LoginFragment.TEL_SHARED, telefone);
+                    editor.putString(LoginFragment.IMG_SHARED, img);
+                    editor.apply();
+                    Intent intent = new Intent(CadastrarUsuarioActivity.this, MainActivity.class);
+                    intent.putExtra("activity", "login");
+                    startActivity(intent);
                 }else{
                     Toast.makeText(CadastrarUsuarioActivity.this, "Esse CPF já foi cadastrado!!", Toast.LENGTH_SHORT).show();
                 }

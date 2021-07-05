@@ -1,6 +1,8 @@
 package com.example.agnciadeturismo.presenter.view.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -50,7 +52,7 @@ public class PerfilFragment extends Fragment {
         imageViewCliente = view.findViewById(R.id.img_usuario);
         textViewNomeUsuario = view.findViewById(R.id.txt_nomeUsuario);
         cliente = UsuarioServices.getUsuario();
-        if(cliente.getImg() != "-1"){
+        if(cliente.getImg() != "-1" && cliente.getImg() != null && cliente.getImg() != ""){
             Picasso.get().load(cliente.getImg()).into(imageViewCliente);
         }
         textViewNomeUsuario.setText(cliente.getNome());
@@ -61,6 +63,11 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 UsuarioServices.clearUsuario();
+                SharedPreferences preferences = getActivity().getSharedPreferences(LoginFragment.LOGIN_SHARED, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putBoolean(LoginFragment.TA_LOGADO_SHARED, false);
+                editor.apply();
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_home, new LoginFragment())
                         .commit();

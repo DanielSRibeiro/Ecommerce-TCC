@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new CarrinhoFragment();
             }else if(activity.equals("perfil")){
                 fragment = new PerfilFragment();
+            }else if(activity.equals("login")){
+                fragment = new LoginFragment();
             }
         }
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_home, fragment)
