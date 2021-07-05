@@ -5,9 +5,9 @@ USE db_horizon;
 */
 
 INSERT INTO Funcionario(nome, senha, CPF, telefone, email,  rg, cargo, tipo, img) VALUES
-('Daniel','123','632.748.440-98','(11) 95282-2503','daniel@gmail.com','503354299', 'Desenvolvedor Android','1', ''),
-('Julia','123','511.738.940-98','(11) 96612-8517','ju@gmail.com','515087124', 'Desenvolvedor Web','1', ''),
-('Vitor','123','369.706.060-07','(11) 93242-1513','vitor@gmail.com','873265319', 'Analista de dados','1', '');
+('Daniel','123','632.748.440-98','(11) 95282-2503','daniel@gmail.com','503354299', 'Desenvolvedor Android','1', '-1'),
+('Julia','123','511.738.940-98','(11) 96612-8517','ju@gmail.com','515087124', 'Desenvolvedor Web','1', '-1'),
+('Vitor','123','369.706.060-07','(11) 93242-1513','vitor@gmail.com','873265319', 'Analista de dados','1', '-1');
 
 INSERT INTO TipoTransporte(cd_tipotransporte,tipo_transporte) VALUES
 ('1','Avião'),

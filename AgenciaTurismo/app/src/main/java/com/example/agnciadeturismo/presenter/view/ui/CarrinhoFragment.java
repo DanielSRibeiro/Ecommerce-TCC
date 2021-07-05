@@ -18,8 +18,8 @@ import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.view.adapter.CarrinhoAdapter;
 import com.example.agnciadeturismo.presenter.view.adapter.OnClickItemCarrinho;
-import com.example.agnciadeturismo.services.CarrinhoServices;
-import com.example.agnciadeturismo.services.UsuarioServices;
+import com.example.agnciadeturismo.presenter.view.services.CarrinhoServices;
+import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
 
 import java.util.ArrayList;
 

@@ -14,7 +14,7 @@ import com.example.agnciadeturismo.data.repository.ItensReservaRepositoryTask;
 import com.example.agnciadeturismo.model.ItensReservaDto;
 import com.example.agnciadeturismo.presenter.view.adapter.ItensAdapter;
 import com.example.agnciadeturismo.presenter.viewmodel.ItensReservaViewModel;
-import com.example.agnciadeturismo.services.UsuarioServices;
+import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
 
 import java.util.ArrayList;
 

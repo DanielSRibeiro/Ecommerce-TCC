@@ -23,8 +23,8 @@ import com.example.agnciadeturismo.presenter.view.adapter.OnClickItemCompra;
 import com.example.agnciadeturismo.presenter.view.adapter.CompraAdapter;
 import com.example.agnciadeturismo.presenter.viewmodel.ItensReservaViewModel;
 import com.example.agnciadeturismo.presenter.viewmodel.ReservaViewModel;
-import com.example.agnciadeturismo.services.CarrinhoServices;
-import com.example.agnciadeturismo.services.UsuarioServices;
+import com.example.agnciadeturismo.presenter.view.services.CarrinhoServices;
+import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

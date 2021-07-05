@@ -18,7 +18,7 @@ import com.example.agnciadeturismo.data.api.RetrofitTask;
 import com.example.agnciadeturismo.data.repository.CidadeRepositoryTask;
 import com.example.agnciadeturismo.model.CarrinhoDto;
 import com.example.agnciadeturismo.presenter.viewmodel.CidadeViewModel;
-import com.example.agnciadeturismo.services.CarrinhoServices;
+import com.example.agnciadeturismo.presenter.view.services.CarrinhoServices;
 import com.squareup.picasso.Picasso;
 
 public class DetalhesActivity extends AppCompatActivity {

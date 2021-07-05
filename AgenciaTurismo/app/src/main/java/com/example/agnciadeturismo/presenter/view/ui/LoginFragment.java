@@ -23,7 +23,7 @@ import com.example.agnciadeturismo.data.repository.ClienteRepositoryTask;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.presenter.viewmodel.ClienteViewModel;
-import com.example.agnciadeturismo.services.UsuarioServices;
+import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 

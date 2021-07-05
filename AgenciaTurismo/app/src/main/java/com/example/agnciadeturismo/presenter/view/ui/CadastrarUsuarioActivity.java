@@ -25,20 +25,27 @@ import android.widget.Toast;
 
 import com.example.agnciadeturismo.data.repository.ClienteRepositoryTask;
 import com.example.agnciadeturismo.presenter.viewmodel.ClienteViewModel;
-import com.example.agnciadeturismo.services.UsuarioServices;
-import com.example.agnciadeturismo.services.FirebaseServices;
-import com.example.agnciadeturismo.services.PermissoesServices;
-import com.example.agnciadeturismo.services.MascaraServices;
+import com.example.agnciadeturismo.presenter.view.services.MascaraServices;
+import com.example.agnciadeturismo.presenter.view.services.PermissoesServices;
+import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
+import com.example.agnciadeturismo.presenter.view.services.FirebaseServices;
 import com.example.agnciadeturismo.R;
-import com.example.agnciadeturismo.services.ValidarCPFServices;
+import com.example.agnciadeturismo.presenter.view.services.ValidarCPFServices;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthEmailException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -59,6 +66,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
     Bitmap bitmap = null;
     StorageReference storageReference;
+    FirebaseAuth firebaseAuth;
     ClienteViewModel clienteViewModel;
 
     @Override
@@ -81,11 +89,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
                 validarFormulario();
                 if(valido){
                     if(ValidarCPFServices.validarCPF(cpf)){
-                        if(bitmap != null){
-                            cadastrarFirebase();
-                        }else{
-                            clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
-                        }
+                        cadastrarFirebase();
                     }else{
                         Toast.makeText(CadastrarUsuarioActivity.this, "CPF inválido", Toast.LENGTH_SHORT).show();
                     }
@@ -98,6 +102,42 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
                 permissaoTask();
             }
         });
+    }
+
+    private void cadastrarFirebase() {
+        if(!alterar){
+            firebaseAuth = FirebaseServices.getFirebaseAuth();
+            firebaseAuth.createUserWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull @NotNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        if(bitmap != null){
+                            cadastrarImagemFirebase();
+                        }else{
+                            clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+                        }
+                    }else{
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthWeakPasswordException e) {
+                            Toast.makeText(CadastrarUsuarioActivity.this, "Senha fraca!!!", Toast.LENGTH_SHORT).show();
+                        } catch (FirebaseAuthEmailException e) {
+                            Toast.makeText(CadastrarUsuarioActivity.this, "Formato de E-Mail errado!!!", Toast.LENGTH_SHORT).show();
+                        } catch (FirebaseAuthUserCollisionException e) {
+                            Toast.makeText(CadastrarUsuarioActivity.this, "E-Mail já cadastrado!!!", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+        }else{
+            if(bitmap != null){
+                cadastrarImagemFirebase();
+            }else{
+                clienteViewModel.modificarCliente(alterar, nome, email, cpf, rg, telefone, senha, img);
+            }
+        }
     }
 
     private void initView()  {
@@ -124,8 +164,8 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         builder.setMessage("Você precisa conceder pelo menos uma permissão");
         builder.setNeutralButton("Cancelar", null);
 
-        MascaraServices.maskFormatter(editTextCPF, "NNN.NNN.NNN-NN");
-        MascaraServices.maskFormatter(editTextTelefone, "(NN)NNNNN-NNNN");
+        MascaraServices.Companion.maskFormatter(editTextCPF, "NNN.NNN.NNN-NN");
+        MascaraServices.Companion.maskFormatter(editTextTelefone, "(NN)NNNNN-NNNN");
 
         cliente = UsuarioServices.getUsuario();
         if(cliente.getCpf() != null){
@@ -135,6 +175,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
             Picasso.get().load(img).into(imageViewCliente);
             buttonCadastrar.setText("Alterar conta");
             editTextCPF.setEnabled(false);
+            editTextEmail.setEnabled(false);
             editTextNome.setText(cliente.getNome());
             editTextCPF.setText(cliente.getCpf());
             editTextEmail.setText(cliente.getEmail());
@@ -159,7 +200,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
     }
 
     private void permissaoTask() {
-        PermissoesServices.validarPermissoes(CadastrarUsuarioActivity.this, permissoes, 1);
+        PermissoesServices.Companion.validarPermissoes(CadastrarUsuarioActivity.this, permissoes, 1);
 
         if(ActivityCompat.checkSelfPermission(CadastrarUsuarioActivity.this, Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED){
@@ -223,11 +264,6 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         }else{
             validacaoFormulario(inputTelefone, true);
         }
-        if(senha.length() < 6){
-            validacaoFormulario(inputSenha, false);
-        }else{
-            validacaoFormulario(inputSenha, true);
-        }
     }
 
     private void validacaoFormulario(TextInputLayout input, boolean campo){
@@ -239,7 +275,7 @@ public class CadastrarUsuarioActivity extends AppCompatActivity {
         }
     }
 
-    private void cadastrarFirebase() {
+    private void cadastrarImagemFirebase() {
         storageReference = FirebaseServices.getFirebaseStorage().child("imagens").child("clientes").child(cpf+".jpg");
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 80, stream);

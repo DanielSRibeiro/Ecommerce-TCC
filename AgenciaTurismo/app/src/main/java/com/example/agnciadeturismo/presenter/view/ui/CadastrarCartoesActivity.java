@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.agnciadeturismo.data.repository.CartaoRepositoryTask;
-import com.example.agnciadeturismo.services.UsuarioServices;
-import com.example.agnciadeturismo.services.MascaraServices;
+import com.example.agnciadeturismo.presenter.view.services.MascaraServices;
+import com.example.agnciadeturismo.presenter.view.services.UsuarioServices;
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.model.ClienteDto;
 import com.example.agnciadeturismo.presenter.viewmodel.CartaoViewModel;
@@ -80,8 +80,8 @@ public class CadastrarCartoesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        MascaraServices.maskFormatter(editTextNumero, "NNNN NNNN NNNN NNNN");
-        MascaraServices.maskFormatter(editTextData, "NN/NN/NNNN");
+        MascaraServices.Companion.maskFormatter(editTextNumero, "NNNN NNNN NNNN NNNN");
+        MascaraServices.Companion.maskFormatter(editTextData, "NN/NN/NNNN");
     }
 
     private void initObserve() {
