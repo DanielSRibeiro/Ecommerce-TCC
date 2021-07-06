@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.agnciadeturismo.R;
 import com.example.agnciadeturismo.data.repository.CidadeRepositoryTask;
@@ -42,7 +43,6 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         initView(view);
         initObserver();
@@ -70,9 +70,8 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
             @Override
             public void onChanged(String[] cidades) {
                 String[] listCidades = cidades;
-                ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, listCidades);
-                autoCompleteTextViewOrigem.setAdapter(adapter);
-                autoCompleteTextViewDestino.setAdapter(adapter);
+                adapterAutoComplete(autoCompleteTextViewOrigem, listCidades);
+                adapterAutoComplete(autoCompleteTextViewDestino, listCidades);
                 Log.d(TAG, "Lista de cidades feito com sucesso");
             }
         });
@@ -118,16 +117,14 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
             intent.putExtra("cdDestino", cdDestino);
             intent.putExtra("destino", autoCompleteTextViewDestino.getText().toString());
             startActivity(intent);
+        }else if(cdOrigem != -1 && cdDestino == -1 || cdOrigem == -1 && cdDestino != -1){
+            Toast.makeText(getActivity(), "Cidade não encontrada", Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        String[] tipo_transporte = getResources().getStringArray(R.array.tipo_transporte);
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, tipo_transporte);
-        autoCompleteTextViewTransporte.setAdapter(adapter);
-
+    private void adapterAutoComplete(AutoCompleteTextView autoCompleteTextView, String[] arrayString) {
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.dropdown_item, arrayString);
+        autoCompleteTextView.setAdapter(adapter);
     }
 
     private void initView(View view) {
@@ -139,8 +136,11 @@ public class HomeFragment extends Fragment implements OnClickItemPacote {
         recyclerViewOferta = view.findViewById(R.id.recycler_oferta);
         buttonPesquisar = view.findViewById(R.id.btn_pesquisarPacote);
 
+        adapterAutoComplete(autoCompleteTextViewTransporte, getResources().getStringArray(R.array.tipo_transporte));
         pacoteViewModel.getAllPacotesOferta();
         cidadeViewModel.getAllCidades();
+
+
     }
 
     private void atualizaAdapter(ArrayList<PacoteDto> listPacote) {
