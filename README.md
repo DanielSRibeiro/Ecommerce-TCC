@@ -33,7 +33,7 @@ Aplicativo de uma agência de turismo que se conecta com o sistema sendo respons
 
 <div>
   <img src="imagens\imagensReadme\cadastroUsuario.png" width="300"/>
-  <img src="imagens\imagensReadme\firebase.png" width="300"/>
+  <img src="imagens\imagensReadme\firebase.PNG" width="800"/>
 <div/>
 
 - ## Login Usuário  
@@ -41,12 +41,10 @@ Aplicativo de uma agência de turismo que se conecta com o sistema sendo respons
   <img src="imagens\imagensReadme\login.gif" width="300"/>
 
 - ## Dashboard Usuário
-
+  
   <img src="imagens\imagensReadme\dashboard.png" width="300"/>
 
 - ## Cartão (Cadastro e lista de cartões)  
-
-
 <div>
   <img src="imagens\imagensReadme\cartao.png" width="300"/>
   <img src="imagens\imagensReadme\cartaoc.png" width="300"/>
