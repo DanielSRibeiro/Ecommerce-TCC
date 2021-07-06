@@ -17,41 +17,44 @@ Aplicativo de uma agência de turismo que se conecta com o sistema sendo respons
 
 ### Telas do Mobile
 
-- #### Menu inicial   
+- ## Menu inicial   
 
-  <img src="imagens\imagensReadme\menu.gif"/>
+  <img src="imagens\imagensReadme\menu.gif" width="300"/>
 
-- #### Buscar Pacotes
+- ## Buscar Pacotes
 
-  <img src="imagens\imagensReadme\carrinho.gif"/>
+  <img src="imagens\imagensReadme\carrinho.gif" width="300"/>
 
-- #### Adicionar no Carrinho  
+- ## Adicionar no Carrinho  
 
-  <img src="imagens\imagensReadme\buscar.gif"/>
+  <img src="imagens\imagensReadme\buscar.gif" width="300"/>
 
-- #### Cadastro Usuário  
+- ## Cadastro Usuário  
 
-  <img src="imagens\imagensReadme\cadastroUsuario.png"/>
+<div>
+  <img src="imagens\imagensReadme\cadastroUsuario.png" width="300"/>
+  <img src="imagens\imagensReadme\firebase.png" width="300"/>
+<div/>
 
-  <img src="imagens\imagensReadme\firebase.png"/>
+- ## Login Usuário  
 
-- #### Login Usuário  
+  <img src="imagens\imagensReadme\login.gif" width="300"/>
 
-  <img src="imagens\imagensReadme\login.gif"/>
+- ## Dashboard Usuário
 
-- #### Dashboard Usuário
+  <img src="imagens\imagensReadme\dashboard.png" width="300"/>
 
-  <img src="imagens\imagensReadme\dashboard.png"/>
+- ## Cartão (Cadastro e lista de cartões)  
 
-- #### Cartão (Cadastro e lista de cartões)  
 
-  <img src="imagens\imagensReadme\cartao.png"/>
+<div>
+  <img src="imagens\imagensReadme\cartao.png" width="300"/>
+  <img src="imagens\imagensReadme\cartaoc.png" width="300"/>
+<div/>
 
-  <img src="imagens\imagensReadme\cartaoc.png"/>
+- ## Realizar Compra  
 
-- #### Realizar Compra  
-
-  <img src="imagens\imagensReadme\compra.gif"/>
+  <img src="imagens\imagensReadme\compra.gif" width="300"/>
 
 ## Web :coffee:
 
