@@ -33,7 +33,7 @@ Aplicativo de uma agência de turismo que se conecta com o sistema sendo respons
 
 <div>
   <img src="imagens\imagensReadme\cadastroUsuario.png" width="250"/>
-  <img src="imagens\imagensReadme\firebase.PNG" width="65%" align="right"/>
+  <img src="imagens\imagensReadme\firebase.PNG" width="68%" align="right"/>
 <div/>
 
 - ## Login Usuário  
