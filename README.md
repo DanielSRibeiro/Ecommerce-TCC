@@ -1,4 +1,4 @@
-# Sobre - Parte Mobile
+# Sobre - Parte Mobile :coffee:
 
 Aplicativo de uma agência de turismo que se conecta com o sistema sendo responsável pela parte do cliente, podendo comprar os pacotes através do aplicativo. Foi feito com a arquitetura MVVM e utilizado Java, Kotlin e o PHP para criar as APIs que se conecta com o sistema. Usando o banco de dado MySql para armazenar os dados do cliente e da compra e o Firebase para realizar a autenticação do Login e guardar a foto do cliente no Storage do Firebase.
 
