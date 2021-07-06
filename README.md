@@ -15,6 +15,44 @@ Aplicativo de uma agência de turismo que se conecta com o sistema sendo respons
 - [x] MySql e Firebase
 - [ ] Testes unitários e Instrumentados (Em andamento)
 
+### Telas do Mobile
+
+- #### Menu inicial   
+
+  <img src="imagens\imagensReadme\menu.gif"/>
+
+- #### Buscar Pacotes
+
+  <img src="imagens\imagensReadme\carrinho.gif"/>
+
+- #### Adicionar no Carrinho  
+
+  <img src="imagens\imagensReadme\buscar.gif"/>
+
+- #### Cadastro Usuário  
+
+  <img src="imagens\imagensReadme\cadastroUsuario.png"/>
+
+  <img src="imagens\imagensReadme\firebase.png"/>
+
+- #### Login Usuário  
+
+  <img src="imagens\imagensReadme\login.gif"/>
+
+- #### Dashboard Usuário
+
+  <img src="imagens\imagensReadme\dashboard.png"/>
+
+- #### Cartão (Cadastro e lista de cartões)  
+
+  <img src="imagens\imagensReadme\cartao.png"/>
+
+  <img src="imagens\imagensReadme\cartaoc.png"/>
+
+- #### Realizar Compra  
+
+  <img src="imagens\imagensReadme\compra.gif"/>
+
 ## Web :coffee:
 
 - [x] C#, JAVASCRIPT, HTML, CSS
